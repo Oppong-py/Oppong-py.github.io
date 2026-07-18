@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kwabena Oppong Adutwum | AI/ML Engineer</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B46'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23C9A54E'%3EKOA%3C/text%3E%3C/svg%3E">
+    <!-- Open Graph — controls how links preview on LinkedIn, Slack, WhatsApp, etc. -->
+    <meta property="og:title" content="Kwabena Oppong Adutwum — AI/ML Engineer">
+    <meta property="og:description" content="AI/ML Engineering undergraduate at KNUST. National Robotics Champion. Regional Cybersecurity Champion. Building intelligent systems from embedded robots to full-stack ML.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oppong-py.github.io">
+    <!-- Replace with an actual preview image (1200x630px recommended): -->
+    <meta property="og:image" content="https://oppong-py.github.io/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kwabena Oppong Adutwum — AI/ML Engineer">
+    <meta name="twitter:description" content="AI/ML Engineering undergraduate at KNUST. National Robotics Champion. Building intelligent systems.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -161,12 +172,12 @@
         }
         .edu-card .edu-watermark {
             position:absolute;right:-18px;bottom:-18px;width:210px;height:210px;
-            object-fit:contain;opacity:0.06;pointer-events:none;
+            object-fit:contain;opacity:0.1;pointer-events:none;
             transition:opacity 0.4s;
         }
-        .edu-card:hover .edu-watermark { opacity:0.12; }
-        [data-theme="dark"] .edu-card .edu-watermark { opacity:0.08; }
-        [data-theme="dark"] .edu-card:hover .edu-watermark { opacity:0.15; }
+        .edu-card:hover .edu-watermark { opacity:0.2; }
+        [data-theme="dark"] .edu-card .edu-watermark { opacity:0.12; }
+        [data-theme="dark"] .edu-card:hover .edu-watermark { opacity:0.25; }
         .edu-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent);opacity:0;transition:opacity 0.3s; }
         .edu-card:hover { transform:translateY(-3px);box-shadow:0 12px 35px var(--shadow-color);border-color:rgba(201,165,78,0.3); }
         .edu-card:hover::before { opacity:1; }
@@ -221,6 +232,9 @@
         .project-header h3 { font-size:1rem;margin-bottom:0.3rem;font-family:var(--heading-font); }
         .project-header .tech { font-size:0.75rem;color:var(--gold-light);font-family:var(--code-font); }
         .project-card.roadmap .project-header .tech { color:var(--coach);opacity:0.7; }
+        .project-preview { width:100%;height:180px;object-fit:cover;display:block;border-bottom:1px solid var(--card-border); }
+        .project-preview-placeholder { width:100%;height:180px;display:flex;align-items:center;justify-content:center;background:var(--cream);border-bottom:1px solid var(--card-border);color:var(--light-slate);font-size:0.8rem;font-family:var(--code-font); }
+        [data-theme="dark"] .project-preview-placeholder { background:var(--navy); }
         .project-body { padding:1.3rem 1.5rem; }
         .project-body p { font-size:0.88rem;color:var(--light-slate);margin-bottom:0.5rem; }
         .project-body .highlight { color:var(--section-title-color);font-weight:600; }
@@ -307,6 +321,19 @@
         .cert-info .year { font-size:0.75rem;color:var(--light-slate);font-family:var(--code-font); }
 
         /* ── Contact ── */
+        /* ── Thinking / Blog ── */
+        .blog-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem; }
+        .blog-card { background:var(--card-bg);border-radius:12px;padding:1.5rem;border:1px solid var(--card-border);position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s; }
+        .blog-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent);opacity:0;transition:opacity 0.3s; }
+        .blog-card:hover { transform:translateY(-4px);box-shadow:0 12px 35px var(--shadow-color);border-color:rgba(201,165,78,0.3); }
+        .blog-card:hover::before { opacity:1; }
+        .blog-card .blog-date { font-size:0.75rem;color:var(--light-slate);font-family:var(--code-font);margin-bottom:0.5rem; }
+        .blog-card h4 { font-size:1rem;color:var(--section-title-color);font-family:var(--heading-font);margin-bottom:0.5rem;transition:color 0.4s; }
+        .blog-card p { font-size:0.85rem;color:var(--slate);line-height:1.7; }
+        .blog-card.placeholder-card { border-style:dashed;opacity:0.6; }
+        .blog-card.placeholder-card:hover { opacity:0.8; }
+        .blog-read-more { font-size:0.8rem;color:var(--gold);font-family:var(--code-font);margin-top:0.8rem;display:inline-block; }
+
         .contact-section { background:var(--navy);color:var(--white);padding:4rem 2rem;text-align:center;position:relative;overflow:hidden; }
         .contact-section::before { content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(201,165,78,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,165,78,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none; }
         .contact-section h2,.contact-section p,.contact-links { position:relative;z-index:1; }
@@ -360,6 +387,7 @@
         <a href="#skills" data-section="skills">Skills</a>
         <a href="#achievements" data-section="achievements">Activities</a>
         <a href="#certifications" data-section="certifications">Certs</a>
+        <a href="#thinking" data-section="thinking">Thinking</a>
         <a href="#contact" data-section="contact">Contact</a>
         <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
     </div>
@@ -375,7 +403,8 @@
         <div class="hero-links">
             <a href="https://github.com/Oppong-py" class="btn-gold" target="_blank">GitHub</a>
             <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum-758984387" class="btn-outline" target="_blank">LinkedIn</a>
-            <a href="mailto:oppongkwabena1777@gmail.com" class="btn-outline">Get In Touch</a>
+            <a href="https://mail.google.com/mail/?view=cm&to=oppongkwabena1777@gmail.com" target="_blank" class="btn-outline">Get In Touch</a>
+            <a href="resume.pdf" class="btn-outline" download>&#8681; Resume</a>
         </div>
     </div>
 </section>
@@ -404,10 +433,10 @@
                 <div class="highlight-badge"><span class="hb-dot"></span> ML Intern @ Zap Tech</div>
             </div>
             <div class="interests-row">
-                <span class="interest-tag">AI Safety</span>
-                <span class="interest-tag">Computer Vision</span>
-                <span class="interest-tag">AI for Africa</span>
-                <span class="interest-tag">Cybersecurity / CTFs</span>
+                <span class="interest-tag">Mathematics</span>
+                <span class="interest-tag">Movies</span>
+                <span class="interest-tag">Video Games</span>
+                <span class="interest-tag">Machine Learning</span>
             </div>
         </div>
     </div>
@@ -551,6 +580,8 @@
     <div class="projects-grid">
         <div class="project-card reveal reveal-delay-1">
             <div class="project-header"><h3>Autonomous Line-Following Robot</h3><div class="tech">LEGO MINDSTORM EV3 &middot; PID Control Algorithm</div></div>
+            <!-- Replace placeholder with: <img src="robot-preview.png" alt="Line-following robot" class="project-preview"> -->
+            <div class="project-preview-placeholder">// screenshot coming soon</div>
             <div class="project-body">
                 <p><span class="highlight">National Champion at Robofest Ghana 2025.</span></p>
                 <p>Designed and implemented a PID (Proportional-Integral-Derivative) control algorithm for autonomous line navigation &mdash; a core precursor to reinforcement learning control systems. Tuned Kp, Ki, and Kd parameters through iterative testing to achieve sub-second course correction at high speed.</p>
@@ -560,6 +591,8 @@
         </div>
         <div class="project-card reveal reveal-delay-2">
             <div class="project-header"><h3>Class Attendance Monitoring System</h3><div class="tech">React Native &middot; Django &middot; PostgreSQL &middot; Bluetooth</div></div>
+            <!-- Replace placeholder with: <img src="attendance-preview.png" alt="Attendance system" class="project-preview"> -->
+            <div class="project-preview-placeholder">// screenshot coming soon</div>
             <div class="project-body">
                 <p>Architected a full-stack biometric attendance platform with a real-time data pipeline, reducing manual roll-call by approximately 80%. Designed the system to handle concurrent Bluetooth fingerprint scans &mdash; experience directly applicable to building data ingestion pipelines at scale.</p>
                 <p>Built a Django REST API backend with PostgreSQL for persistent storage and a React Native mobile frontend for cross-platform deployment. Implemented Bluetooth Low Energy (BLE) communication for proximity-based check-in.</p>
@@ -569,6 +602,8 @@
         </div>
         <div class="project-card reveal reveal-delay-3">
             <div class="project-header"><h3>Solar-Powered IoT Watering System</h3><div class="tech">Arduino &middot; IR Sensor &middot; C++ &middot; Solar Panel</div></div>
+            <!-- Replace placeholder with: <img src="iot-preview.png" alt="IoT watering system" class="project-preview"> -->
+            <div class="project-preview-placeholder">// screenshot coming soon</div>
             <div class="project-body">
                 <p>Designed and built a sensor-driven embedded system with proximity-triggered actuation &mdash; edge computing for IoT agriculture. The system uses infrared sensors to detect plant proximity and triggers a solar-powered water pump automatically.</p>
                 <p>Engineered the full circuit from scratch: solar charge controller, relay logic, sensor fusion, and C++ firmware on Arduino. This project demonstrates the hardware-software integration skills that companies like Tesla and Samsung value in their embedded AI teams.</p>
@@ -578,6 +613,8 @@
         </div>
         <div class="project-card reveal reveal-delay-1">
             <div class="project-header"><h3>Arethos &mdash; Mental Wellness App</h3><div class="tech">React Native &middot; Expo SDK 54 &middot; SQLite &middot; Groq &amp; Anthropic AI</div></div>
+            <!-- Replace placeholder with: <img src="arethos-preview.png" alt="Arethos app" class="project-preview"> -->
+            <div class="project-preview-placeholder">// screenshot coming soon</div>
             <div class="project-body">
                 <p><span class="highlight">Team Project</span> &mdash; Co-built a cross-platform mental wellness app designed specifically for KNUST students, addressing real mental health gaps on campus. The app provides three core experiences: an AI-powered Journal for reflective writing, a Mood tracker with sleep and energy logging, and a History/Reflections tab that surfaces behavioral patterns in plain language.</p>
                 <p>Engineered a dual-AI fallback architecture (Groq primary, Anthropic secondary) to ensure 99%+ uptime for the reflection engine. Built a custom haptic feedback system with multi-pulse waveforms calibrated through 9 iterations on Android hardware &mdash; solving the limitation that expo-haptics only fires single-pulse vibrations on Android by dropping to React Native&rsquo;s native <code>Vibration.vibrate()</code> API. Implemented a PanResponder-based sleep slider with ref-pinned state to eliminate stale-closure bugs inherent in React Native gesture handlers.</p>
@@ -852,12 +889,41 @@
     </div>
 </section>
 
+<!-- ═══ Thinking / Blog ═══ -->
+<section id="thinking">
+    <div class="section-header reveal">
+        <div class="section-title"><span class="bracket">{</span> Thinking <span class="bracket">}</span></div>
+        <p class="section-subtitle">What I'm learning, building, and reflecting on.</p>
+        <div class="section-line"></div>
+    </div>
+    <div class="blog-grid">
+        <div class="blog-card placeholder-card reveal reveal-delay-1">
+            <div class="blog-date">// coming soon</div>
+            <h4>What Building Arethos Taught Me About React Native</h4>
+            <p>Lessons from solving stale closures in PanResponder, building multi-pulse haptic patterns on Android, and why Modal beats zIndex every time.</p>
+            <span class="blog-read-more">read &rarr;</span>
+        </div>
+        <div class="blog-card placeholder-card reveal reveal-delay-2">
+            <div class="blog-date">// coming soon</div>
+            <h4>From PID Control to Reinforcement Learning</h4>
+            <p>How tuning Kp, Ki, and Kd on a line-following robot gave me an intuition for reward signals, policy gradients, and the explore-exploit tradeoff.</p>
+            <span class="blog-read-more">read &rarr;</span>
+        </div>
+        <div class="blog-card placeholder-card reveal reveal-delay-3">
+            <div class="blog-date">// coming soon</div>
+            <h4>AI in African Education — What's Missing</h4>
+            <p>Why most edtech tools built for Western classrooms fail African students, and what building for KNUST taught me about context-aware design.</p>
+            <span class="blog-read-more">read &rarr;</span>
+        </div>
+    </div>
+</section>
+
 <!-- ═══ Contact ═══ -->
 <section class="contact-section" id="contact">
     <h2 class="reveal">Let's <span style="color:var(--gold);">Connect</span></h2>
     <p class="reveal">I'm actively looking for AI/ML internship opportunities. If you're building something exciting with AI, I'd love to hear about it.</p>
     <div class="contact-links reveal">
-        <a href="mailto:oppongkwabena1777@gmail.com">&#9993; email_me</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=oppongkwabena1777@gmail.com" target="_blank">&#9993; email_me</a>
         <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum-758984387" target="_blank">&#8599; linkedin</a>
         <a href="https://github.com/Oppong-py" target="_blank">&#8599; github</a>
     </div>
