@@ -334,6 +334,11 @@
         .blog-card.placeholder-card:hover { opacity:0.8; }
         .blog-read-more { font-size:0.8rem;color:var(--gold);font-family:var(--code-font);margin-top:0.8rem;display:inline-block; }
 
+        /* ── View All Link ── */
+        .view-all-link { display:block;text-align:center;margin-top:1.5rem; }
+        .view-all-link a { display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.8rem;border:2px solid var(--gold);border-radius:8px;color:var(--gold);text-decoration:none;font-weight:600;font-size:0.85rem;font-family:var(--code-font);transition:all 0.3s; }
+        .view-all-link a:hover { background:var(--gold);color:var(--navy);transform:translateY(-2px);box-shadow:0 0 20px var(--glow-strong); }
+
         .contact-section { background:var(--navy);color:var(--white);padding:4rem 2rem;text-align:center;position:relative;overflow:hidden; }
         .contact-section::before { content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(201,165,78,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,165,78,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none; }
         .contact-section h2,.contact-section p,.contact-links { position:relative;z-index:1; }
@@ -405,6 +410,7 @@
             <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum-758984387" class="btn-outline" target="_blank">LinkedIn</a>
             <a href="https://mail.google.com/mail/?view=cm&to=oppongkwabena1777@gmail.com" target="_blank" class="btn-outline">Get In Touch</a>
             <a href="resume.pdf" class="btn-outline" download><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Resume</a>
+            <a href="cv.pdf" class="btn-outline" download><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Full CV</a>
         </div>
     </div>
 </section>
@@ -601,50 +607,18 @@
             </div>
         </div>
         <div class="project-card reveal reveal-delay-3">
-            <div class="project-header"><h3>Solar-Powered IoT Watering System</h3><div class="tech">Arduino &middot; IR Sensor &middot; C++ &middot; Solar Panel</div></div>
-            <!-- Replace placeholder with: <img src="iot-preview.png" alt="IoT watering system" class="project-preview"> -->
-            <div class="project-preview-placeholder">// screenshot coming soon</div>
-            <div class="project-body">
-                <p>Designed and built a sensor-driven embedded system with proximity-triggered actuation &mdash; edge computing for IoT agriculture. The system uses infrared sensors to detect plant proximity and triggers a solar-powered water pump automatically.</p>
-                <p>Engineered the full circuit from scratch: solar charge controller, relay logic, sensor fusion, and C++ firmware on Arduino. This project demonstrates the hardware-software integration skills that companies like Tesla and Samsung value in their embedded AI teams.</p>
-                <div class="tech-stack"><span class="tech-chip">Arduino</span><span class="tech-chip">C++</span><span class="tech-chip">IR Sensor</span><span class="tech-chip">Solar</span><span class="tech-chip">IoT</span><span class="tech-chip">Circuit Design</span></div>
-                <div class="project-links"><a href="https://github.com/Oppong-py" target="_blank">view_on_github &rarr;</a></div>
-            </div>
-        </div>
-        <div class="project-card reveal reveal-delay-1">
             <div class="project-header"><h3>Arethos &mdash; Mental Wellness App</h3><div class="tech">React Native &middot; Expo SDK 54 &middot; SQLite &middot; Groq &amp; Anthropic AI</div></div>
             <!-- Replace placeholder with: <img src="arethos-preview.png" alt="Arethos app" class="project-preview"> -->
             <div class="project-preview-placeholder">// screenshot coming soon</div>
             <div class="project-body">
-                <p><span class="highlight">Team Project</span> &mdash; Co-built a cross-platform mental wellness app designed specifically for KNUST students, addressing real mental health gaps on campus. The app provides three core experiences: an AI-powered Journal for reflective writing, a Mood tracker with sleep and energy logging, and a History/Reflections tab that surfaces behavioral patterns in plain language.</p>
-                <p>Engineered a dual-AI fallback architecture (Groq primary, Anthropic secondary) to ensure 99%+ uptime for the reflection engine. Built a custom haptic feedback system with multi-pulse waveforms calibrated through 9 iterations on Android hardware &mdash; solving the limitation that expo-haptics only fires single-pulse vibrations on Android by dropping to React Native&rsquo;s native <code>Vibration.vibrate()</code> API. Implemented a PanResponder-based sleep slider with ref-pinned state to eliminate stale-closure bugs inherent in React Native gesture handlers.</p>
-                <p>Other technical contributions include a Modal-based bottom-sheet delete system (bypassing React Native&rsquo;s unreliable zIndex between non-sibling elements), voice recording with real-time waveform visualization, dark/light theme toggle, and a 16-chapter technical documentation covering every architectural decision. The team used SQLite for fully offline-first local storage &mdash; no user data ever leaves the device.</p>
-                <div class="tech-stack"><span class="tech-chip">React Native</span><span class="tech-chip">Expo SDK 54</span><span class="tech-chip">SQLite</span><span class="tech-chip">Groq API</span><span class="tech-chip">Anthropic API</span><span class="tech-chip">PanResponder</span><span class="tech-chip">expo-haptics</span><span class="tech-chip">Voice Recording</span></div>
+                <p><span class="highlight">Team Project</span> &mdash; Co-built a cross-platform mental wellness app for KNUST students with three core tabs: AI-powered Journal, Mood tracker, and History/Reflections. Engineered dual-AI fallback (Groq + Anthropic), custom haptic feedback, and offline-first SQLite storage.</p>
+                <div class="tech-stack"><span class="tech-chip">React Native</span><span class="tech-chip">Expo SDK 54</span><span class="tech-chip">SQLite</span><span class="tech-chip">Groq API</span><span class="tech-chip">Anthropic API</span></div>
                 <div class="project-links"><a href="https://github.com/Oppong-py/arethos" target="_blank">view_on_github &rarr;</a></div>
             </div>
         </div>
-        <div class="project-card roadmap reveal reveal-delay-1">
-            <div class="project-header"><span class="roadmap-badge">ROADMAP</span><h3>Computer Vision &mdash; Crop Disease Detector</h3><div class="tech">PyTorch &middot; CNN/ResNet &middot; FastAPI &middot; AWS</div></div>
-            <div class="project-body">
-                <p>Train a convolutional neural network on thousands of labeled plant images to identify diseases from leaf photos. Build a production web app where farmers upload a photo and receive an instant diagnosis with treatment recommendations.</p>
-                <p>This project directly aligns with Google's AI for Social Good initiative and Anthropic's mission of building AI that benefits humanity.</p>
-                <div class="tech-stack"><span class="tech-chip">PyTorch</span><span class="tech-chip">CNN</span><span class="tech-chip">ResNet</span><span class="tech-chip">FastAPI</span><span class="tech-chip">AWS</span><span class="tech-chip">Docker</span></div>
-            </div>
-        </div>
-        <div class="project-card roadmap reveal reveal-delay-2">
-            <div class="project-header"><span class="roadmap-badge">ROADMAP</span><h3>NLP / LLM &mdash; AI Study Assistant</h3><div class="tech">Claude/OpenAI API &middot; LangChain &middot; RAG &middot; Next.js</div></div>
-            <div class="project-body">
-                <p>Build a chatbot that ingests textbooks and lecture notes, then answers student questions using Retrieval-Augmented Generation (RAG) with safety guardrails. Demonstrates understanding of prompt engineering, vector databases, and responsible AI deployment.</p>
-                <div class="tech-stack"><span class="tech-chip">Claude API</span><span class="tech-chip">LangChain</span><span class="tech-chip">RAG</span><span class="tech-chip">Next.js</span><span class="tech-chip">Pinecone</span></div>
-            </div>
-        </div>
-        <div class="project-card roadmap reveal reveal-delay-3">
-            <div class="project-header"><span class="roadmap-badge">ROADMAP</span><h3>Predictive ML &mdash; Energy Demand Forecasting</h3><div class="tech">Scikit-learn &middot; XGBoost &middot; Pandas &middot; Streamlit</div></div>
-            <div class="project-body">
-                <p>Build a regression model predicting energy demand from historical consumption data and weather patterns. Deploy an interactive Streamlit dashboard for real-time predictions &mdash; the kind of applied ML that Tesla's energy division and Samsung's smart grid teams work on daily.</p>
-                <div class="tech-stack"><span class="tech-chip">Scikit-learn</span><span class="tech-chip">XGBoost</span><span class="tech-chip">Pandas</span><span class="tech-chip">Streamlit</span><span class="tech-chip">Time Series</span></div>
-            </div>
-        </div>
+    </div>
+    <div class="view-all-link reveal">
+        <a href="projects.html">view_all_projects( 7 ) &rarr;</a>
     </div>
 </section>
 
@@ -768,85 +742,9 @@
             </div>
             <p>Competed in a rigorous knowledge-based challenge testing cybersecurity fundamentals, threat analysis, network security, and security best practices. Won the regional round, advancing to the national stage.</p>
         </div>
-        <div class="achieve-card reveal-right stagger-4">
-            <div class="achieve-top">
-                <h4>Participant &mdash; International Public Policy Forum</h4>
-                <span class="achieve-date">2024</span>
-            </div>
-            <p>Selected to represent Prempeh College in this global policy debate organized by the Brewer Foundation and NYU. Developed research, argumentation, and communication skills valued in cross-functional tech teams.</p>
-        </div>
-        <div class="achieve-card roadmap reveal-left stagger-5">
-            <div class="achieve-top">
-                <span class="roadmap-badge">UPCOMING</span>
-                <h4>AI Hackathon &mdash; MLH / HackKNUST</h4>
-                <span class="achieve-date">// next</span>
-            </div>
-            <p>Compete in a 24-48 hour AI-focused hackathon, building a working prototype from scratch.</p>
-        </div>
-        <div class="achieve-card roadmap reveal-right stagger-6">
-            <div class="achieve-top">
-                <span class="roadmap-badge">UPCOMING</span>
-                <h4>Kaggle Competition</h4>
-                <span class="achieve-date">// next</span>
-            </div>
-            <p>Enter a data science competition on Kaggle to build real ML models and benchmark against global talent.</p>
-        </div>
     </div>
-
-    <!-- ── Activities & Memberships ── -->
-    <div class="sub-header reveal">
-        <h3>Activities & Memberships</h3>
-        <div class="sub-line"></div>
-    </div>
-    <div class="activity-list">
-        <div class="activity-item reveal-right stagger-1">
-
-            <div class="activity-body">
-                <div class="act-meta">// 2025&ndash;present</div>
-                <h4>AmaliTech Coding Club</h4>
-                <p>Active participant in coding workshops, pair programming sessions, and collaborative tech projects with peers across Ghana's growing tech ecosystem.</p>
-            </div>
-        </div>
-        <div class="activity-item reveal-left stagger-2">
-
-            <div class="activity-body">
-                <div class="act-meta">// 2025&ndash;present</div>
-                <h4>Microsoft User Group Ghana &mdash; KNUST Chapter</h4>
-                <p>Engaging with Microsoft technologies, Azure cloud services, and developer community events.</p>
-            </div>
-        </div>
-        <div class="activity-item reveal-right stagger-3">
-
-            <div class="activity-body">
-                <div class="act-meta">// 2025&ndash;present</div>
-                <h4>Claude Builder Club &mdash; KNUST</h4>
-                <p>Exploring AI applications, prompt engineering, and building tools with the Claude API and Anthropic's ecosystem.</p>
-            </div>
-        </div>
-        <div class="activity-item reveal-left stagger-4">
-
-            <div class="activity-body">
-                <div class="act-meta">// 2023&ndash;2025</div>
-                <h4>Club Leader &mdash; Prempeh College Cybersecurity Club</h4>
-                <p>Founded and led the school's cybersecurity club. Organized workshops on ethical hacking, network security, and CTF challenges. Mentored 20+ students in security fundamentals.</p>
-            </div>
-        </div>
-        <div class="activity-item reveal-right stagger-5">
-
-            <div class="activity-body">
-                <div class="act-meta">// ongoing</div>
-                <h4>Volunteer &mdash; Solutions for Life Initiative Ghana (SFLIG)</h4>
-                <p>Contributing to community development and social impact initiatives, aligning technical skills with service.</p>
-            </div>
-        </div>
-        <div class="activity-item roadmap reveal-left stagger-6">
-
-            <div class="activity-body">
-                <div class="act-meta">// upcoming</div>
-                <h4>AI/ML Club Lead or Co-Founder &mdash; KNUST</h4>
-                <p>Start or lead a student group focused on AI/ML learning, projects, and competitions.</p>
-            </div>
-        </div>
+    <div class="view-all-link reveal">
+        <a href="achievements.html">view_all_achievements( 12 ) &rarr;</a>
     </div>
 </section>
 
@@ -873,19 +771,9 @@
             <div class="cert-icon">&#9670;</div>
             <div class="cert-info"><h4>IPPF Competitor</h4><div class="issuer">Brewer Foundation & NYU</div><div class="year">2024-25 &mdash; view_cert &rarr;</div></div>
         </div></a>
-        <a href="prempeh-certificate.pdf" target="_blank" style="text-decoration:none;color:inherit;">
-        <div class="cert-card reveal reveal-delay-1" title="Click to view certificate" style="cursor:pointer;">
-            <div class="cert-icon">&#9670;</div>
-            <div class="cert-info"><h4>WASSCE General Science</h4><div class="issuer">Prempeh College</div><div class="year">Sep 2025 &mdash; view_cert &rarr;</div></div>
-        </div></a>
-        <div class="cert-card roadmap reveal reveal-delay-2">
-            <div class="cert-icon">~</div>
-            <div class="cert-info"><h4>Deep Learning Specialization</h4><div class="issuer">DeepLearning.AI / Coursera</div><div class="year">// planned</div></div>
-        </div>
-        <div class="cert-card roadmap reveal reveal-delay-3">
-            <div class="cert-icon">~</div>
-            <div class="cert-info"><h4>ML Specialization</h4><div class="issuer">Stanford / Coursera</div><div class="year">// planned</div></div>
-        </div>
+    </div>
+    <div class="view-all-link reveal">
+        <a href="certifications.html">view_all_certs( 6 ) &rarr;</a>
     </div>
 </section>
 
@@ -926,6 +814,8 @@
         <a href="https://mail.google.com/mail/?view=cm&to=oppongkwabena1777@gmail.com" target="_blank">&#9993; email_me</a>
         <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum-758984387" target="_blank">&#8599; linkedin</a>
         <a href="https://github.com/Oppong-py" target="_blank">&#8599; github</a>
+        <a href="resume.pdf" download>&#8681; resume</a>
+        <a href="cv.pdf" download>&#8681; full_cv</a>
     </div>
 </section>
 

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements & Activities | Kwabena Oppong Adutwum</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B46'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23C9A54E'%3EKOA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --navy:#0F2B46;--navy-light:#1a3a5c;--gold:#C9A54E;--gold-light:#d4b76a;
+            --cream:#F0ECE3;--slate:#3B444F;--light-slate:#6B7480;--white:#FFFFFF;
+            --bg:#f8f9fa;--card-bg:#ffffff;--card-border:#e8e8e8;
+            --coach:#B05020;--coach-bg:#fef6f0;--coach-border:#f0c8a0;
+            --section-title-color:var(--navy);--footer-bg:#0a1f33;
+            --shadow-color:rgba(0,0,0,0.08);--shadow-heavy:rgba(0,0,0,0.1);
+            --glow:rgba(201,165,78,0.15);--glow-strong:rgba(201,165,78,0.35);
+            --grid-color:rgba(15,43,70,0.04);--code-font:'JetBrains Mono','Fira Code','Consolas',monospace;
+            --heading-font:'Space Grotesk','Inter',sans-serif;
+        }
+        [data-theme="dark"] {
+            --bg:#0d1b2a;--card-bg:#1b2838;--card-border:#2a3a4d;
+            --slate:#c8d0d8;--light-slate:#8a95a3;--cream:#1e3048;
+            --section-title-color:var(--gold);--footer-bg:#060e17;
+            --shadow-color:rgba(0,0,0,0.3);--shadow-heavy:rgba(0,0,0,0.4);
+            --coach-bg:#2a1a10;--coach-border:#5a3820;--grid-color:rgba(201,165,78,0.03);
+        }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--slate); line-height:1.6; transition:background 0.4s,color 0.4s; background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px); background-size:60px 60px; }
+        .top-bar { background:var(--navy); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(201,165,78,0.15); position:sticky; top:0; z-index:100; }
+        .top-bar .logo { color:var(--gold); font-weight:700; font-size:1.2rem; letter-spacing:1px; font-family:var(--code-font); text-decoration:none; }
+        .top-bar .logo::before { content:'< '; opacity:0.5; } .top-bar .logo::after { content:' />'; opacity:0.5; }
+        .top-bar .back-link { color:var(--cream); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.3s; }
+        .top-bar .back-link:hover { color:var(--gold); }
+        .top-bar .right-controls { display:flex; align-items:center; gap:1rem; }
+        .theme-toggle { background:none; border:2px solid var(--gold); color:var(--gold); width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+        .theme-toggle:hover { background:var(--gold); color:var(--navy); }
+        .page-header { padding:4rem 2rem 2rem; text-align:center; }
+        .page-header h1 { font-size:1.8rem; color:var(--section-title-color); font-family:var(--heading-font); margin-bottom:0.5rem; transition:color 0.4s; }
+        .page-header h1 .bracket { color:var(--gold); }
+        .page-header p { color:var(--light-slate); font-size:0.95rem; max-width:600px; margin:0 auto 1rem; }
+        .page-header .section-line { width:60px; height:3px; background:linear-gradient(90deg,var(--gold),var(--gold-light)); margin:0 auto; border-radius:2px; }
+        .content-wrap { max-width:1100px; margin:0 auto; padding:0 2rem 3rem; }
+        .sub-header { margin:2rem 0 1rem; }
+        .sub-header h3 { font-size:1.1rem; color:var(--section-title-color); font-family:var(--heading-font); transition:color 0.4s; }
+        .sub-line { width:40px; height:2px; background:var(--gold); margin-top:0.4rem; border-radius:2px; }
+
+        /* Achievement cards */
+        .achieve-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.2rem; }
+        .achieve-card { background:var(--card-bg); border-radius:10px; padding:1.3rem; border:1px solid var(--card-border); transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s; }
+        .achieve-card:hover { transform:translateY(-3px); box-shadow:0 10px 30px var(--shadow-color); border-color:rgba(201,165,78,0.3); }
+        .achieve-card.roadmap { border-style:dashed; border-color:var(--coach-border); }
+        .achieve-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; gap:0.5rem; }
+        .achieve-top h4 { font-size:0.92rem; color:var(--section-title-color); font-family:var(--heading-font); transition:color 0.4s; }
+        .achieve-date { font-size:0.75rem; color:var(--gold); font-family:var(--code-font); white-space:nowrap; }
+        .achieve-card p { font-size:0.85rem; color:var(--light-slate); line-height:1.65; }
+        .roadmap-badge { display:inline-block; background:var(--coach); color:var(--white); font-size:0.65rem; padding:0.15rem 0.5rem; border-radius:3px; font-family:var(--code-font); margin-bottom:0.3rem; letter-spacing:1px; }
+
+        /* Activity items */
+        .activity-list { display:flex; flex-direction:column; gap:0.8rem; }
+        .activity-item { background:var(--card-bg); border-radius:10px; padding:1.2rem 1.4rem; border:1px solid var(--card-border); transition:transform 0.3s,box-shadow 0.3s; }
+        .activity-item:hover { transform:translateX(4px); box-shadow:0 4px 20px var(--shadow-color); }
+        .activity-item.roadmap { border-style:dashed; border-color:var(--coach-border); }
+        .act-meta { font-size:0.72rem; color:var(--gold); font-family:var(--code-font); margin-bottom:0.3rem; }
+        .activity-item h4 { font-size:0.9rem; color:var(--section-title-color); font-family:var(--heading-font); margin-bottom:0.3rem; transition:color 0.4s; }
+        .activity-item p { font-size:0.84rem; color:var(--light-slate); line-height:1.6; }
+        footer { background:var(--footer-bg); color:var(--light-slate); text-align:center; padding:1.5rem; font-size:0.8rem; font-family:var(--code-font); }
+        @media(max-width:768px) { .achieve-grid { grid-template-columns:1fr; } .page-header h1 { font-size:1.4rem; } }
+    </style>
+</head>
+<body>
+<div class="top-bar">
+    <a href="index.html" class="logo">KOA</a>
+    <div class="right-controls">
+        <a href="index.html" class="back-link">&larr; back_to_home</a>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
+    </div>
+</div>
+
+<div class="page-header">
+    <h1><span class="bracket">{</span> Achievements & Activities <span class="bracket">}</span></h1>
+    <p>Competitions won, communities built, and milestones ahead.</p>
+    <div class="section-line"></div>
+</div>
+
+<div class="content-wrap">
+    <div class="sub-header"><h3>Achievements</h3><div class="sub-line"></div></div>
+    <div class="achieve-grid">
+        <div class="achieve-card">
+            <div class="achieve-top"><h4>ACES CodeFest 2026 &mdash; UI/UX Challenge</h4><span class="achieve-date">2026</span></div>
+            <p>Redesigned the ACES KNUST website into a mobile-first, student-focused experience across 9 pages in a 2-week sprint. Demonstrated front-end development skills and user-centered design thinking.</p>
+        </div>
+        <div class="achieve-card">
+            <div class="achieve-top"><h4>National Champion &mdash; Robofest Ghana</h4><span class="achieve-date">2025</span></div>
+            <p>Designed and built an autonomous line-following robot under timed competition conditions. Won first place against teams from across the country, demonstrating engineering execution under pressure.</p>
+        </div>
+        <div class="achieve-card">
+            <div class="achieve-top"><h4>Regional Champion &mdash; National Cybersecurity Challenge</h4><span class="achieve-date">2024</span></div>
+            <p>Competed in a rigorous knowledge-based challenge testing cybersecurity fundamentals, threat analysis, network security, and security best practices. Won the regional round, advancing to the national stage.</p>
+        </div>
+        <div class="achieve-card">
+            <div class="achieve-top"><h4>Participant &mdash; International Public Policy Forum</h4><span class="achieve-date">2024</span></div>
+            <p>Selected to represent Prempeh College in this global policy debate organized by the Brewer Foundation and NYU. Developed research, argumentation, and communication skills valued in cross-functional tech teams.</p>
+        </div>
+        <div class="achieve-card roadmap">
+            <div class="achieve-top"><span class="roadmap-badge">UPCOMING</span><h4>AI Hackathon &mdash; MLH / HackKNUST</h4><span class="achieve-date">// next</span></div>
+            <p>Compete in a 24-48 hour AI-focused hackathon, building a working prototype from scratch.</p>
+        </div>
+        <div class="achieve-card roadmap">
+            <div class="achieve-top"><span class="roadmap-badge">UPCOMING</span><h4>Kaggle Competition</h4><span class="achieve-date">// next</span></div>
+            <p>Enter a data science competition on Kaggle to build real ML models and benchmark against global talent.</p>
+        </div>
+    </div>
+
+    <div class="sub-header" style="margin-top:3rem;"><h3>Activities & Memberships</h3><div class="sub-line"></div></div>
+    <div class="activity-list">
+        <div class="activity-item">
+            <div class="activity-body">
+                <div class="act-meta">// 2025&ndash;present</div>
+                <h4>AmaliTech Coding Club</h4>
+                <p>Active participant in coding workshops, pair programming sessions, and collaborative tech projects with peers across Ghana's growing tech ecosystem.</p>
+            </div>
+        </div>
+        <div class="activity-item">
+            <div class="activity-body">
+                <div class="act-meta">// 2025&ndash;present</div>
+                <h4>Microsoft User Group Ghana &mdash; KNUST Chapter</h4>
+                <p>Engaging with Microsoft technologies, Azure cloud services, and developer community events.</p>
+            </div>
+        </div>
+        <div class="activity-item">
+            <div class="activity-body">
+                <div class="act-meta">// 2025&ndash;present</div>
+                <h4>Claude Builder Club &mdash; KNUST</h4>
+                <p>Exploring AI applications, prompt engineering, and building tools with the Claude API and Anthropic's ecosystem.</p>
+            </div>
+        </div>
+        <div class="activity-item">
+            <div class="activity-body">
+                <div class="act-meta">// 2023&ndash;2025</div>
+                <h4>Club Leader &mdash; Prempeh College Cybersecurity Club</h4>
+                <p>Founded and led the school's cybersecurity club. Organized workshops on ethical hacking, network security, and CTF challenges. Mentored 20+ students in security fundamentals.</p>
+            </div>
+        </div>
+        <div class="activity-item">
+            <div class="activity-body">
+                <div class="act-meta">// ongoing</div>
+                <h4>Volunteer &mdash; Solutions for Life Initiative Ghana (SFLIG)</h4>
+                <p>Contributing to community development and social impact initiatives, aligning technical skills with service.</p>
+            </div>
+        </div>
+        <div class="activity-item roadmap">
+            <div class="activity-body">
+                <div class="act-meta">// upcoming</div>
+                <h4>AI/ML Club Lead or Co-Founder &mdash; KNUST</h4>
+                <p>Start or lead a student group focused on AI/ML learning, projects, and competitions.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer><p>// &copy; 2026 Kwabena Oppong Adutwum &mdash; built_with_passion( "Kumasi, Ghana" )</p></footer>
+
+<script>
+(function(){
+    var t=document.getElementById('themeToggle');
+    var saved=localStorage.getItem('theme');
+    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');t.textContent='☀';}
+    t.addEventListener('click',function(){
+        var dark=document.documentElement.getAttribute('data-theme')==='dark';
+        document.documentElement.setAttribute('data-theme',dark?'':'dark');
+        t.textContent=dark?'☽':'☀';
+        localStorage.setItem('theme',dark?'light':'dark');
+    });
+})();
+</script>
+</body>
+</html>

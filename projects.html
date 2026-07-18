@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects | Kwabena Oppong Adutwum</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B46'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23C9A54E'%3EKOA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --navy:#0F2B46;--navy-light:#1a3a5c;--gold:#C9A54E;--gold-light:#d4b76a;
+            --cream:#F0ECE3;--slate:#3B444F;--light-slate:#6B7480;--white:#FFFFFF;
+            --bg:#f8f9fa;--card-bg:#ffffff;--card-border:#e8e8e8;
+            --coach:#B05020;--coach-bg:#fef6f0;--coach-border:#f0c8a0;
+            --section-title-color:var(--navy);--footer-bg:#0a1f33;
+            --shadow-color:rgba(0,0,0,0.08);--shadow-heavy:rgba(0,0,0,0.1);
+            --glow:rgba(201,165,78,0.15);--glow-strong:rgba(201,165,78,0.35);
+            --grid-color:rgba(15,43,70,0.04);--code-font:'JetBrains Mono','Fira Code','Consolas',monospace;
+            --heading-font:'Space Grotesk','Inter',sans-serif;
+        }
+        [data-theme="dark"] {
+            --bg:#0d1b2a;--card-bg:#1b2838;--card-border:#2a3a4d;
+            --slate:#c8d0d8;--light-slate:#8a95a3;--cream:#1e3048;
+            --section-title-color:var(--gold);--footer-bg:#060e17;
+            --shadow-color:rgba(0,0,0,0.3);--shadow-heavy:rgba(0,0,0,0.4);
+            --coach-bg:#2a1a10;--coach-border:#5a3820;--grid-color:rgba(201,165,78,0.03);
+        }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--slate); line-height:1.6; transition:background 0.4s,color 0.4s; background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px); background-size:60px 60px; }
+
+        /* ── Top bar ── */
+        .top-bar { background:var(--navy); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(201,165,78,0.15); position:sticky; top:0; z-index:100; }
+        .top-bar .logo { color:var(--gold); font-weight:700; font-size:1.2rem; letter-spacing:1px; font-family:var(--code-font); text-decoration:none; }
+        .top-bar .logo::before { content:'< '; opacity:0.5; } .top-bar .logo::after { content:' />'; opacity:0.5; }
+        .top-bar .back-link { color:var(--cream); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.3s; display:flex; align-items:center; gap:0.4rem; }
+        .top-bar .back-link:hover { color:var(--gold); }
+        .top-bar .right-controls { display:flex; align-items:center; gap:1rem; }
+        .theme-toggle { background:none; border:2px solid var(--gold); color:var(--gold); width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+        .theme-toggle:hover { background:var(--gold); color:var(--navy); }
+
+        /* ── Page header ── */
+        .page-header { padding:4rem 2rem 2rem; text-align:center; }
+        .page-header h1 { font-size:1.8rem; color:var(--section-title-color); font-family:var(--heading-font); margin-bottom:0.5rem; transition:color 0.4s; }
+        .page-header h1 .bracket { color:var(--gold); }
+        .page-header p { color:var(--light-slate); font-size:0.95rem; max-width:600px; margin:0 auto 1rem; }
+        .page-header .section-line { width:60px; height:3px; background:linear-gradient(90deg,var(--gold),var(--gold-light)); margin:0 auto; border-radius:2px; }
+
+        /* ── Legend ── */
+        .legend { display:flex; gap:1.5rem; justify-content:center; margin-bottom:2rem; }
+        .legend-item { display:flex; align-items:center; gap:0.4rem; font-size:0.8rem; color:var(--light-slate); font-family:var(--code-font); }
+        .legend-dot { width:10px; height:10px; border-radius:50%; }
+        .legend-dot.achieved { background:var(--gold); }
+        .legend-dot.roadmap { background:var(--coach); border:2px dashed var(--coach-border); }
+
+        /* ── Project cards ── */
+        .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; padding:0 2rem 3rem; }
+        .project-card { background:var(--card-bg); border-radius:12px; overflow:hidden; border:1px solid var(--card-border); position:relative; transition:transform 0.4s,box-shadow 0.4s,border-color 0.3s; }
+        .project-card::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; border-radius:12px; padding:1px; background:linear-gradient(135deg,var(--gold),transparent 40%,transparent 60%,var(--gold)); -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:0; transition:opacity 0.4s; pointer-events:none; }
+        .project-card:hover { transform:translateY(-6px) scale(1.01); box-shadow:0 16px 40px var(--shadow-heavy); border-color:rgba(201,165,78,0.3); }
+        .project-card:hover::before { opacity:1; }
+        .project-card.roadmap { border:2px dashed var(--coach-border); }
+        .project-card.roadmap::before { display:none; }
+        .project-header { background:var(--navy); color:var(--white); padding:1.3rem 1.5rem; position:relative; overflow:hidden; }
+        .project-header::after { content:'{ }'; position:absolute; right:1rem; top:50%; transform:translateY(-50%); font-family:var(--code-font); font-size:2rem; opacity:0.06; font-weight:700; }
+        .project-card.roadmap .project-header { background:var(--coach-bg); color:var(--coach); }
+        .project-header h3 { font-size:1rem; margin-bottom:0.3rem; font-family:var(--heading-font); }
+        .project-header .tech { font-size:0.75rem; color:var(--gold-light); font-family:var(--code-font); }
+        .project-card.roadmap .project-header .tech { color:var(--coach); opacity:0.7; }
+        .project-preview-placeholder { width:100%; height:180px; display:flex; align-items:center; justify-content:center; background:var(--cream); border-bottom:1px solid var(--card-border); color:var(--light-slate); font-size:0.8rem; font-family:var(--code-font); }
+        [data-theme="dark"] .project-preview-placeholder { background:var(--navy); }
+        .project-body { padding:1.3rem 1.5rem; }
+        .project-body p { font-size:0.88rem; color:var(--light-slate); margin-bottom:0.5rem; }
+        .project-body .highlight { color:var(--section-title-color); font-weight:600; }
+        .tech-stack { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.8rem; padding-top:0.8rem; border-top:1px solid var(--card-border); }
+        .tech-chip { font-size:0.68rem; padding:0.2rem 0.5rem; border-radius:4px; background:var(--cream); color:var(--navy); font-family:var(--code-font); border:1px solid var(--card-border); transition:all 0.3s; }
+        .tech-chip:hover { border-color:var(--gold); color:var(--gold); }
+        .project-links { margin-top:0.8rem; }
+        .project-links a { color:var(--gold); font-size:0.8rem; text-decoration:none; font-family:var(--code-font); transition:color 0.3s; }
+        .project-links a:hover { color:var(--gold-light); }
+        .roadmap-badge { display:inline-block; background:var(--coach); color:var(--white); font-size:0.65rem; padding:0.15rem 0.5rem; border-radius:3px; font-family:var(--code-font); margin-bottom:0.3rem; letter-spacing:1px; }
+        footer { background:var(--footer-bg); color:var(--light-slate); text-align:center; padding:1.5rem; font-size:0.8rem; font-family:var(--code-font); }
+        @media(max-width:768px) { .projects-grid { grid-template-columns:1fr; } .page-header h1 { font-size:1.4rem; } }
+    </style>
+</head>
+<body>
+<div class="top-bar">
+    <a href="index.html" class="logo">KOA</a>
+    <div class="right-controls">
+        <a href="index.html" class="back-link">&larr; back_to_home</a>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
+    </div>
+</div>
+
+<div class="page-header">
+    <h1><span class="bracket">{</span> All Projects <span class="bracket">}</span></h1>
+    <p>Everything I've built and what I'm building next.</p>
+    <div class="section-line"></div>
+</div>
+
+<div class="legend">
+    <div class="legend-item"><div class="legend-dot achieved"></div> Completed</div>
+    <div class="legend-item"><div class="legend-dot roadmap"></div> Planned / In Progress</div>
+</div>
+
+<div class="projects-grid">
+    <!-- Completed Projects -->
+    <div class="project-card">
+        <div class="project-header"><h3>Autonomous Line-Following Robot</h3><div class="tech">LEGO MINDSTORM EV3 &middot; PID Control Algorithm</div></div>
+        <div class="project-preview-placeholder">// screenshot coming soon</div>
+        <div class="project-body">
+            <p><span class="highlight">National Champion at Robofest Ghana 2025.</span></p>
+            <p>Designed and implemented a PID (Proportional-Integral-Derivative) control algorithm for autonomous line navigation &mdash; a core precursor to reinforcement learning control systems. Tuned Kp, Ki, and Kd parameters through iterative testing to achieve sub-second course correction at high speed.</p>
+            <p>Optimized sensor-motor feedback loops under strict competition time limits, simulating the real-world constraint of deploying ML models with latency requirements.</p>
+            <div class="tech-stack"><span class="tech-chip">LEGO EV3</span><span class="tech-chip">PID Control</span><span class="tech-chip">Sensors</span><span class="tech-chip">Robotics</span><span class="tech-chip">Embedded C</span></div>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-header"><h3>Class Attendance Monitoring System</h3><div class="tech">React Native &middot; Django &middot; PostgreSQL &middot; Bluetooth</div></div>
+        <div class="project-preview-placeholder">// screenshot coming soon</div>
+        <div class="project-body">
+            <p>Architected a full-stack biometric attendance platform with a real-time data pipeline, reducing manual roll-call by approximately 80%. Designed the system to handle concurrent Bluetooth fingerprint scans &mdash; experience directly applicable to building data ingestion pipelines at scale.</p>
+            <p>Built a Django REST API backend with PostgreSQL for persistent storage and a React Native mobile frontend for cross-platform deployment. Implemented Bluetooth Low Energy (BLE) communication for proximity-based check-in.</p>
+            <div class="tech-stack"><span class="tech-chip">React Native</span><span class="tech-chip">Django</span><span class="tech-chip">PostgreSQL</span><span class="tech-chip">BLE</span><span class="tech-chip">REST API</span><span class="tech-chip">Git</span></div>
+            <div class="project-links"><a href="https://github.com/Oppong-py" target="_blank">view_on_github &rarr;</a></div>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-header"><h3>Arethos &mdash; Mental Wellness App</h3><div class="tech">React Native &middot; Expo SDK 54 &middot; SQLite &middot; Groq &amp; Anthropic AI</div></div>
+        <div class="project-preview-placeholder">// screenshot coming soon</div>
+        <div class="project-body">
+            <p><span class="highlight">Team Project</span> &mdash; Co-built a cross-platform mental wellness app designed specifically for KNUST students, addressing real mental health gaps on campus. The app provides three core experiences: an AI-powered Journal for reflective writing, a Mood tracker with sleep and energy logging, and a History/Reflections tab that surfaces behavioral patterns in plain language.</p>
+            <p>Engineered a dual-AI fallback architecture (Groq primary, Anthropic secondary) to ensure 99%+ uptime for the reflection engine. Built a custom haptic feedback system with multi-pulse waveforms calibrated through 9 iterations on Android hardware &mdash; solving the limitation that expo-haptics only fires single-pulse vibrations on Android by dropping to React Native&rsquo;s native <code>Vibration.vibrate()</code> API. Implemented a PanResponder-based sleep slider with ref-pinned state to eliminate stale-closure bugs inherent in React Native gesture handlers.</p>
+            <p>Other technical contributions include a Modal-based bottom-sheet delete system (bypassing React Native&rsquo;s unreliable zIndex between non-sibling elements), voice recording with real-time waveform visualization, dark/light theme toggle, and a 16-chapter technical documentation covering every architectural decision. The team used SQLite for fully offline-first local storage &mdash; no user data ever leaves the device.</p>
+            <div class="tech-stack"><span class="tech-chip">React Native</span><span class="tech-chip">Expo SDK 54</span><span class="tech-chip">SQLite</span><span class="tech-chip">Groq API</span><span class="tech-chip">Anthropic API</span><span class="tech-chip">PanResponder</span><span class="tech-chip">expo-haptics</span><span class="tech-chip">Voice Recording</span></div>
+            <div class="project-links"><a href="https://github.com/Oppong-py/arethos" target="_blank">view_on_github &rarr;</a></div>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-header"><h3>Solar-Powered IoT Watering System</h3><div class="tech">Arduino &middot; IR Sensor &middot; C++ &middot; Solar Panel</div></div>
+        <div class="project-preview-placeholder">// screenshot coming soon</div>
+        <div class="project-body">
+            <p>Designed and built a sensor-driven embedded system with proximity-triggered actuation &mdash; edge computing for IoT agriculture. The system uses infrared sensors to detect plant proximity and triggers a solar-powered water pump automatically.</p>
+            <p>Engineered the full circuit from scratch: solar charge controller, relay logic, sensor fusion, and C++ firmware on Arduino. This project demonstrates the hardware-software integration skills that companies like Tesla and Samsung value in their embedded AI teams.</p>
+            <div class="tech-stack"><span class="tech-chip">Arduino</span><span class="tech-chip">C++</span><span class="tech-chip">IR Sensor</span><span class="tech-chip">Solar</span><span class="tech-chip">IoT</span><span class="tech-chip">Circuit Design</span></div>
+            <div class="project-links"><a href="https://github.com/Oppong-py" target="_blank">view_on_github &rarr;</a></div>
+        </div>
+    </div>
+
+    <!-- Roadmap Projects -->
+    <div class="project-card roadmap">
+        <div class="project-header"><span class="roadmap-badge">ROADMAP</span><h3>Computer Vision &mdash; Crop Disease Detector</h3><div class="tech">PyTorch &middot; CNN/ResNet &middot; FastAPI &middot; AWS</div></div>
+        <div class="project-body">
+            <p>Train a convolutional neural network on thousands of labeled plant images to identify diseases from leaf photos. Build a production web app where farmers upload a photo and receive an instant diagnosis with treatment recommendations.</p>
+            <p>This project directly aligns with Google's AI for Social Good initiative and Anthropic's mission of building AI that benefits humanity.</p>
+            <div class="tech-stack"><span class="tech-chip">PyTorch</span><span class="tech-chip">CNN</span><span class="tech-chip">ResNet</span><span class="tech-chip">FastAPI</span><span class="tech-chip">AWS</span><span class="tech-chip">Docker</span></div>
+        </div>
+    </div>
+
+    <div class="project-card roadmap">
+        <div class="project-header"><span class="roadmap-badge">ROADMAP</span><h3>NLP / LLM &mdash; AI Study Assistant</h3><div class="tech">Claude/OpenAI API &middot; LangChain &middot; RAG &middot; Next.js</div></div>
+        <div class="project-body">
+            <p>Build a chatbot that ingests textbooks and lecture notes, then answers student questions using Retrieval-Augmented Generation (RAG) with safety guardrails. Demonstrates understanding of prompt engineering, vector databases, and responsible AI deployment.</p>
+            <div class="tech-stack"><span class="tech-chip">Claude API</span><span class="tech-chip">LangChain</span><span class="tech-chip">RAG</span><span class="tech-chip">Next.js</span><span class="tech-chip">Pinecone</span></div>
+        </div>
+    </div>
+
+    <div class="project-card roadmap">
+        <div class="project-header"><span class="roadmap-badge">ROADMAP</span><h3>Predictive ML &mdash; Energy Demand Forecasting</h3><div class="tech">Scikit-learn &middot; XGBoost &middot; Pandas &middot; Streamlit</div></div>
+        <div class="project-body">
+            <p>Build a regression model predicting energy demand from historical consumption data and weather patterns. Deploy an interactive Streamlit dashboard for real-time predictions &mdash; the kind of applied ML that Tesla's energy division and Samsung's smart grid teams work on daily.</p>
+            <div class="tech-stack"><span class="tech-chip">Scikit-learn</span><span class="tech-chip">XGBoost</span><span class="tech-chip">Pandas</span><span class="tech-chip">Streamlit</span><span class="tech-chip">Time Series</span></div>
+        </div>
+    </div>
+</div>
+
+<footer><p>// &copy; 2026 Kwabena Oppong Adutwum &mdash; built_with_passion( "Kumasi, Ghana" )</p></footer>
+
+<script>
+(function(){
+    var t=document.getElementById('themeToggle');
+    var saved=localStorage.getItem('theme');
+    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');t.textContent='☀';}
+    t.addEventListener('click',function(){
+        var dark=document.documentElement.getAttribute('data-theme')==='dark';
+        document.documentElement.setAttribute('data-theme',dark?'':'dark');
+        t.textContent=dark?'☽':'☀';
+        localStorage.setItem('theme',dark?'light':'dark');
+    });
+})();
+</script>
+</body>
+</html>
