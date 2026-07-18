@@ -159,6 +159,14 @@
             background:var(--card-bg);border-radius:12px;padding:1.8rem;border:1px solid var(--card-border);
             position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
         }
+        .edu-card .edu-watermark {
+            position:absolute;right:-18px;bottom:-18px;width:210px;height:210px;
+            object-fit:contain;opacity:0.06;pointer-events:none;
+            transition:opacity 0.4s;
+        }
+        .edu-card:hover .edu-watermark { opacity:0.12; }
+        [data-theme="dark"] .edu-card .edu-watermark { opacity:0.08; }
+        [data-theme="dark"] .edu-card:hover .edu-watermark { opacity:0.15; }
         .edu-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent);opacity:0;transition:opacity 0.3s; }
         .edu-card:hover { transform:translateY(-3px);box-shadow:0 12px 35px var(--shadow-color);border-color:rgba(201,165,78,0.3); }
         .edu-card:hover::before { opacity:1; }
@@ -485,6 +493,7 @@
     </div>
     <div class="edu-grid">
         <div class="edu-card reveal reveal-delay-1">
+            <img src="knust_logo.png" alt="" class="edu-watermark">
             <div class="edu-top">
                 <div>
                     <h3>B.Sc. Computer Science</h3>
@@ -506,6 +515,7 @@
             </div>
         </div>
         <div class="edu-card reveal reveal-delay-2">
+            <img src="pc_logo_1.png" alt="" class="edu-watermark">
             <div class="edu-top">
                 <div>
                     <h3>WASSCE &mdash; General Science</h3>
