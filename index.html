@@ -7,7 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B46'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23C9A54E'%3EKOA%3C/text%3E%3C/svg%3E">
     <!-- Open Graph — controls how links preview on LinkedIn, Slack, WhatsApp, etc. -->
     <meta property="og:title" content="Kwabena Oppong Adutwum — AI/ML Engineer">
-    <meta property="og:description" content="AI/ML Engineering undergraduate at KNUST. National Robotics Champion. Regional Cybersecurity Champion. Building intelligent systems from embedded robots to full-stack ML.">
+    <meta property="og:description" content="AI/ML Engineering undergraduate at KNUST. National Robotics Champion. Regional Cybersecurity Champion. Building intelligent systems from embedded robots to applied machine learning.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://oppong-py.github.io">
     <!-- Replace with an actual preview image (1200x630px recommended): -->
@@ -46,6 +46,10 @@
             background-image: linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
             background-size: 60px 60px;
         }
+
+        /* ── Skip Link ── */
+        .skip-to-content { position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);padding:0.6rem 1.5rem;border-radius:0 0 8px 8px;font-weight:700;font-size:0.85rem;z-index:200;text-decoration:none;transition:top 0.3s; }
+        .skip-to-content:focus { top:0; }
 
         /* ── Nav ── */
         nav { position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);padding:0.8rem 2rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 20px rgba(0,0,0,0.3);transition:background 0.4s,padding 0.3s;border-bottom:1px solid rgba(201,165,78,0.15); }
@@ -380,9 +384,10 @@
     </style>
 </head>
 <body>
+<a href="#about" class="skip-to-content">Skip to content</a>
 <div class="mobile-overlay" id="mobileOverlay"></div>
 
-<nav id="navbar">
+<nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="logo">KOA</div>
     <div class="nav-links" id="navLinks">
         <a href="#about" data-section="about">About</a>
@@ -396,7 +401,7 @@
         <a href="#contact" data-section="contact">Contact</a>
         <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
     </div>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
 <section class="hero" id="hero">
@@ -404,11 +409,11 @@
     <div class="hero-content">
         <h1>KWABENA OPPONG <span class="gold">ADUTWUM</span></h1>
         <div class="tagline">&gt; <span id="typed-text"></span><span class="typing-cursor"></span></div>
-        <p class="subtitle">AI/ML Engineering undergraduate at KNUST with hands-on experience in embedded intelligence, autonomous systems, and full-stack ML deployment. Regional Cybersecurity Champion. National Robotics Champion.</p>
+        <p class="subtitle">AI/ML Engineering undergraduate at KNUST with hands-on experience in embedded intelligence, autonomous systems, and applied machine learning. Regional Cybersecurity Champion. National Robotics Champion.</p>
         <div class="hero-links">
             <a href="https://github.com/Oppong-py" class="btn-gold" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum-758984387" class="btn-outline" target="_blank">LinkedIn</a>
-            <a href="https://mail.google.com/mail/?view=cm&to=oppongkwabena1777@gmail.com" target="_blank" class="btn-outline">Get In Touch</a>
+            <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum" class="btn-outline" target="_blank">LinkedIn</a>
+            <a href="mailto:oppongkwabena1777@gmail.com" class="btn-outline">Get In Touch</a>
             <a href="resume.pdf" class="btn-outline" download><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Resume</a>
             <a href="cv.pdf" class="btn-outline" download><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Full CV</a>
         </div>
@@ -425,18 +430,18 @@
     <div class="about-layout">
         <div class="about-photo-col reveal">
             <div class="profile-photo-wrapper">
-                <img src="profile.jpg" alt="Kwabena Oppong Adutwum">
+                <img src="profile.jpg" alt="Portrait of Kwabena Oppong Adutwum — AI/ML Engineering student at KNUST">
             </div>
         </div>
         <div class="about-text-col reveal">
-            <p>I'm a Computer Science undergraduate at Kwame Nkrumah University of Science & Technology (KNUST) in Kumasi, Ghana, expected to graduate in 2029. I speak English natively and French at an intermediate level. My mission is to become an AI/ML Engineer &mdash; a journey that started with building robots and hacking into systems (ethically!) and has evolved into deep learning, computer vision, and natural language processing.</p>
+            <p>I'm a Computer Science undergraduate at Kwame Nkrumah University of Science & Technology (KNUST) in Kumasi, Ghana, expected to graduate in 2029. I speak English natively and French at an intermediate level. My mission is to become a Machine Learning Engineer &mdash; a journey that started with building robots and hacking into systems (ethically!) and has evolved into deep interest in intelligent and automated systems.</p>
             <p>I believe AI should solve real problems, especially for communities that need it most. Whether it's precision agriculture, healthcare access, or smart infrastructure &mdash; I want to build intelligent systems that make a tangible difference, starting right here in Africa.</p>
-            <p>When I'm not coding, you'll find me tinkering with Arduino circuits, reading about AI safety, or mentoring younger students in robotics and cybersecurity.</p>
+            <p>When I'm not coding, you'll find me reading self-development books, solving math problems, or mentoring younger students in robotics and cybersecurity.</p>
             <div class="highlight-strip">
                 <div class="highlight-badge"><span class="hb-dot"></span> National Robotics Champion 2025</div>
                 <div class="highlight-badge"><span class="hb-dot"></span> Regional Cybersecurity Champion 2024</div>
                 <div class="highlight-badge"><span class="hb-dot"></span> Hedera Certified Developer</div>
-                <div class="highlight-badge"><span class="hb-dot"></span> ML Intern @ Zap Tech</div>
+                <div class="highlight-badge"><span class="hb-dot"></span> ML Trainee @ Zap Tech</div>
             </div>
             <div class="interests-row">
                 <span class="interest-tag">Mathematics</span>
@@ -459,18 +464,17 @@
     <div class="exp-card reveal">
         <div class="exp-header">
             <div>
-                <h3>Machine Learning Intern</h3>
+                <h3>Machine Learning Trainee</h3>
                 <div class="exp-company">Zap Tech Technologies</div>
             </div>
             <div class="exp-meta">// May 2025 &middot; Remote</div>
         </div>
         <div class="exp-body">
             <ul>
-                <li>Collaborated with the engineering team on ML-driven product features, gaining hands-on exposure to the full model development lifecycle from data collection through deployment.</li>
-                <li>Preprocessed and cleaned datasets using Pandas and NumPy, handling missing values, feature scaling, and data augmentation to improve model input quality.</li>
-                <li>Assisted in training and evaluating classification models, learning to interpret metrics like accuracy, precision, recall, and F1-score in production contexts.</li>
-                <li>Documented model experiments, parameters, and results &mdash; building the discipline of reproducible ML research that top labs like Google DeepMind and Anthropic prioritize.</li>
-                <li>Participated in code reviews and sprint planning, gaining professional software engineering habits alongside ML skills.</li>
+                <li>Completed an intensive 2-week ML engineering program covering the full model development lifecycle &mdash; from raw data collection through model evaluation and iteration.</li>
+                <li>Preprocessed and cleaned real-world datasets using Pandas and NumPy, handling missing values, feature scaling, and data augmentation to improve model input quality.</li>
+                <li>Trained and evaluated classification models using Scikit-learn, learning to interpret accuracy, precision, recall, and F1-score to compare model performance across iterations.</li>
+                <li>Documented all experiments, hyperparameters, and results in structured notebooks &mdash; building the discipline of reproducible ML research from day one.</li>
             </ul>
             <div class="exp-skills">
                 <span class="exp-skill-chip">Python</span>
@@ -487,33 +491,16 @@
         <div class="exp-header">
             <div>
                 <span class="roadmap-badge">SEEKING</span>
-                <h3>AI/ML Research Intern</h3>
-                <div class="exp-company">Target: Google, Anthropic, Samsung, Tesla</div>
+                <h3>AI/ML Research Intern &mdash; Summer 2026</h3>
+                <div class="exp-company">AI Research Lab or Top-Tier Tech Company</div>
             </div>
             <div class="exp-meta">// Summer 2026 &middot; Remote or On-site</div>
         </div>
         <div class="exp-body">
             <ul>
-                <li>Seeking a research-oriented internship working on computer vision, NLP, reinforcement learning, or AI safety problems at scale.</li>
-                <li>Prepared to contribute to model training pipelines, data engineering, evaluation frameworks, or responsible AI tooling.</li>
+                <li>Seeking a research-oriented internship in computer vision, NLP, reinforcement learning, or applied ML at scale.</li>
                 <li>Bringing strong fundamentals in Python, embedded systems (IoT/robotics), and a track record of building end-to-end projects from hardware to software.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="exp-card roadmap reveal">
-        <div class="exp-header">
-            <div>
-                <span class="roadmap-badge">SEEKING</span>
-                <h3>Open Source Contributor</h3>
-                <div class="exp-company">Target: PyTorch, Hugging Face, LangChain, or OpenCV</div>
-            </div>
-            <div class="exp-meta">// 2026 &middot; Remote</div>
-        </div>
-        <div class="exp-body">
-            <ul>
-                <li>Planning to contribute to major open-source ML frameworks &mdash; the fastest way to build a public engineering track record that top companies evaluate during hiring.</li>
-                <li>Focus areas: documentation improvements, bug fixes, and eventually feature PRs in areas aligned with my learning roadmap.</li>
+                <li>Also planning to contribute to major open-source ML frameworks (PyTorch, Hugging Face, OpenCV) to build a public engineering track record.</li>
             </ul>
         </div>
     </div>
@@ -559,7 +546,7 @@
             </div>
             <div class="edu-meta">// Graduated Sep 2025 &middot; Kumasi, Ghana</div>
             <div class="edu-body">
-                <p>Graduated from one of Ghana's top secondary schools with a strong science foundation. Founded and led the Cybersecurity Club, mentoring peers in network security and ethical hacking. Active member of the Robotics Club, competing nationally and winning the Robofest Ghana 2025 championship.</p>
+                <p>Graduated from one of Ghana's top secondary schools with a strong science foundation. Founded and led the Cybersecurity Club, personally mentoring 6 junior students in network security and ethical hacking. Active member of the Robotics Club, competing nationally and winning the Robofest Ghana 2025 championship.</p>
                 <p>Won the Regional Cybersecurity Challenge (2024) and represented Prempeh College at the International Public Policy Forum (IPPF), a global debate competition organized by the Brewer Foundation and NYU.</p>
             </div>
             <div class="edu-highlights">
@@ -600,10 +587,9 @@
             <!-- Replace placeholder with: <img src="attendance-preview.png" alt="Attendance system" class="project-preview"> -->
             <div class="project-preview-placeholder">// screenshot coming soon</div>
             <div class="project-body">
-                <p>Architected a full-stack biometric attendance platform with a real-time data pipeline, reducing manual roll-call by approximately 80%. Designed the system to handle concurrent Bluetooth fingerprint scans &mdash; experience directly applicable to building data ingestion pipelines at scale.</p>
+                <p>Architected a full-stack biometric attendance platform serving <span class="highlight">50 students</span> in prototype testing, reducing manual roll-call time by ~80%. Designed the system to handle concurrent Bluetooth fingerprint scans &mdash; experience directly applicable to building data ingestion pipelines at scale.</p>
                 <p>Built a Django REST API backend with PostgreSQL for persistent storage and a React Native mobile frontend for cross-platform deployment. Implemented Bluetooth Low Energy (BLE) communication for proximity-based check-in.</p>
                 <div class="tech-stack"><span class="tech-chip">React Native</span><span class="tech-chip">Django</span><span class="tech-chip">PostgreSQL</span><span class="tech-chip">BLE</span><span class="tech-chip">REST API</span><span class="tech-chip">Git</span></div>
-                <div class="project-links"><a href="https://github.com/Oppong-py" target="_blank">view_on_github &rarr;</a></div>
             </div>
         </div>
         <div class="project-card reveal reveal-delay-3">
@@ -611,7 +597,7 @@
             <!-- Replace placeholder with: <img src="arethos-preview.png" alt="Arethos app" class="project-preview"> -->
             <div class="project-preview-placeholder">// screenshot coming soon</div>
             <div class="project-body">
-                <p><span class="highlight">Team Project</span> &mdash; Co-built a cross-platform mental wellness app for KNUST students with three core tabs: AI-powered Journal, Mood tracker, and History/Reflections. Engineered dual-AI fallback (Groq + Anthropic), custom haptic feedback, and offline-first SQLite storage.</p>
+                <p><span class="highlight">3-person team project</span> &mdash; Co-built a cross-platform mental wellness app for KNUST students with three core tabs: AI-powered Journal, Mood tracker, and History/Reflections. Engineered dual-AI fallback (Groq + Anthropic), custom haptic feedback, and offline-first SQLite storage.</p>
                 <div class="tech-stack"><span class="tech-chip">React Native</span><span class="tech-chip">Expo SDK 54</span><span class="tech-chip">SQLite</span><span class="tech-chip">Groq API</span><span class="tech-chip">Anthropic API</span></div>
                 <div class="project-links"><a href="https://github.com/Oppong-py/arethos" target="_blank">view_on_github &rarr;</a></div>
             </div>
@@ -691,18 +677,18 @@
             </div>
             <div class="skill-bar-container"><div class="skill-bar-label"><span>proficiency</span><span>55%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="55"></div></div></div>
         </div>
-        <div class="skill-category reveal reveal-delay-3" data-has-current="false" data-has-roadmap="true">
+        <div class="skill-category reveal reveal-delay-3" data-has-current="true" data-has-roadmap="true">
             <div class="terminal-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
             <h3>AI / ML Frameworks</h3>
             <div class="skill-tags">
+                <span class="tag" data-type="current">Scikit-learn</span>
                 <span class="tag roadmap" data-type="roadmap">PyTorch</span>
                 <span class="tag roadmap" data-type="roadmap">TensorFlow</span>
-                <span class="tag roadmap" data-type="roadmap">Scikit-learn</span>
                 <span class="tag roadmap" data-type="roadmap">Hugging Face</span>
                 <span class="tag roadmap" data-type="roadmap">LangChain</span>
                 <span class="tag roadmap" data-type="roadmap">OpenCV</span>
             </div>
-            <div class="skill-bar-container"><div class="skill-bar-label"><span>proficiency</span><span>15%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="15"></div></div></div>
+            <div class="skill-bar-container"><div class="skill-bar-label"><span>proficiency</span><span>25%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="25"></div></div></div>
         </div>
     </div>
 </section>
@@ -723,28 +709,28 @@
     <div class="achieve-grid">
         <div class="achieve-card reveal-left stagger-1">
             <div class="achieve-top">
-                <h4>ACES CodeFest 2026 &mdash; UI/UX Challenge</h4>
-                <span class="achieve-date">2026</span>
-            </div>
-            <p>Redesigned the ACES KNUST website into a mobile-first, student-focused experience across 9 pages in a 2-week sprint. Demonstrated front-end development skills and user-centered design thinking.</p>
-        </div>
-        <div class="achieve-card reveal-right stagger-2">
-            <div class="achieve-top">
                 <h4>National Champion &mdash; Robofest Ghana</h4>
                 <span class="achieve-date">2025</span>
             </div>
             <p>Designed and built an autonomous line-following robot under timed competition conditions. Won first place against teams from across the country, demonstrating engineering execution under pressure.</p>
         </div>
-        <div class="achieve-card reveal-left stagger-3">
+        <div class="achieve-card reveal-right stagger-2">
             <div class="achieve-top">
                 <h4>Regional Champion &mdash; National Cybersecurity Challenge</h4>
                 <span class="achieve-date">2024</span>
             </div>
             <p>Competed in a rigorous knowledge-based challenge testing cybersecurity fundamentals, threat analysis, network security, and security best practices. Won the regional round, advancing to the national stage.</p>
         </div>
+        <div class="achieve-card reveal-left stagger-3">
+            <div class="achieve-top">
+                <h4>Participant &mdash; International Public Policy Forum</h4>
+                <span class="achieve-date">2024</span>
+            </div>
+            <p>Selected to represent Prempeh College in a global policy debate organized by the Brewer Foundation and NYU. Developed research, argumentation, and communication skills valued in cross-functional tech teams.</p>
+        </div>
     </div>
     <div class="view-all-link reveal">
-        <a href="achievements.html">view_all_achievements( 12 ) &rarr;</a>
+        <a href="achievements.html">view_all( 12 items ) &rarr;</a>
     </div>
 </section>
 
@@ -761,15 +747,15 @@
             <div class="cert-icon">&#9670;</div>
             <div class="cert-info"><h4>Hashgraph Developer Course</h4><div class="issuer">Hedera</div><div class="year">Jan 2026 &mdash; view_cert &rarr;</div></div>
         </div></a>
-        <a href="hedera-foundation-certificate.pdf" target="_blank" style="text-decoration:none;color:inherit;">
+        <a href="ippf-certificate.pdf" target="_blank" style="text-decoration:none;color:inherit;">
         <div class="cert-card reveal reveal-delay-2" title="Click to view certificate" style="cursor:pointer;">
             <div class="cert-icon">&#9670;</div>
-            <div class="cert-info"><h4>Hedera Certified Foundation</h4><div class="issuer">Hedera</div><div class="year">Apr 2026 &mdash; view_cert &rarr;</div></div>
+            <div class="cert-info"><h4>IPPF Competitor</h4><div class="issuer">Brewer Foundation & NYU</div><div class="year">2024-25 &mdash; view_cert &rarr;</div></div>
         </div></a>
-        <a href="ippf-certificate.pdf" target="_blank" style="text-decoration:none;color:inherit;">
+        <a href="hedera-foundation-certificate.pdf" target="_blank" style="text-decoration:none;color:inherit;">
         <div class="cert-card reveal reveal-delay-3" title="Click to view certificate" style="cursor:pointer;">
             <div class="cert-icon">&#9670;</div>
-            <div class="cert-info"><h4>IPPF Competitor</h4><div class="issuer">Brewer Foundation & NYU</div><div class="year">2024-25 &mdash; view_cert &rarr;</div></div>
+            <div class="cert-info"><h4>Hedera Certified Foundation</h4><div class="issuer">Hedera</div><div class="year">Apr 2026 &mdash; view_cert &rarr;</div></div>
         </div></a>
     </div>
     <div class="view-all-link reveal">
@@ -785,21 +771,23 @@
         <div class="section-line"></div>
     </div>
     <div class="blog-grid">
-        <div class="blog-card placeholder-card reveal reveal-delay-1">
-            <div class="blog-date">// coming soon</div>
-            <h4>What Building Arethos Taught Me About React Native</h4>
-            <p>Lessons from solving stale closures in PanResponder, building multi-pulse haptic patterns on Android, and why Modal beats zIndex every time.</p>
-            <span class="blog-read-more">read &rarr;</span>
-        </div>
-        <div class="blog-card placeholder-card reveal reveal-delay-2">
-            <div class="blog-date">// coming soon</div>
+        <a href="blog-pid-to-rl.html" style="text-decoration:none;color:inherit;">
+        <div class="blog-card reveal reveal-delay-1" style="cursor:pointer;">
+            <div class="blog-date">// July 2026 &middot; 4 min read</div>
             <h4>From PID Control to Reinforcement Learning</h4>
             <p>How tuning Kp, Ki, and Kd on a line-following robot gave me an intuition for reward signals, policy gradients, and the explore-exploit tradeoff.</p>
-            <span class="blog-read-more">read &rarr;</span>
-        </div>
+            <span class="blog-read-more">read_post &rarr;</span>
+        </div></a>
+        <a href="blog-arethos-rn.html" style="text-decoration:none;color:inherit;">
+        <div class="blog-card reveal reveal-delay-2" style="cursor:pointer;">
+            <div class="blog-date">// July 2026 &middot; 6 min read</div>
+            <h4>Three Bugs That Taught Me More Than Any Tutorial</h4>
+            <p>Why React Native's zIndex is a lie, how stale closures broke my slider, and what 9 haptic iterations taught me about Android vibration APIs.</p>
+            <span class="blog-read-more">read_post &rarr;</span>
+        </div></a>
         <div class="blog-card placeholder-card reveal reveal-delay-3">
             <div class="blog-date">// coming soon</div>
-            <h4>AI in African Education — What's Missing</h4>
+            <h4>AI in African Education &mdash; What's Missing</h4>
             <p>Why most edtech tools built for Western classrooms fail African students, and what building for KNUST taught me about context-aware design.</p>
             <span class="blog-read-more">read &rarr;</span>
         </div>
@@ -811,11 +799,12 @@
     <h2 class="reveal">Let's <span style="color:var(--gold);">Connect</span></h2>
     <p class="reveal">I'm actively looking for AI/ML internship opportunities. If you're building something exciting with AI, I'd love to hear about it.</p>
     <div class="contact-links reveal">
-        <a href="https://mail.google.com/mail/?view=cm&to=oppongkwabena1777@gmail.com" target="_blank">&#9993; email_me</a>
-        <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum-758984387" target="_blank">&#8599; linkedin</a>
+        <a href="mailto:oppongkwabena1777@gmail.com">&#9993; personal_email</a>
+        <a href="mailto:kaoppong5@st.knust.edu.gh">&#9993; university_email</a>
+        <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum" target="_blank">&#8599; linkedin</a>
         <a href="https://github.com/Oppong-py" target="_blank">&#8599; github</a>
-        <a href="resume.pdf" download>&#8681; resume</a>
-        <a href="cv.pdf" download>&#8681; full_cv</a>
+        <a href="resume.pdf" download><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>resume</a>
+        <a href="cv.pdf" download><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>full_cv</a>
     </div>
 </section>
 
@@ -836,7 +825,7 @@
     resizeCanvas();createParticles();drawParticles();window.addEventListener('resize',function(){resizeCanvas();createParticles();});
 
     var hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks'),overlay=document.getElementById('mobileOverlay');
-    function toggleMenu(){hamburger.classList.toggle('open');navLinks.classList.toggle('open');overlay.classList.toggle('active');}
+    function toggleMenu(){hamburger.classList.toggle('open');navLinks.classList.toggle('open');overlay.classList.toggle('active');hamburger.setAttribute('aria-expanded',navLinks.classList.contains('open'));}
     hamburger.addEventListener('click',toggleMenu);overlay.addEventListener('click',toggleMenu);
     var mobileAs=navLinks.querySelectorAll('a');for(var m=0;m<mobileAs.length;m++)mobileAs[m].addEventListener('click',function(){if(navLinks.classList.contains('open'))toggleMenu();});
 
@@ -849,7 +838,8 @@
     for(var b=0;b<bars.length;b++)bo.observe(bars[b]);
 
     var themeBtn=document.getElementById('themeToggle');
-    themeBtn.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme');var t=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);themeBtn.innerHTML=t==='dark'?'&#9788;':'&#9790;';});
+    var savedTheme=localStorage.getItem('theme');if(savedTheme==='dark'){document.documentElement.setAttribute('data-theme','dark');themeBtn.innerHTML='&#9788;';}
+    themeBtn.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme');var t=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);themeBtn.innerHTML=t==='dark'?'&#9788;':'&#9790;';localStorage.setItem('theme',t);});
 
     var fTabs=document.querySelectorAll('.filter-tab'),sCards=document.querySelectorAll('.skill-category');
     for(var f=0;f<fTabs.length;f++){fTabs[f].addEventListener('click',function(){for(var a=0;a<fTabs.length;a++)fTabs[a].classList.remove('active');this.classList.add('active');var fl=this.getAttribute('data-filter');for(var c=0;c<sCards.length;c++){var cd=sCards[c],hc=cd.getAttribute('data-has-current')==='true',hr=cd.getAttribute('data-has-roadmap')==='true',tags=cd.querySelectorAll('.tag');if(fl==='all'){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].classList.remove('hidden-tag');}else if(fl==='current'){if(hc){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].getAttribute('data-type')==='roadmap'?tags[t].classList.add('hidden-tag'):tags[t].classList.remove('hidden-tag');}else cd.classList.add('hidden-card');}else if(fl==='roadmap'){if(hr){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].getAttribute('data-type')==='current'?tags[t].classList.add('hidden-tag'):tags[t].classList.remove('hidden-tag');}else cd.classList.add('hidden-card');}}});}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Building Arethos Taught Me About React Native | KOA</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B46'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23C9A54E'%3EKOA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --navy:#0F2B46;--navy-light:#1a3a5c;--gold:#C9A54E;--gold-light:#d4b76a;
+            --cream:#F0ECE3;--slate:#3B444F;--light-slate:#6B7480;--white:#FFFFFF;
+            --bg:#f8f9fa;--card-bg:#ffffff;--card-border:#e8e8e8;
+            --section-title-color:var(--navy);--footer-bg:#0a1f33;
+            --shadow-color:rgba(0,0,0,0.08);
+            --grid-color:rgba(15,43,70,0.04);--code-font:'JetBrains Mono','Fira Code','Consolas',monospace;
+            --heading-font:'Space Grotesk','Inter',sans-serif;
+        }
+        [data-theme="dark"] {
+            --bg:#0d1b2a;--card-bg:#1b2838;--card-border:#2a3a4d;
+            --slate:#c8d0d8;--light-slate:#8a95a3;--cream:#1e3048;
+            --section-title-color:var(--gold);--footer-bg:#060e17;
+            --shadow-color:rgba(0,0,0,0.3);--grid-color:rgba(201,165,78,0.03);
+        }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--slate); line-height:1.8; transition:background 0.4s,color 0.4s; background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px); background-size:60px 60px; }
+        .top-bar { background:var(--navy); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(201,165,78,0.15); position:sticky; top:0; z-index:100; }
+        .top-bar .logo { color:var(--gold); font-weight:700; font-size:1.2rem; letter-spacing:1px; font-family:var(--code-font); text-decoration:none; }
+        .top-bar .logo::before { content:'< '; opacity:0.5; } .top-bar .logo::after { content:' />'; opacity:0.5; }
+        .top-bar .back-link { color:var(--cream); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.3s; }
+        .top-bar .back-link:hover { color:var(--gold); }
+        .top-bar .right-controls { display:flex; align-items:center; gap:1rem; }
+        .theme-toggle { background:none; border:2px solid var(--gold); color:var(--gold); width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+        .theme-toggle:hover { background:var(--gold); color:var(--navy); }
+
+        .article-wrap { max-width:720px; margin:0 auto; padding:3rem 2rem 4rem; }
+        .article-meta { font-family:var(--code-font); font-size:0.8rem; color:var(--gold); margin-bottom:0.5rem; }
+        .article-wrap h1 { font-size:1.8rem; color:var(--section-title-color); font-family:var(--heading-font); margin-bottom:0.5rem; line-height:1.3; transition:color 0.4s; }
+        .article-wrap .subtitle { font-size:1rem; color:var(--light-slate); margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:2px solid var(--card-border); }
+        .article-wrap h2 { font-size:1.2rem; color:var(--section-title-color); font-family:var(--heading-font); margin:2rem 0 0.8rem; transition:color 0.4s; }
+        .article-wrap p { font-size:0.95rem; margin-bottom:1.2rem; }
+        .article-wrap code { font-family:var(--code-font); background:var(--cream); padding:0.15rem 0.4rem; border-radius:4px; font-size:0.85rem; border:1px solid var(--card-border); }
+        [data-theme="dark"] .article-wrap code { color:var(--gold); }
+        .code-block { background:var(--navy); color:#b0bec5; padding:1.2rem 1.5rem; border-radius:10px; font-family:var(--code-font); font-size:0.82rem; line-height:1.7; overflow-x:auto; margin:1rem 0 1.5rem; border:1px solid rgba(201,165,78,0.15); }
+        .code-block .comment { color:#6B7480; }
+        .code-block .keyword { color:var(--gold); }
+        .highlight-box { background:var(--card-bg); border-left:4px solid var(--gold); padding:1rem 1.5rem; border-radius:0 8px 8px 0; margin:1.5rem 0; border:1px solid var(--card-border); border-left:4px solid var(--gold); }
+        .highlight-box p { margin-bottom:0; font-size:0.9rem; }
+        .iteration-table { width:100%; border-collapse:collapse; margin:1rem 0 1.5rem; font-size:0.85rem; }
+        .iteration-table th { text-align:left; padding:0.6rem 0.8rem; background:var(--navy); color:var(--gold); font-family:var(--code-font); font-size:0.75rem; letter-spacing:0.5px; }
+        .iteration-table td { padding:0.5rem 0.8rem; border-bottom:1px solid var(--card-border); }
+        .iteration-table tr:last-child td { border-bottom:none; }
+        .iteration-table tr.winner td { background:rgba(201,165,78,0.08); font-weight:600; }
+        .tags-row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:2rem; padding-top:1.5rem; border-top:2px solid var(--card-border); }
+        .tags-row span { font-size:0.72rem; padding:0.25rem 0.6rem; border-radius:4px; background:transparent; border:1px solid var(--gold); color:var(--gold); font-family:var(--code-font); }
+        footer { background:var(--footer-bg); color:var(--light-slate); text-align:center; padding:1.5rem; font-size:0.8rem; font-family:var(--code-font); }
+        @media(max-width:768px) { .article-wrap h1 { font-size:1.4rem; } .article-wrap { padding:2rem 1.2rem 3rem; } .iteration-table { font-size:0.78rem; } }
+    </style>
+</head>
+<body>
+<div class="top-bar">
+    <a href="index.html" class="logo">KOA</a>
+    <div class="right-controls">
+        <a href="index.html#thinking" class="back-link">&larr; back_to_thinking</a>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
+    </div>
+</div>
+
+<article class="article-wrap">
+    <div class="article-meta">// July 2026 &middot; 6 min read</div>
+    <h1>Three Bugs That Taught Me More Than Any Tutorial</h1>
+    <p class="subtitle">Lessons from building Arethos &mdash; a mental wellness app where React Native's abstractions broke down and the real engineering started.</p>
+
+    <p>Arethos is a mental wellness app I co-built with two teammates for KNUST students. It has an AI-powered journal, a mood tracker with sleep logging, and a reflections tab that surfaces behavioral patterns. We shipped it with React Native and Expo SDK 54, backed by SQLite for fully offline-first storage and a dual-AI fallback system (Groq primary, Anthropic secondary).</p>
+
+    <p>The interesting parts aren't in the feature list. They're in the three bugs that forced me to understand what React Native actually does under the hood, instead of just using it.</p>
+
+    <h2>Bug 1: The Delete Button That Didn't Exist</h2>
+
+    <p>The journal screen shows recent entries as cards. Each card has a three-dot menu. You tap it, a dropdown appears with a "Delete" option. Simple. Except tapping "Delete" did absolutely nothing.</p>
+
+    <p>The dropdown was positioned with <code>zIndex: 10</code>. Visually, it rendered on top of everything. But React Native's <code>zIndex</code> only works between direct siblings in the same parent view. Our dropdown and the card's <code>TouchableOpacity</code> wrapper were not siblings &mdash; the dropdown was a child of the card, and the <code>TouchableOpacity</code> wrapping the entire card was intercepting every tap before it could reach the dropdown's buttons.</p>
+
+    <p>This is a fundamental difference from CSS. On the web, <code>z-index</code> creates stacking contexts that govern hit-testing globally. In React Native, touch responders are resolved by the view tree's parent-child hierarchy, not by visual layering. A child can never "escape" its parent's touch boundary through <code>zIndex</code> alone.</p>
+
+    <div class="highlight-box">
+        <p><strong>The fix:</strong> Replace the inline dropdown with a <code>Modal</code> bottom-sheet. A Modal renders at the OS level, outside the entire view tree. Nothing can intercept its touches. This is not a workaround &mdash; it's the correct pattern for any overlay that needs to receive taps in React Native.</p>
+    </div>
+
+    <p>The bottom-sheet shows a preview of the entry, a red "Delete entry" button, and a cancel option. Tapping the dark backdrop dismisses it. It works every time, on every device, because it doesn't fight the framework &mdash; it uses the escape hatch the framework provides.</p>
+
+    <h2>Bug 2: The Slider That Teleported</h2>
+
+    <p>The mood screen has a sleep slider &mdash; drag a knob across a track to log hours slept. Except sometimes, mid-drag, the knob would snap back to position zero. Other times it wouldn't move at all. The behavior was inconsistent and maddening.</p>
+
+    <p>The root cause took me a while to find: a <strong>stale closure</strong>.</p>
+
+    <p><code>PanResponder.create()</code> runs once, inside a <code>useRef</code>, at component mount. Every callback it defines &mdash; <code>onPanResponderGrant</code>, <code>onPanResponderMove</code>, <code>onPanResponderRelease</code> &mdash; captures the variables in scope at that single moment. Those variables are frozen forever.</p>
+
+    <p>My <code>onPanResponderMove</code> was reading a state variable called <code>value</code> (the current sleep level), converting it back to a pixel position, and using that as the drag origin. But <code>value</code> inside the closure was always <code>0</code> &mdash; its initial state. Every drag calculated its position relative to zero, regardless of where the knob actually was.</p>
+
+    <div class="code-block">
+<span class="comment">// THE BUG: value is always 0 inside the frozen closure</span>
+onPanResponderMove: (_, gs) => {
+  <span class="keyword">const</span> startPixel = valueToPixel(<span class="keyword">value</span>);  <span class="comment">// value === 0, always</span>
+  <span class="keyword">const</span> newPos = startPixel + gs.dx;
+  knobX.setValue(newPos);
+}
+
+<span class="comment">// THE FIX: save real position into a ref at drag start</span>
+<span class="keyword">const</span> dragStartX = useRef(0);
+
+onPanResponderGrant: (evt) => {
+  <span class="comment">// Capture actual pixel position RIGHT NOW, not from state</span>
+  dragStartX.current = evt.nativeEvent.locationX - KNOB_D / 2;
+},
+onPanResponderMove: (_, gs) => {
+  <span class="keyword">const</span> newPos = dragStartX.current + gs.dx;  <span class="comment">// always correct</span>
+  knobX.setValue(Math.max(0, Math.min(newPos, maxWidth)));
+}
+    </div>
+
+    <p>The lesson is broader than React Native. Any system that creates callbacks at initialization time and reuses them later &mdash; event listeners in embedded systems, registered callbacks in game engines, hooks in ML training loops &mdash; is vulnerable to stale closures. The pattern is always the same: if a callback needs current state, pass it through a mutable reference, not a captured variable.</p>
+
+    <h2>Bug 3: The Vibration That Took 9 Iterations</h2>
+
+    <p>This one wasn't a bug. It was a design problem that revealed something about how Android haptics actually work.</p>
+
+    <p>We wanted the dark/light theme toggle to produce a specific haptic sensation &mdash; a subtle shake in the palm, like the Samsung S23's "no face detected" vibration. Not a harsh buzz. Not a single tap. A gentle multi-pulse tremor.</p>
+
+    <p>My first instinct was <code>expo-haptics</code>, the standard Expo library for haptic feedback. It offers presets like <code>ImpactFeedbackStyle.Light</code>, <code>.Medium</code>, <code>.Heavy</code>, and notification types like <code>Success</code> and <code>Error</code>.</p>
+
+    <p>On Android, none of them worked. Every preset felt like the same single electronic buzz, just at slightly different intensities. Here's why: <code>expo-haptics</code> calls <code>VibrationEffect.createOneShot(duration, amplitude)</code> under the hood. One shot. One pulse. You can adjust how hard and how long, but it's always a single impulse.</p>
+
+    <p>To get a multi-pulse waveform &mdash; the kind that feels organic and physical &mdash; you need <code>VibrationEffect.createWaveform()</code>, which React Native's built-in <code>Vibration.vibrate([pattern])</code> calls. The array alternates between wait and vibrate durations in milliseconds.</p>
+
+    <table class="iteration-table">
+        <thead><tr><th>#</th><th>Approach</th><th>Result</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td><code>impactAsync(Medium)</code></td><td>Too strong, single buzz</td></tr>
+            <tr><td>2</td><td><code>selectionAsync()</code> &times; 2, 55ms gap</td><td>Doesn't feel natural</td></tr>
+            <tr><td>3</td><td><code>impactAsync(Light)</code> &times; 3</td><td>Still mechanical</td></tr>
+            <tr><td>4</td><td><code>notificationAsync(Error)</code></td><td>"That's the wrong password one"</td></tr>
+            <tr><td>5</td><td><code>Vibration.vibrate([0,40,30,40,30,40])</code></td><td>Getting there, too strong</td></tr>
+            <tr><td>6</td><td><code>Vibration.vibrate([0,20,30,20,30,20])</code></td><td>Better, still heavy</td></tr>
+            <tr class="winner"><td>7</td><td><code>Vibration.vibrate([0,12,32,12,32,12])</code></td><td>Confirmed &mdash; subtle palm shake</td></tr>
+        </tbody>
+    </table>
+
+    <p>The key insight: <strong>pulse duration controls perceived intensity, not amplitude.</strong> A 40ms vibrate pulse feels harsh regardless of what amplitude the OS chooses. A 12ms pulse barely registers consciously &mdash; you feel it in your palm without it interrupting your attention. Three 12ms pulses with 32ms breathing room between them produce the exact sensation we wanted.</p>
+
+    <p>We shipped three haptic functions: <code>subtleShake()</code> for mode changes, <code>softTap()</code> for buttons, and <code>successPulse()</code> for save confirmations. The platform-specific branching is isolated in a single 15-line file.</p>
+
+    <div class="code-block">
+<span class="comment">// src/lib/haptics.js — the entire haptics layer</span>
+<span class="keyword">export function</span> subtleShake() {
+  <span class="keyword">if</span> (Platform.OS === "android") {
+    Vibration.vibrate([0, 12, 32, 12, 32, 12]);
+  } <span class="keyword">else</span> {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  }
+}
+    </div>
+
+    <h2>What These Three Bugs Have in Common</h2>
+
+    <p>Each one forced me past the abstraction layer. React Native presents a clean API &mdash; <code>zIndex</code> for layering, state for data, <code>expo-haptics</code> for vibrations &mdash; but the abstraction leaks in predictable ways when you push it.</p>
+
+    <p>The delete button taught me that touch resolution in React Native follows the view tree, not visual stacking. The slider taught me that closures in hook-based architectures can freeze state at initialization. The haptics taught me that high-level APIs often call the simplest underlying system call, and sometimes you need to drop one level to get what you want.</p>
+
+    <p>These aren't React Native problems. They're <em>abstraction</em> problems. Every framework hides complexity until it doesn't, and the engineers who ship reliable software are the ones who know where the seams are. That's what building Arethos taught me &mdash; not how to use React Native, but how to debug it when the surface-level answer isn't enough.</p>
+
+    <div class="tags-row">
+        <span>react-native</span>
+        <span>expo</span>
+        <span>debugging</span>
+        <span>android</span>
+        <span>haptics</span>
+        <span>PanResponder</span>
+        <span>stale-closures</span>
+        <span>mobile-dev</span>
+    </div>
+</article>
+
+<footer><p>// &copy; 2026 Kwabena Oppong Adutwum &mdash; built_with_passion( "Kumasi, Ghana" )</p></footer>
+
+<script>
+(function(){
+    var t=document.getElementById('themeToggle');
+    var saved=localStorage.getItem('theme');
+    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');t.textContent='☀';}
+    t.addEventListener('click',function(){
+        var dark=document.documentElement.getAttribute('data-theme')==='dark';
+        document.documentElement.setAttribute('data-theme',dark?'':'dark');
+        t.textContent=dark?'☽':'☀';
+        localStorage.setItem('theme',dark?'light':'dark');
+    });
+})();
+</script>
+</body>
+</html>

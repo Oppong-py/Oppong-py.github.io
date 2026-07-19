@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From PID Control to Reinforcement Learning | KOA</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B46'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23C9A54E'%3EKOA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --navy:#0F2B46;--navy-light:#1a3a5c;--gold:#C9A54E;--gold-light:#d4b76a;
+            --cream:#F0ECE3;--slate:#3B444F;--light-slate:#6B7480;--white:#FFFFFF;
+            --bg:#f8f9fa;--card-bg:#ffffff;--card-border:#e8e8e8;
+            --section-title-color:var(--navy);--footer-bg:#0a1f33;
+            --shadow-color:rgba(0,0,0,0.08);
+            --grid-color:rgba(15,43,70,0.04);--code-font:'JetBrains Mono','Fira Code','Consolas',monospace;
+            --heading-font:'Space Grotesk','Inter',sans-serif;
+        }
+        [data-theme="dark"] {
+            --bg:#0d1b2a;--card-bg:#1b2838;--card-border:#2a3a4d;
+            --slate:#c8d0d8;--light-slate:#8a95a3;--cream:#1e3048;
+            --section-title-color:var(--gold);--footer-bg:#060e17;
+            --shadow-color:rgba(0,0,0,0.3);--grid-color:rgba(201,165,78,0.03);
+        }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--slate); line-height:1.8; transition:background 0.4s,color 0.4s; background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px); background-size:60px 60px; }
+        .top-bar { background:var(--navy); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(201,165,78,0.15); position:sticky; top:0; z-index:100; }
+        .top-bar .logo { color:var(--gold); font-weight:700; font-size:1.2rem; letter-spacing:1px; font-family:var(--code-font); text-decoration:none; }
+        .top-bar .logo::before { content:'< '; opacity:0.5; } .top-bar .logo::after { content:' />'; opacity:0.5; }
+        .top-bar .back-link { color:var(--cream); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.3s; }
+        .top-bar .back-link:hover { color:var(--gold); }
+        .top-bar .right-controls { display:flex; align-items:center; gap:1rem; }
+        .theme-toggle { background:none; border:2px solid var(--gold); color:var(--gold); width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+        .theme-toggle:hover { background:var(--gold); color:var(--navy); }
+
+        .article-wrap { max-width:720px; margin:0 auto; padding:3rem 2rem 4rem; }
+        .article-meta { font-family:var(--code-font); font-size:0.8rem; color:var(--gold); margin-bottom:0.5rem; }
+        .article-wrap h1 { font-size:1.8rem; color:var(--section-title-color); font-family:var(--heading-font); margin-bottom:0.5rem; line-height:1.3; transition:color 0.4s; }
+        .article-wrap .subtitle { font-size:1rem; color:var(--light-slate); margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:2px solid var(--card-border); }
+        .article-wrap h2 { font-size:1.2rem; color:var(--section-title-color); font-family:var(--heading-font); margin:2rem 0 0.8rem; transition:color 0.4s; }
+        .article-wrap p { font-size:0.95rem; margin-bottom:1.2rem; }
+        .article-wrap code { font-family:var(--code-font); background:var(--cream); padding:0.15rem 0.4rem; border-radius:4px; font-size:0.85rem; border:1px solid var(--card-border); }
+        [data-theme="dark"] .article-wrap code { color:var(--gold); }
+        .article-wrap .code-block { background:var(--navy); color:#b0bec5; padding:1.2rem 1.5rem; border-radius:10px; font-family:var(--code-font); font-size:0.82rem; line-height:1.7; overflow-x:auto; margin:1rem 0 1.5rem; border:1px solid rgba(201,165,78,0.15); }
+        .article-wrap .code-block .comment { color:#6B7480; }
+        .article-wrap .code-block .keyword { color:var(--gold); }
+        .article-wrap .highlight-box { background:var(--card-bg); border-left:4px solid var(--gold); padding:1rem 1.5rem; border-radius:0 8px 8px 0; margin:1.5rem 0; border:1px solid var(--card-border); border-left:4px solid var(--gold); }
+        .article-wrap .highlight-box p { margin-bottom:0; font-size:0.9rem; }
+        .tags-row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:2rem; padding-top:1.5rem; border-top:2px solid var(--card-border); }
+        .tags-row span { font-size:0.72rem; padding:0.25rem 0.6rem; border-radius:4px; background:transparent; border:1px solid var(--gold); color:var(--gold); font-family:var(--code-font); }
+        footer { background:var(--footer-bg); color:var(--light-slate); text-align:center; padding:1.5rem; font-size:0.8rem; font-family:var(--code-font); }
+        @media(max-width:768px) { .article-wrap h1 { font-size:1.4rem; } .article-wrap { padding:2rem 1.2rem 3rem; } }
+    </style>
+</head>
+<body>
+<div class="top-bar">
+    <a href="index.html" class="logo">KOA</a>
+    <div class="right-controls">
+        <a href="index.html#thinking" class="back-link">&larr; back_to_thinking</a>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
+    </div>
+</div>
+
+<article class="article-wrap">
+    <div class="article-meta">// July 2026 &middot; 4 min read</div>
+    <h1>From PID Control to Reinforcement Learning</h1>
+    <p class="subtitle">How tuning a line-following robot gave me an intuition for reward signals, policy gradients, and the explore-exploit tradeoff.</p>
+
+    <p>When I was building the autonomous line-following robot that won Robofest Ghana 2025, I didn't know I was learning reinforcement learning. I thought I was just tuning three numbers.</p>
+
+    <p>The robot had a single job: follow a black line on a white surface. An infrared sensor read the line position, and a motor controller adjusted the wheels. The bridge between sensor and motor was a PID controller &mdash; three coefficients that determined how the robot reacted to error.</p>
+
+    <h2>The Three Numbers That Control Everything</h2>
+
+    <p><code>Kp</code> (Proportional) says: "The further you are from the line, the harder you should steer." Set it too low and the robot drifts lazily off the track. Set it too high and it oscillates wildly, overcorrecting left-right-left until it spins off the course entirely.</p>
+
+    <p><code>Ki</code> (Integral) says: "If you've been slightly off for a while, accumulate that error and push harder." This fixes the subtle drift that Kp alone can't catch &mdash; the robot that's always 2mm to the left, never quite centering. But too much Ki and the system winds up, building momentum that causes massive overshoot.</p>
+
+    <p><code>Kd</code> (Derivative) says: "If you're approaching the line quickly, ease off." It's the damper, the brake, the thing that prevents Kp's corrections from becoming oscillations. Too much Kd and the robot becomes sluggish, afraid to move.</p>
+
+    <div class="code-block">
+<span class="comment">// The core PID loop I ran on competition day</span>
+error = sensor_position - target_center
+<span class="keyword">integral</span> += error
+<span class="keyword">derivative</span> = error - previous_error
+
+correction = (Kp * error) + (Ki * integral) + (Kd * derivative)
+
+left_motor  = base_speed + correction
+right_motor = base_speed - correction
+
+previous_error = error
+    </div>
+
+    <p>Those six lines of code won a national championship. But I spent weeks tuning them &mdash; running the robot, watching it fail, adjusting one coefficient, running it again. Dozens of iterations. Some runs the robot was too cautious, some too aggressive, and occasionally it nailed the line perfectly.</p>
+
+    <h2>Then I Opened an RL Textbook</h2>
+
+    <p>Months later, studying reinforcement learning for the first time, I kept having d&eacute;j&agrave; vu. The vocabulary was different but the problems were identical.</p>
+
+    <div class="highlight-box">
+        <p><strong>PID tuning</strong> is manual policy optimization. The policy is the PID equation. The parameters are Kp, Ki, Kd. The reward is "robot stays on line." I was the optimization algorithm &mdash; watching, adjusting, repeating. RL just automates me out of the loop.</p>
+    </div>
+
+    <p>The <strong>explore-exploit tradeoff</strong> was something I felt physically. Early in tuning, I tried wild Kp values (exploration) &mdash; 0.1, 5.0, 15.0 &mdash; to understand the parameter space. Later, I made tiny adjustments around the best values I'd found (exploitation). That's exactly what epsilon-greedy and UCB algorithms formalize.</p>
+
+    <p><strong>Reward shaping</strong> was intuitive too. At first, my "reward" was binary: did the robot finish the course? But that signal was too sparse. So I started watching intermediate behavior &mdash; how smooth were the turns? How fast through straight sections? I was decomposing a sparse reward into a denser signal, the same challenge every RL practitioner faces.</p>
+
+    <p>Even <strong>overfitting</strong> showed up. I tuned my PID specifically for the practice track in our lab. First competition run on a different track with tighter curves &mdash; the robot struggled. I'd overfit to my training environment. The fix was testing on multiple track layouts, which is just domain randomization by another name.</p>
+
+    <h2>What This Taught Me About Learning AI</h2>
+
+    <p>The best way to understand abstraction is to first do the concrete thing it abstracts. I didn't learn PID from a textbook &mdash; I learned it from a robot that kept falling off a table. And because of that, concepts like policy gradients, reward functions, and hyperparameter search don't feel abstract to me. They feel like the robot.</p>
+
+    <p>If you're starting out in AI/ML and the math feels disconnected: build something physical first. A robot, a sensor system, a control loop. The intuitions you develop from watching hardware fail in real-time transfer directly to understanding why neural networks fail in a Jupyter notebook.</p>
+
+    <p>The PID controller is 100 years old. Reinforcement learning is the same idea with a bigger budget and more parameters. Understanding one deeply makes the other inevitable.</p>
+
+    <div class="tags-row">
+        <span>robotics</span>
+        <span>reinforcement-learning</span>
+        <span>PID-control</span>
+        <span>robofest-2025</span>
+        <span>machine-learning</span>
+    </div>
+</article>
+
+<footer><p>// &copy; 2026 Kwabena Oppong Adutwum &mdash; built_with_passion( "Kumasi, Ghana" )</p></footer>
+
+<script>
+(function(){
+    var t=document.getElementById('themeToggle');
+    var saved=localStorage.getItem('theme');
+    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');t.textContent='☀';}
+    t.addEventListener('click',function(){
+        var dark=document.documentElement.getAttribute('data-theme')==='dark';
+        document.documentElement.setAttribute('data-theme',dark?'':'dark');
+        t.textContent=dark?'☽':'☀';
+        localStorage.setItem('theme',dark?'light':'dark');
+    });
+})();
+</script>
+</body>
+</html>
