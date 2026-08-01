@@ -74,8 +74,8 @@
         .project-preview-placeholder { width:100%; height:180px; display:flex; align-items:center; justify-content:center; background:var(--cream); border-bottom:1px solid var(--card-border); color:var(--light-slate); font-size:0.8rem; font-family:var(--code-font); }
         .lightbox-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);z-index:999;cursor:pointer;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:background 0.4s ease,backdrop-filter 0.4s ease,-webkit-backdrop-filter 0.4s ease;}
         .lightbox-overlay.active{background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:auto;}
-        .lightbox-overlay img{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform:scale(0.85);opacity:0;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease;}
-        .lightbox-overlay.active img{transform:scale(1);opacity:1;}
+        .lightbox-overlay img,.lightbox-overlay video{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform:scale(0.85);opacity:0;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease;}
+        .lightbox-overlay.active img,.lightbox-overlay.active video{transform:scale(1);opacity:1;}
         [data-theme="dark"] .project-preview-placeholder { background:var(--navy); }
         .project-body { padding:1.3rem 1.5rem; }
         .project-body p { font-size:0.88rem; color:var(--light-slate); margin-bottom:0.5rem; }
@@ -115,7 +115,7 @@
     <!-- Completed Projects -->
     <div class="project-card">
         <div class="project-header"><h3>Autonomous Line-Following Robot</h3><div class="tech">LEGO MINDSTORM EV3 &middot; PID Control Algorithm</div></div>
-        <!-- project screenshot -->
+        <video src="assets/videos/pid-bot-video.mp4" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" autoplay muted loop playsinline onclick="openVideoLightbox(this)"></video>
         <div class="project-body">
             <p><span class="highlight">National Champion at Robofest Ghana 2025.</span></p>
             <p>Designed and implemented a PID (Proportional-Integral-Derivative) control algorithm for autonomous line navigation &mdash; a core precursor to reinforcement learning control systems. Tuned Kp, Ki, and Kd parameters through iterative testing to achieve sub-second course correction at high speed.</p>
@@ -159,12 +159,12 @@
 
     <div class="project-card">
         <div class="project-header"><h3>ACES KNUST Website Redesign</h3><div class="tech">Figma &middot; UI/UX Design &middot; Mobile-First &middot; Prototyping</div></div>
-        <img src="Screenshot (66).png" alt="ACES website redesign in Figma" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" onclick="openLightbox(this.src)">
+        <img src="assets/images/codefest-figma.png" alt="ACES website redesign in Figma" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" onclick="openLightbox(this.src)">
         <div class="project-body">
             <p><span class="highlight">2nd Place &mdash; CodeFest 2026.</span> Team of 5.</p>
             <p>Redesigned the entire ACES KNUST website for mobile &mdash; all 9 pages, from homepage to marketplace to course resources. Built a high-fidelity clickable prototype in Figma with real-time collaboration across all team members. Focused on visual hierarchy, touch-friendly navigation, and useful empty states for pages without content.</p>
             <div class="tech-stack"><span class="tech-chip">Figma</span><span class="tech-chip">UI/UX</span><span class="tech-chip">Mobile-First</span><span class="tech-chip">Prototyping</span><span class="tech-chip">Collaboration</span></div>
-            <div class="project-links"><a href="https://www.figma.com/proto/uZCkzk7lSsNmTTUwJMdSu9/Untitled?node-id=212-73&t=7QIixyMz9WWijsW7-1&starting-point-node-id=8%3A85" target="_blank">view_prototype &rarr;</a> <a href="CODEFEST 2026 CERTIFICATE.pdf" target="_blank">view_certificate &rarr;</a></div>
+            <div class="project-links"><a href="https://www.figma.com/proto/uZCkzk7lSsNmTTUwJMdSu9/Untitled?node-id=212-73&t=7QIixyMz9WWijsW7-1&starting-point-node-id=8%3A85" target="_blank">view_prototype &rarr;</a> <a href="assets/docs/codefest-2026-certificate.pdf" target="_blank">view_certificate &rarr;</a></div>
         </div>
     </div>
 
@@ -213,11 +213,29 @@
 
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox-overlay" style="visibility:hidden;" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="Expanded view">
+    <img id="lightbox-img" src="" alt="Expanded view" style="display:none;">
+    <video id="lightbox-video" controls style="display:none;" onclick="event.stopPropagation()"></video>
 </div>
 <script>
-function openLightbox(src){var lb=document.getElementById('lightbox');document.getElementById('lightbox-img').src=src;requestAnimationFrame(function(){lb.style.visibility='visible';requestAnimationFrame(function(){lb.classList.add('active');});});document.body.style.overflow='hidden';}
-function closeLightbox(){var lb=document.getElementById('lightbox');lb.classList.remove('active');document.body.style.overflow='';setTimeout(function(){lb.style.visibility='hidden';},400);}
+var lbImg=document.getElementById('lightbox-img'),lbVid=document.getElementById('lightbox-video');
+function openLightbox(src){
+    lbVid.style.display='none';lbVid.pause();
+    lbImg.style.display='';lbImg.src=src;
+    var lb=document.getElementById('lightbox');
+    requestAnimationFrame(function(){lb.style.visibility='visible';requestAnimationFrame(function(){lb.classList.add('active');});});
+    document.body.style.overflow='hidden';
+}
+function openVideoLightbox(cardVideo){
+    lbImg.style.display='none';
+    lbVid.style.display='';lbVid.src=cardVideo.src;lbVid.currentTime=cardVideo.currentTime;lbVid.muted=false;lbVid.play();
+    var lb=document.getElementById('lightbox');
+    requestAnimationFrame(function(){lb.style.visibility='visible';requestAnimationFrame(function(){lb.classList.add('active');});});
+    document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+    var lb=document.getElementById('lightbox');lb.classList.remove('active');document.body.style.overflow='';
+    setTimeout(function(){lb.style.visibility='hidden';lbVid.pause();lbVid.removeAttribute('src');},400);
+}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
 </script>
 </body>
