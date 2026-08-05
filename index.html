@@ -237,7 +237,10 @@
         .project-header h3 { font-size:1rem;margin-bottom:0.3rem;font-family:var(--heading-font); }
         .project-header .tech { font-size:0.75rem;color:var(--gold-light);font-family:var(--code-font); }
         .project-card.roadmap .project-header .tech { color:var(--coach);opacity:0.7; }
-        .project-preview { width:100%;height:180px;object-fit:cover;object-position:center center;display:block;border-bottom:1px solid var(--card-border);transition:transform 0.3s;cursor:pointer; }
+        .preview-wrap { position:relative;overflow:hidden;border-bottom:1px solid var(--card-border); }
+        .preview-wrap::after { content:'click to expand';position:absolute;bottom:8px;left:50%;transform:translateX(-50%) translateY(4px);background:rgba(15,43,70,0.85);color:var(--gold-light);font-size:0.68rem;font-family:var(--code-font);padding:0.25rem 0.7rem;border-radius:4px;opacity:0;transition:opacity 0.3s 0.5s,transform 0.3s 0.5s;pointer-events:none; }
+        .preview-wrap:hover::after { opacity:1;transform:translateX(-50%) translateY(0); }
+        .project-preview { width:100%;height:180px;object-fit:cover;object-position:center center;display:block;transition:transform 0.3s;cursor:pointer; }
         .project-preview:hover { transform:scale(1.03); }
         .project-preview-placeholder { width:100%;height:180px;display:flex;align-items:center;justify-content:center;background:var(--cream);border-bottom:1px solid var(--card-border);color:var(--light-slate);font-size:0.8rem;font-family:var(--code-font); }
         [data-theme="dark"] .project-preview-placeholder { background:var(--navy); }
@@ -618,7 +621,7 @@
     <div class="projects-grid">
         <div class="project-card reveal reveal-delay-1">
             <div class="project-header"><h3>Autonomous Line-Following Robot</h3><div class="tech">LEGO MINDSTORM EV3 &middot; PID Control Algorithm</div></div>
-            <video src="assets/videos/pid-bot-video.mp4" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" autoplay muted loop playsinline onclick="openVideoLightbox(this)"></video>
+            <div class="preview-wrap"><video src="assets/videos/pid-bot-video.mp4" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" autoplay muted loop playsinline onclick="openVideoLightbox(this)"></video></div>
             <div class="project-body">
                 <p><span class="highlight">National Champion at Robofest Ghana 2025.</span></p>
                 <p>Designed and implemented a PID (Proportional-Integral-Derivative) control algorithm for autonomous line navigation, a core precursor to reinforcement learning control systems. Tuned Kp, Ki, and Kd parameters through iterative testing to achieve sub-second course correction at high speed.</p>
@@ -628,7 +631,7 @@
         </div>
         <div class="project-card reveal reveal-delay-2">
             <div class="project-header"><h3>Solar-Powered Automated Water Dispenser</h3><div class="tech">Arduino &middot; Ultrasonic Sensors &middot; C++ &middot; Solar Panel</div></div>
-            <img src="assets/images/solar_dispensor.png" alt="Solar-powered water dispenser Arduino code" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" onclick="openLightbox(this.src)">
+            <div class="preview-wrap"><img src="assets/images/solar_dispensor.png" alt="Solar-powered water dispenser Arduino code" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" onclick="openLightbox(this.src)"></div>
             <div class="project-body">
                 <p><span class="highlight">Team project (3+ members).</span> Built a solar-powered water dispensing system using dual ultrasonic sensors to detect container placement and automatically control a solenoid valve. The system monitors fill level in real time and closes the valve when the container is full or removed.</p>
                 <p>Implemented debounce logic to prevent false triggers, a buzzer for audio feedback, and LED status indicators. The entire system runs off-grid on solar power, suitable for deployment in areas without reliable electricity.</p>
@@ -646,12 +649,12 @@
         </div>
         <div class="project-card reveal reveal-delay-4">
             <div class="project-header"><h3>ACES KNUST Website Redesign</h3><div class="tech">Figma &middot; UI/UX Design &middot; Mobile-First &middot; Prototyping</div></div>
-            <img src="assets/images/codefest-figma.png" alt="ACES website redesign in Figma" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" onclick="openLightbox(this.src)">
+            <div class="preview-wrap"><img src="assets/images/codefest-figma.png" alt="ACES website redesign in Figma" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" onclick="openLightbox(this.src)"></div>
             <div class="project-body">
                 <p><span class="highlight">2nd Place &mdash; CodeFest 2026.</span> Team of 5.</p>
                 <p>Redesigned the entire ACES KNUST website for mobile, all 9 pages, from homepage to marketplace to course resources. Built a high-fidelity clickable prototype in Figma with real-time collaboration across all team members. Focused on visual hierarchy, touch-friendly navigation, and useful empty states.</p>
                 <div class="tech-stack"><span class="tech-chip">Figma</span><span class="tech-chip">UI/UX</span><span class="tech-chip">Mobile-First</span><span class="tech-chip">Prototyping</span><span class="tech-chip">Collaboration</span></div>
-                <div class="project-links"><a href="https://www.figma.com/proto/uZCkzk7lSsNmTTUwJMdSu9/Untitled?node-id=212-73&t=7QIixyMz9WWijsW7-1&starting-point-node-id=8%3A85" target="_blank">view_prototype &rarr;</a> <a href="assets/docs/codefest-2026-certificate.pdf" target="_blank">view_certificate &rarr;</a></div>
+                <div class="project-links"><a href="https://www.figma.com/proto/uZCkzk7lSsNmTTUwJMdSu9/Untitled?node-id=8-85&t=7QIixyMz9WWijsW7-1&starting-point-node-id=8%3A85" target="_blank">view_prototype &rarr;</a> <a href="assets/docs/codefest-2026-certificate.pdf" target="_blank">view_certificate &rarr;</a></div>
             </div>
         </div>
     </div>
