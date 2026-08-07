@@ -39,7 +39,7 @@
             --shadow-color: rgba(0,0,0,0.3); --shadow-heavy: rgba(0,0,0,0.4);
             --coach-bg: #2a1a10; --coach-border: #5a3820; --grid-color: rgba(201,165,78,0.03);
         }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: auto; }
         body {
             font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
             background: var(--bg); color: var(--slate); line-height: 1.6;
@@ -224,14 +224,10 @@
         .terminal-dots .dot-red{background:#ff5f56;} .terminal-dots .dot-yellow{background:#ffbd2e;} .terminal-dots .dot-green{background:#27c93f;}
 
         /* ── Projects ── */
-        .projects-grid { display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:1rem;scrollbar-width:none; }
+        #projects, #achievements { max-width:1400px; }
+        .projects-grid { display:flex;gap:1.5rem;overflow-x:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:0.5rem;scrollbar-width:none; }
         .projects-grid::-webkit-scrollbar { display:none; }
-        .projects-grid .project-card { flex:1 1 0;min-width:0;scroll-snap-align:center;transition:transform 0.5s,box-shadow 0.5s,border-color 0.3s,opacity 0.5s; }
-        .carousel-nav { display:flex;justify-content:center;align-items:center;gap:0.5rem;margin-top:0.8rem; }
-        .carousel-dot { width:8px;height:8px;border-radius:50%;background:var(--card-border);transition:all 0.3s;cursor:pointer;border:none;padding:0; }
-        .carousel-dot.active { background:var(--gold);width:20px;border-radius:4px; }
-        .carousel-arrow { background:none;border:1px solid var(--card-border);color:var(--gold);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.3s; }
-        .carousel-arrow:hover { border-color:var(--gold);background:rgba(201,165,78,0.1); }
+        .projects-grid .project-card { flex:1 1 0;min-width:0;transition:transform 0.5s,box-shadow 0.5s,border-color 0.3s,opacity 0.5s; }
         .project-card { background:var(--card-bg);border-radius:12px;overflow:hidden;border:1px solid var(--card-border);position:relative;transition:transform 0.4s,box-shadow 0.4s,border-color 0.3s; }
         .project-card::before { content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;padding:1px;background:linear-gradient(135deg,var(--gold),transparent 40%,transparent 60%,var(--gold));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity 0.4s;pointer-events:none; }
         .project-card:hover { transform:translateY(-6px) scale(1.01);box-shadow:0 16px 40px var(--shadow-heavy);border-color:rgba(201,165,78,0.3); }
@@ -270,13 +266,13 @@
         .sub-icon { font-size:1.3rem;line-height:1; }
 
         /* ── Achievement Cards ── */
-        .achieve-grid { display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:1rem;margin-bottom:1.5rem;scrollbar-width:none; }
+        .achieve-grid { display:flex;gap:1.2rem;overflow-x:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:0.5rem;margin-bottom:1.5rem;scrollbar-width:none; }
         .achieve-grid::-webkit-scrollbar { display:none; }
         .achieve-card {
             background:var(--card-bg);border-radius:12px;padding:1.4rem 1.4rem 1.4rem 1.6rem;
             border:1px solid var(--card-border);position:relative;overflow:hidden;
             transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s,border-color 0.3s,opacity 0.4s;
-            flex:1 1 0;min-width:0;scroll-snap-align:center;
+            flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;
         }
         .achieve-card::before { content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold);border-radius:2px 0 0 2px;transition:width 0.3s; }
         .achieve-card:hover { transform:translateY(-5px);box-shadow:0 14px 35px var(--shadow-color);border-color:rgba(201,165,78,0.35); }
@@ -626,7 +622,7 @@
         <p class="section-subtitle">What I've built and what I'm building next.</p>
         <div class="section-line"></div>
     </div>
-    <div class="projects-grid" id="projectsCarousel">
+    <div class="projects-grid">
         <div class="project-card reveal">
             <div class="project-header"><h3>Autonomous Line-Following Robot</h3><div class="tech">LEGO MINDSTORM EV3 &middot; PID Control Algorithm</div></div>
             <div class="preview-wrap"><video src="assets/videos/pid-bot-video.mp4" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" autoplay muted loop playsinline onclick="openVideoLightbox(this)"></video></div>
@@ -657,11 +653,6 @@
                 <div class="project-links"><a href="https://www.figma.com/proto/uZCkzk7lSsNmTTUwJMdSu9/Untitled?node-id=8-85&t=7QIixyMz9WWijsW7-1&starting-point-node-id=8%3A85" target="_blank">view_prototype &rarr;</a> <a href="assets/docs/codefest-2026-certificate.pdf" target="_blank">view_certificate &rarr;</a></div>
             </div>
         </div>
-    </div>
-    <div class="carousel-nav reveal" id="projectsNav">
-        <button class="carousel-arrow" onclick="scrollCarousel('projectsCarousel',-1)" aria-label="Previous project">&#8592;</button>
-        <div class="carousel-dots" id="projectsDots"></div>
-        <button class="carousel-arrow" onclick="scrollCarousel('projectsCarousel',1)" aria-label="Next project">&#8594;</button>
     </div>
     <div class="view-all-link reveal">
         <a href="projects.html">view_all_projects( 8 ) &rarr;</a>
@@ -780,7 +771,7 @@
         <h3>Achievements</h3>
         <div class="sub-line"></div>
     </div>
-    <div class="achieve-grid" id="achieveCarousel">
+    <div class="achieve-grid">
         <div class="achieve-card reveal">
             <div class="achieve-top">
                 <h4>National Champion &mdash; Robofest Ghana</h4>
@@ -809,11 +800,6 @@
             </div>
             <p>Selected to represent Prempeh College in a global policy debate organized by the Brewer Foundation and New York University (NYU). Co-authored a qualifying round essay arguing that equitable access to pharmaceuticals should be prioritized over intellectual property rights &mdash; combining policy research, data analysis, and structured argumentation. <a href="assets/docs/IPPF_Documentation.pdf" target="_blank" style="color:var(--gold);text-decoration:underline;">Read the full research paper &rarr;</a></p>
         </div>
-    </div>
-    <div class="carousel-nav reveal" id="achieveNav">
-        <button class="carousel-arrow" onclick="scrollCarousel('achieveCarousel',-1)" aria-label="Previous achievement">&#8592;</button>
-        <div class="carousel-dots" id="achieveDots"></div>
-        <button class="carousel-arrow" onclick="scrollCarousel('achieveCarousel',1)" aria-label="Next achievement">&#8594;</button>
     </div>
     <div class="view-all-link reveal">
         <a href="achievements.html">view_all( 12 items ) &rarr;</a>
@@ -931,6 +917,7 @@
     for(var f=0;f<fTabs.length;f++){fTabs[f].addEventListener('click',function(){for(var a=0;a<fTabs.length;a++)fTabs[a].classList.remove('active');this.classList.add('active');var fl=this.getAttribute('data-filter');for(var c=0;c<sCards.length;c++){var cd=sCards[c],hc=cd.getAttribute('data-has-current')==='true',hr=cd.getAttribute('data-has-roadmap')==='true',tags=cd.querySelectorAll('.tag');if(fl==='all'){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].classList.remove('hidden-tag');}else if(fl==='current'){if(hc){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].getAttribute('data-type')==='roadmap'?tags[t].classList.add('hidden-tag'):tags[t].classList.remove('hidden-tag');}else cd.classList.add('hidden-card');}else if(fl==='roadmap'){if(hr){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].getAttribute('data-type')==='current'?tags[t].classList.add('hidden-tag'):tags[t].classList.remove('hidden-tag');}else cd.classList.add('hidden-card');}}});}
 
     var navbar=document.getElementById('navbar'),secs=document.querySelectorAll('section[id]'),navAs=document.querySelectorAll('.nav-links a[data-section]'),btt=document.getElementById('backToTop');
+    for(var n=0;n<navAs.length;n++){navAs[n].addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});}
     function onScroll(){var sy=window.scrollY;sy>80?navbar.classList.add('scrolled'):navbar.classList.remove('scrolled');sy>600?btt.classList.add('visible'):btt.classList.remove('visible');var cur='';for(var i=0;i<secs.length;i++){if(sy>=secs[i].offsetTop-120)cur=secs[i].getAttribute('id');}for(var i=0;i<navAs.length;i++){navAs[i].classList.remove('active');if(navAs[i].getAttribute('data-section')===cur)navAs[i].classList.add('active');}}
     window.addEventListener('scroll',onScroll,{passive:true});onScroll();
     btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
@@ -938,54 +925,6 @@
     var projCards=document.querySelectorAll('.project-card:not(.roadmap)');
     for(var pc=0;pc<projCards.length;pc++){(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,rx=(y-r.height/2)/20,ry=(r.width/2-x)/20;card.style.transform='perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-6px) scale(1.01)';});card.addEventListener('mouseleave',function(){card.style.transform='';});})(projCards[pc]);}
 
-    /* ── Carousel Logic ── */
-    function initCarousel(carouselId, dotsId) {
-        var carousel = document.getElementById(carouselId);
-        var dotsContainer = document.getElementById(dotsId);
-        if (!carousel || !dotsContainer) return;
-        var cards = carousel.children;
-        var count = cards.length;
-        for (var d = 0; d < count; d++) {
-            var dot = document.createElement('button');
-            dot.className = 'carousel-dot' + (d === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', 'Go to item ' + (d + 1));
-            (function(idx) {
-                dot.addEventListener('click', function() {
-                    cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                });
-            })(d);
-            dotsContainer.appendChild(dot);
-        }
-        function updateFocus() {
-            var scrollLeft = carousel.scrollLeft;
-            var containerCenter = scrollLeft + carousel.offsetWidth / 2;
-            var closest = 0, minDist = Infinity;
-            for (var i = 0; i < count; i++) {
-                var card = cards[i];
-                var cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                var dist = Math.abs(containerCenter - cardCenter);
-                if (dist < minDist) { minDist = dist; closest = i; }
-            }
-            var dots = dotsContainer.querySelectorAll('.carousel-dot');
-            for (var i = 0; i < count; i++) {
-                dots[i].className = 'carousel-dot' + (i === closest ? ' active' : '');
-                if (carouselId === 'projectsCarousel') {
-                    cards[i].style.transform = i === closest ? 'scale(1.02)' : 'scale(0.97)';
-                    cards[i].style.opacity = i === closest ? '1' : '0.7';
-                }
-            }
-        }
-        carousel.addEventListener('scroll', updateFocus, { passive: true });
-        setTimeout(updateFocus, 300);
-    }
-    window.scrollCarousel = function(carouselId, dir) {
-        var carousel = document.getElementById(carouselId);
-        if (!carousel || !carousel.children.length) return;
-        var cardWidth = carousel.children[0].offsetWidth + 24;
-        carousel.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
-    };
-    initCarousel('projectsCarousel', 'projectsDots');
-    initCarousel('achieveCarousel', 'achieveDots');
 })();
 </script>
 
