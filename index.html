@@ -11,7 +11,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://oppong-py.github.io">
     <!-- Replace with an actual preview image (1200x630px recommended): -->
-    <meta property="og:image" content="https://oppong-py.github.io/og-preview.png">
+    <meta property="og:image" content="https://oppong-py.github.io/assets/images/og-preview.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kwabena Oppong Adutwum — AI/ML Engineer">
     <meta name="twitter:description" content="Computer Science undergraduate at KNUST. National Robotics Champion. Regional Cybersecurity Champion. Building intelligent systems.">
@@ -79,6 +79,7 @@
         .hero .tagline { font-size:1.15rem;color:var(--gold-light);margin-bottom:1rem;letter-spacing:2px;font-weight:500;min-height:1.8em;font-family:var(--code-font); }
         .typing-cursor { display:inline-block;width:2px;height:1.1em;background:var(--gold-light);margin-left:3px;vertical-align:text-bottom;animation:blink 0.7s step-end infinite; }
         @keyframes blink { 50%{opacity:0;} }
+        @keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
         .hero .subtitle { font-size:1rem;color:#b0bec5;max-width:600px;margin:0 auto 2rem;line-height:1.7; }
         .hero-links { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap; }
         .hero-links a { display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.4rem;border-radius:6px;text-decoration:none;font-size:0.9rem;font-weight:600;transition:all 0.3s; }
@@ -371,6 +372,8 @@
         .legend-dot.achieved { background:var(--gold);box-shadow:0 0 6px var(--glow); }
         .legend-dot.roadmap { background:var(--white);border:2px dashed var(--coach); }
 
+        .testimonial-scroll::-webkit-scrollbar { display:none; }
+
         .back-to-top { position:fixed;bottom:2rem;right:2rem;width:45px;height:45px;background:var(--gold);color:var(--navy);border:none;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(20px);transition:all 0.3s;box-shadow:0 4px 15px var(--glow-strong);z-index:99; }
         .back-to-top.visible { opacity:1;visibility:visible;transform:translateY(0); }
         .back-to-top:hover { transform:translateY(-3px);box-shadow:0 8px 25px var(--glow-strong); }
@@ -384,6 +387,7 @@
             .skills-grid { grid-template-columns:1fr; }
             .projects-grid .project-card { flex:0 0 85vw;min-width:85vw; }
             .achieve-card { flex:0 0 80vw;min-width:80vw; }
+            .testimonial-scroll > div { flex:0 0 85vw;min-width:85vw; }
             .edu-grid { grid-template-columns:1fr; }
             .exp-header { flex-direction:column; }
             .hamburger { display:flex; }
@@ -449,6 +453,10 @@
             <p>I'm a Computer Science undergraduate at Kwame Nkrumah University of Science & Technology (KNUST) in Kumasi, Ghana, expected to graduate in 2029. I speak English natively and French at an intermediate level. My mission is to become a Machine Learning Engineer: a journey that started with building robots and hacking into systems (ethically!) and has evolved into deep interest in intelligent and automated systems.</p>
             <p>I believe AI should solve real problems, especially for communities that need it most. Whether it's precision agriculture, healthcare access, or smart infrastructure, I want to build intelligent systems that make a tangible difference, starting right here in Africa.</p>
             <p>When I'm not coding, you'll find me reading self-development books, solving math problems, or mentoring younger students in robotics and cybersecurity.</p>
+            <div class="currently-box" style="display:flex;align-items:center;gap:0.6rem;padding:0.7rem 1rem;background:rgba(201,165,78,0.08);border:1px solid rgba(201,165,78,0.2);border-radius:8px;margin-top:1.2rem;font-size:0.85rem;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#27c93f;box-shadow:0 0 6px rgba(39,201,63,0.5);flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite;"></span>
+                <span><strong style="color:var(--gold);font-family:var(--code-font);font-weight:600;">Currently:</strong> Taking Andrew Ng's <a href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank" style="color:var(--gold);text-decoration:underline;">ML Specialization</a> on Coursera &amp; solving LeetCode daily.</span>
+            </div>
             <div class="highlight-strip">
                 <div class="highlight-badge"><span class="hb-dot"></span> National Robotics Champion 2025</div>
                 <div class="highlight-badge"><span class="hb-dot"></span> Regional Cybersecurity Champion 2024</div>
@@ -625,7 +633,7 @@
     <div class="projects-grid">
         <div class="project-card reveal">
             <div class="project-header"><h3>Autonomous Line-Following Robot</h3><div class="tech">LEGO MINDSTORM EV3 &middot; PID Control Algorithm</div></div>
-            <div class="preview-wrap"><video src="assets/videos/pid-bot-video.mp4" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" autoplay muted loop playsinline onclick="openVideoLightbox(this)"></video></div>
+            <div class="preview-wrap"><video src="assets/videos/pid-bot-video.mp4" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" autoplay muted loop playsinline loading="lazy" preload="none" onclick="openVideoLightbox(this)"></video></div>
             <div class="project-body">
                 <p><span class="highlight">National Champion at Robofest Ghana 2025.</span></p>
                 <p>Designed and implemented a PID (Proportional-Integral-Derivative) control algorithm for autonomous line navigation, a core precursor to reinforcement learning control systems. Tuned Kp, Ki, and Kd parameters through iterative testing to achieve sub-second course correction at high speed.</p>
@@ -657,6 +665,7 @@
     <div class="view-all-link reveal">
         <a href="projects.html">view_all_projects( 8 ) &rarr;</a>
     </div>
+
 </section>
 
 <!-- ═══ Skills ═══ -->
@@ -806,6 +815,49 @@
     </div>
 </section>
 
+<!-- ═══ Testimonial ═══ -->
+<section id="testimonial" style="max-width:1400px;">
+    <div class="section-header reveal">
+        <div class="section-title"><span class="bracket">{</span> What Others Say <span class="bracket">}</span></div>
+        <div class="section-line"></div>
+    </div>
+    <div style="display:flex;gap:1.2rem;overflow-x:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:0.5rem;scrollbar-width:none;" class="testimonial-scroll">
+        <div class="reveal" style="background:var(--card-bg);border-radius:12px;padding:1.8rem 2rem;border:1px solid var(--card-border);position:relative;overflow:hidden;flex:1 1 0;min-width:0;">
+            <div style="position:absolute;top:0.8rem;left:1.2rem;font-family:var(--heading-font);font-size:3.5rem;line-height:1;color:var(--gold);opacity:0.15;pointer-events:none;">&ldquo;</div>
+            <p style="font-size:0.85rem;color:var(--slate);line-height:1.75;font-style:italic;margin-bottom:1rem;position:relative;z-index:1;">Oppong is an outstanding student with a natural flair for technology and innovation. He played key roles in building a solar-powered water dispenser system, a class attendance monitoring system (Scanroll), and an air purification device. These projects reflect his passion for solving real-world problems through artificial intelligence and engineering. He is also a skilled team leader, winning the regional cybersecurity challenge and mentoring peers in robotics and coding.</p>
+            <div style="display:flex;align-items:center;gap:0.7rem;">
+                <div style="width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:0.7rem;color:var(--gold);font-family:var(--code-font);flex-shrink:0;">ROA</div>
+                <div>
+                    <div style="font-weight:600;font-size:0.85rem;color:var(--section-title-color);font-family:var(--heading-font);">Richard Osei Adu</div>
+                    <div style="font-size:0.72rem;color:var(--gold);font-family:var(--code-font);">Robotics Patron, Prempeh College</div>
+                </div>
+            </div>
+        </div>
+        <div class="reveal" style="background:var(--card-bg);border-radius:12px;padding:1.8rem 2rem;border:1px solid var(--card-border);position:relative;overflow:hidden;flex:1 1 0;min-width:0;">
+            <div style="position:absolute;top:0.8rem;left:1.2rem;font-family:var(--heading-font);font-size:3.5rem;line-height:1;color:var(--gold);opacity:0.15;pointer-events:none;">&ldquo;</div>
+            <p style="font-size:0.85rem;color:var(--slate);line-height:1.75;font-style:italic;margin-bottom:1rem;position:relative;z-index:1;">Oppong is a driven, well-organized student who develops inspiring relationship with his peers. He is an intellectually gifted individual who is very gentle, respectful, hardworking, disciplined, committed, focused and exerts much seriousness to his studies. In addition to this, he is a team player and is able to accomplish given tasks on time. He is naturally born to lead and as a result takes on the mantle to teach his colleagues in the absence of a teacher or where they may have free periods. This came not as a surprise when he was recently selected among some students in the ICT class to play the leading role in developing a software for e-voting in the College. He is undoubtedly a promising student full of potentials.</p>
+            <div style="display:flex;align-items:center;gap:0.7rem;">
+                <div style="width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:0.7rem;color:var(--gold);font-family:var(--code-font);flex-shrink:0;">EOA</div>
+                <div>
+                    <div style="font-weight:600;font-size:0.85rem;color:var(--section-title-color);font-family:var(--heading-font);">Emmanuel Owusu Ansah</div>
+                    <div style="font-size:0.72rem;color:var(--gold);font-family:var(--code-font);">Senior Mathematics Teacher &amp; Form Master, Prempeh College</div>
+                </div>
+            </div>
+        </div>
+        <div class="reveal" style="background:var(--card-bg);border-radius:12px;padding:1.8rem 2rem;border:1px solid var(--card-border);position:relative;overflow:hidden;flex:1 1 0;min-width:0;">
+            <div style="position:absolute;top:0.8rem;left:1.2rem;font-family:var(--heading-font);font-size:3.5rem;line-height:1;color:var(--gold);opacity:0.15;pointer-events:none;">&ldquo;</div>
+            <p style="font-size:0.85rem;color:var(--slate);line-height:1.75;font-style:italic;margin-bottom:1rem;position:relative;z-index:1;">Kwabena is a very bright, confident, sociable, open-minded and creative young man with high professional goals. He also has excellent interpersonal skills. Given that he is a determined person who is seeking to pursue his dreams of actively engaging in cybersecurity and AI to drive positive change and safety for the vulnerable in society.</p>
+            <div style="display:flex;align-items:center;gap:0.7rem;">
+                <div style="width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:0.7rem;color:var(--gold);font-family:var(--code-font);flex-shrink:0;">SAY</div>
+                <div>
+                    <div style="font-weight:600;font-size:0.85rem;color:var(--section-title-color);font-family:var(--heading-font);">Sally Anokye Yeboah</div>
+                    <div style="font-size:0.72rem;color:var(--gold);font-family:var(--code-font);">Executive Director, SFLIG</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ═══ Certifications ═══ -->
 <section id="certifications">
     <div class="section-header reveal">
@@ -878,6 +930,13 @@
         <a href="assets/docs/cv.pdf" download title="Download CV" style="border-left:0;border-top-left-radius:0;border-bottom-left-radius:0;margin-left:-2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
         </span>
     </div>
+    <form action="https://formspree.io/f/myegkzrb" method="POST" style="position:relative;z-index:1;max-width:480px;margin:2.5rem auto 0;display:flex;flex-direction:column;gap:0.8rem;" id="contactForm">
+        <div style="font-size:0.85rem;color:#b0bec5;margin-bottom:0.2rem;font-family:var(--code-font);">// or drop me a quick message</div>
+        <input type="text" name="name" placeholder="Your name" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid rgba(201,165,78,0.3);background:rgba(255,255,255,0.05);color:var(--white);font-size:0.9rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,165,78,0.3)'">
+        <input type="email" name="email" placeholder="Your email" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid rgba(201,165,78,0.3);background:rgba(255,255,255,0.05);color:var(--white);font-size:0.9rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,165,78,0.3)'">
+        <textarea name="message" placeholder="Your message" rows="4" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid rgba(201,165,78,0.3);background:rgba(255,255,255,0.05);color:var(--white);font-size:0.9rem;font-family:inherit;outline:none;resize:vertical;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,165,78,0.3)'"></textarea>
+        <button type="submit" style="padding:0.7rem 1.5rem;border-radius:8px;border:2px solid var(--gold);background:var(--gold);color:var(--navy);font-size:0.9rem;font-weight:600;cursor:pointer;font-family:var(--code-font);transition:all 0.3s;align-self:flex-start;" onmouseover="this.style.background='var(--gold-light)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(201,165,78,0.35)'" onmouseout="this.style.background='var(--gold)';this.style.transform='';this.style.boxShadow=''">send_message( ) &rarr;</button>
+    </form>
 </section>
 
 <footer><p>// &copy; 2026 Kwabena Oppong Adutwum &mdash; built_with_passion( "Kumasi, Ghana" )</p></footer>
