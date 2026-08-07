@@ -224,7 +224,14 @@
         .terminal-dots .dot-red{background:#ff5f56;} .terminal-dots .dot-yellow{background:#ffbd2e;} .terminal-dots .dot-green{background:#27c93f;}
 
         /* ── Projects ── */
-        .projects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem; }
+        .projects-grid { display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:1rem;scrollbar-width:none; }
+        .projects-grid::-webkit-scrollbar { display:none; }
+        .projects-grid .project-card { flex:1 1 0;min-width:0;scroll-snap-align:center;transition:transform 0.5s,box-shadow 0.5s,border-color 0.3s,opacity 0.5s; }
+        .carousel-nav { display:flex;justify-content:center;align-items:center;gap:0.5rem;margin-top:0.8rem; }
+        .carousel-dot { width:8px;height:8px;border-radius:50%;background:var(--card-border);transition:all 0.3s;cursor:pointer;border:none;padding:0; }
+        .carousel-dot.active { background:var(--gold);width:20px;border-radius:4px; }
+        .carousel-arrow { background:none;border:1px solid var(--card-border);color:var(--gold);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.3s; }
+        .carousel-arrow:hover { border-color:var(--gold);background:rgba(201,165,78,0.1); }
         .project-card { background:var(--card-bg);border-radius:12px;overflow:hidden;border:1px solid var(--card-border);position:relative;transition:transform 0.4s,box-shadow 0.4s,border-color 0.3s; }
         .project-card::before { content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;padding:1px;background:linear-gradient(135deg,var(--gold),transparent 40%,transparent 60%,var(--gold));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity 0.4s;pointer-events:none; }
         .project-card:hover { transform:translateY(-6px) scale(1.01);box-shadow:0 16px 40px var(--shadow-heavy);border-color:rgba(201,165,78,0.3); }
@@ -263,11 +270,13 @@
         .sub-icon { font-size:1.3rem;line-height:1; }
 
         /* ── Achievement Cards ── */
-        .achieve-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin-bottom:3rem; }
+        .achieve-grid { display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:1rem;margin-bottom:1.5rem;scrollbar-width:none; }
+        .achieve-grid::-webkit-scrollbar { display:none; }
         .achieve-card {
             background:var(--card-bg);border-radius:12px;padding:1.4rem 1.4rem 1.4rem 1.6rem;
             border:1px solid var(--card-border);position:relative;overflow:hidden;
-            transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s,border-color 0.3s;
+            transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s,border-color 0.3s,opacity 0.4s;
+            flex:1 1 0;min-width:0;scroll-snap-align:center;
         }
         .achieve-card::before { content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold);border-radius:2px 0 0 2px;transition:width 0.3s; }
         .achieve-card:hover { transform:translateY(-5px);box-shadow:0 14px 35px var(--shadow-color);border-color:rgba(201,165,78,0.35); }
@@ -376,7 +385,9 @@
             .about-photo-col { align-items:center; }
             .profile-photo-wrapper { width:200px;height:200px; }
             section { padding:3rem 1.2rem; }
-            .skills-grid,.projects-grid,.achieve-grid { grid-template-columns:1fr; }
+            .skills-grid { grid-template-columns:1fr; }
+            .projects-grid .project-card { flex:0 0 85vw;min-width:85vw; }
+            .achieve-card { flex:0 0 80vw;min-width:80vw; }
             .edu-grid { grid-template-columns:1fr; }
             .exp-header { flex-direction:column; }
             .hamburger { display:flex; }
@@ -615,12 +626,8 @@
         <p class="section-subtitle">What I've built and what I'm building next.</p>
         <div class="section-line"></div>
     </div>
-    <div class="legend reveal">
-        <div class="legend-item"><div class="legend-dot achieved"></div> Completed</div>
-        <div class="legend-item"><div class="legend-dot roadmap"></div> Planned / In Progress</div>
-    </div>
-    <div class="projects-grid">
-        <div class="project-card reveal reveal-delay-1">
+    <div class="projects-grid" id="projectsCarousel">
+        <div class="project-card reveal">
             <div class="project-header"><h3>Autonomous Line-Following Robot</h3><div class="tech">LEGO MINDSTORM EV3 &middot; PID Control Algorithm</div></div>
             <div class="preview-wrap"><video src="assets/videos/pid-bot-video.mp4" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" autoplay muted loop playsinline onclick="openVideoLightbox(this)"></video></div>
             <div class="project-body">
@@ -630,7 +637,7 @@
                 <div class="tech-stack"><span class="tech-chip">LEGO EV3</span><span class="tech-chip">PID Control</span><span class="tech-chip">Sensors</span><span class="tech-chip">Robotics</span></div>
             </div>
         </div>
-        <div class="project-card reveal reveal-delay-2">
+        <div class="project-card reveal">
             <div class="project-header"><h3>Solar-Powered Automated Water Dispenser</h3><div class="tech">Arduino &middot; Ultrasonic Sensors &middot; C++ &middot; Solar Panel</div></div>
             <div class="preview-wrap"><img src="assets/images/solar_dispensor.png" alt="Solar-powered water dispenser Arduino code" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" onclick="openLightbox(this.src)"></div>
             <div class="project-body">
@@ -640,15 +647,7 @@
                 <div class="project-links"><a href="https://github.com/Oppong-py/solar-water-dispenser" target="_blank">view_on_github &rarr;</a></div>
             </div>
         </div>
-        <div class="project-card reveal reveal-delay-3">
-            <div class="project-header"><h3>Arethos &mdash; Mental Wellness App</h3><div class="tech">React Native &middot; Expo SDK 54 &middot; SQLite &middot; Groq &amp; Anthropic AI</div></div>
-            <!-- Add project screenshot: <img src="arethos-preview.png" alt="Arethos app" class="project-preview"> -->
-            <div class="project-body">
-                <p><span class="highlight">3-person team project.</span> Co-built a cross-platform mental wellness app for KNUST students with three core tabs: AI-powered Journal, Mood tracker, and History/Reflections. Engineered dual-AI fallback (Groq + Anthropic), custom haptic feedback, and offline-first SQLite storage.</p>
-                <div class="tech-stack"><span class="tech-chip">React Native</span><span class="tech-chip">Expo SDK 54</span><span class="tech-chip">SQLite</span><span class="tech-chip">Groq API</span><span class="tech-chip">Anthropic API</span></div>
-            </div>
-        </div>
-        <div class="project-card reveal reveal-delay-4">
+        <div class="project-card reveal">
             <div class="project-header"><h3>ACES KNUST Website Redesign</h3><div class="tech">Figma &middot; UI/UX Design &middot; Mobile-First &middot; Prototyping</div></div>
             <div class="preview-wrap"><img src="assets/images/codefest-figma.png" alt="ACES website redesign in Figma" class="project-preview" style="height:220px;object-position:center center;cursor:pointer;" onclick="openLightbox(this.src)"></div>
             <div class="project-body">
@@ -658,6 +657,11 @@
                 <div class="project-links"><a href="https://www.figma.com/proto/uZCkzk7lSsNmTTUwJMdSu9/Untitled?node-id=8-85&t=7QIixyMz9WWijsW7-1&starting-point-node-id=8%3A85" target="_blank">view_prototype &rarr;</a> <a href="assets/docs/codefest-2026-certificate.pdf" target="_blank">view_certificate &rarr;</a></div>
             </div>
         </div>
+    </div>
+    <div class="carousel-nav reveal" id="projectsNav">
+        <button class="carousel-arrow" onclick="scrollCarousel('projectsCarousel',-1)" aria-label="Previous project">&#8592;</button>
+        <div class="carousel-dots" id="projectsDots"></div>
+        <button class="carousel-arrow" onclick="scrollCarousel('projectsCarousel',1)" aria-label="Next project">&#8594;</button>
     </div>
     <div class="view-all-link reveal">
         <a href="projects.html">view_all_projects( 8 ) &rarr;</a>
@@ -776,35 +780,40 @@
         <h3>Achievements</h3>
         <div class="sub-line"></div>
     </div>
-    <div class="achieve-grid">
-        <div class="achieve-card reveal-left stagger-1">
+    <div class="achieve-grid" id="achieveCarousel">
+        <div class="achieve-card reveal">
             <div class="achieve-top">
                 <h4>National Champion &mdash; Robofest Ghana</h4>
                 <span class="achieve-date">2025</span>
             </div>
             <p>Designed and built an autonomous line-following robot under timed competition conditions. Won first place against teams from across the country, demonstrating engineering execution under pressure.</p>
         </div>
-        <div class="achieve-card reveal-right stagger-2">
+        <div class="achieve-card reveal">
             <div class="achieve-top">
                 <h4>Regional Champion &mdash; National Cybersecurity Challenge</h4>
                 <span class="achieve-date">2024</span>
             </div>
             <p>Competed in a rigorous knowledge-based challenge testing cybersecurity fundamentals, threat analysis, network security, and security best practices. Won the regional round, advancing to the national stage.</p>
         </div>
-        <div class="achieve-card reveal-left stagger-3">
+        <div class="achieve-card reveal">
             <div class="achieve-top">
                 <h4>2nd Place &mdash; CodeFest 2026 UI/UX Challenge</h4>
                 <span class="achieve-date">2026</span>
             </div>
             <p>Redesigned the ACES KNUST website for mobile across all 9 pages as a team of 5. Built a clickable Figma prototype in 2 weeks, competing against multiple teams. <a href="assets/docs/codefest-2026-certificate.pdf" target="_blank" style="color:var(--gold);text-decoration:underline;">View certificate &rarr;</a></p>
         </div>
-        <div class="achieve-card reveal-right stagger-4">
+        <div class="achieve-card reveal">
             <div class="achieve-top">
                 <h4>Participant &mdash; International Public Policy Forum</h4>
                 <span class="achieve-date">2024</span>
             </div>
             <p>Selected to represent Prempeh College in a global policy debate organized by the Brewer Foundation and New York University (NYU). Co-authored a qualifying round essay arguing that equitable access to pharmaceuticals should be prioritized over intellectual property rights &mdash; combining policy research, data analysis, and structured argumentation. <a href="assets/docs/IPPF_Documentation.pdf" target="_blank" style="color:var(--gold);text-decoration:underline;">Read the full research paper &rarr;</a></p>
         </div>
+    </div>
+    <div class="carousel-nav reveal" id="achieveNav">
+        <button class="carousel-arrow" onclick="scrollCarousel('achieveCarousel',-1)" aria-label="Previous achievement">&#8592;</button>
+        <div class="carousel-dots" id="achieveDots"></div>
+        <button class="carousel-arrow" onclick="scrollCarousel('achieveCarousel',1)" aria-label="Next achievement">&#8594;</button>
     </div>
     <div class="view-all-link reveal">
         <a href="achievements.html">view_all( 12 items ) &rarr;</a>
@@ -928,6 +937,55 @@
 
     var projCards=document.querySelectorAll('.project-card:not(.roadmap)');
     for(var pc=0;pc<projCards.length;pc++){(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,rx=(y-r.height/2)/20,ry=(r.width/2-x)/20;card.style.transform='perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-6px) scale(1.01)';});card.addEventListener('mouseleave',function(){card.style.transform='';});})(projCards[pc]);}
+
+    /* ── Carousel Logic ── */
+    function initCarousel(carouselId, dotsId) {
+        var carousel = document.getElementById(carouselId);
+        var dotsContainer = document.getElementById(dotsId);
+        if (!carousel || !dotsContainer) return;
+        var cards = carousel.children;
+        var count = cards.length;
+        for (var d = 0; d < count; d++) {
+            var dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (d === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to item ' + (d + 1));
+            (function(idx) {
+                dot.addEventListener('click', function() {
+                    cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                });
+            })(d);
+            dotsContainer.appendChild(dot);
+        }
+        function updateFocus() {
+            var scrollLeft = carousel.scrollLeft;
+            var containerCenter = scrollLeft + carousel.offsetWidth / 2;
+            var closest = 0, minDist = Infinity;
+            for (var i = 0; i < count; i++) {
+                var card = cards[i];
+                var cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                var dist = Math.abs(containerCenter - cardCenter);
+                if (dist < minDist) { minDist = dist; closest = i; }
+            }
+            var dots = dotsContainer.querySelectorAll('.carousel-dot');
+            for (var i = 0; i < count; i++) {
+                dots[i].className = 'carousel-dot' + (i === closest ? ' active' : '');
+                if (carouselId === 'projectsCarousel') {
+                    cards[i].style.transform = i === closest ? 'scale(1.02)' : 'scale(0.97)';
+                    cards[i].style.opacity = i === closest ? '1' : '0.7';
+                }
+            }
+        }
+        carousel.addEventListener('scroll', updateFocus, { passive: true });
+        setTimeout(updateFocus, 300);
+    }
+    window.scrollCarousel = function(carouselId, dir) {
+        var carousel = document.getElementById(carouselId);
+        if (!carousel || !carousel.children.length) return;
+        var cardWidth = carousel.children[0].offsetWidth + 24;
+        carousel.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+    };
+    initCarousel('projectsCarousel', 'projectsDots');
+    initCarousel('achieveCarousel', 'achieveDots');
 })();
 </script>
 
