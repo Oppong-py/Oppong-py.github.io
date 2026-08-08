@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://oppong-py.github.io/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://oppong-py.github.io/projects.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oppong-py.github.io/achievements.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oppong-py.github.io/certifications.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oppong-py.github.io/blog-pid-to-rl.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oppong-py.github.io/blog-arethos-rn.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+</urlset>
