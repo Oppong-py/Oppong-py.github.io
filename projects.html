@@ -91,7 +91,19 @@
         .project-links a:hover { color:var(--gold-light); }
         .roadmap-badge { display:inline-block; background:var(--coach); color:var(--white); font-size:0.65rem; padding:0.15rem 0.5rem; border-radius:3px; font-family:var(--code-font); margin-bottom:0.3rem; letter-spacing:1px; }
         footer { background:var(--footer-bg); color:var(--light-slate); text-align:center; padding:1.5rem; font-size:0.8rem; font-family:var(--code-font); }
-        @media(max-width:768px) { .projects-grid { grid-template-columns:1fr; } .page-header h1 { font-size:1.4rem; } }
+        @media(max-width:768px) {
+            .projects-grid { grid-template-columns:1fr; }
+            .page-header h1 { font-size:1.4rem; }
+            /* Reorder: projects with images first, then without, then roadmap */
+            .project-card:nth-child(1) { order:1; } /* Line Robot — has video */
+            .project-card:nth-child(2) { order:4; } /* Attendance — no image */
+            .project-card:nth-child(3) { order:5; } /* Arethos — no image */
+            .project-card:nth-child(4) { order:2; } /* Solar Dispenser — has image */
+            .project-card:nth-child(5) { order:3; } /* ACES Website — has image */
+            .project-card:nth-child(6) { order:6; } /* Roadmap */
+            .project-card:nth-child(7) { order:7; } /* Roadmap */
+            .project-card:nth-child(8) { order:8; } /* Roadmap */
+        }
     </style>
 </head>
 <body>

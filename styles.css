@@ -351,6 +351,7 @@
         .legend-dot.roadmap { background:var(--white);border:2px dashed var(--coach); }
 
         .testimonial-scroll::-webkit-scrollbar { display:none; }
+        .testimonial-view-all { display:none; }
 
         .back-to-top { position:fixed;bottom:2rem;right:2rem;width:45px;height:45px;background:var(--gold);color:var(--navy);border:none;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(20px);transition:all 0.3s;box-shadow:0 4px 15px var(--glow-strong);z-index:99; }
         .back-to-top.visible { opacity:1;visibility:visible;transform:translateY(0); }
@@ -365,7 +366,9 @@
             .skills-grid { grid-template-columns:1fr; }
             .projects-grid .project-card { flex:0 0 85vw;min-width:85vw; }
             .achieve-card { flex:0 0 80vw;min-width:80vw; }
-            .testimonial-scroll > div { flex:0 0 85vw;min-width:85vw; }
+            .testimonial-scroll > .testimonial-card:nth-child(n+2) { display:none; }
+            .testimonial-scroll > .testimonial-card:first-child { flex:0 0 100%;min-width:0; }
+            .testimonial-view-all { display:block; }
             .edu-grid { grid-template-columns:1fr; }
             .exp-header { flex-direction:column; }
             .hamburger { display:flex; }
