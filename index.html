@@ -68,7 +68,10 @@
         <a href="#certifications" data-section="certifications">Certs</a>
         <a href="#thinking" data-section="thinking">Thinking</a>
         <a href="#contact" data-section="contact">Contact</a>
-        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
@@ -636,9 +639,9 @@
     var bo=new IntersectionObserver(function(entries){for(var i=0;i<entries.length;i++)if(entries[i].isIntersecting)entries[i].target.style.width=entries[i].target.getAttribute('data-width')+'%';},{threshold:0.2});
     for(var b=0;b<bars.length;b++)bo.observe(bars[b]);
 
-    var themeBtn=document.getElementById('themeToggle');
-    var savedTheme=localStorage.getItem('theme');if(savedTheme==='dark'){document.documentElement.setAttribute('data-theme','dark');themeBtn.innerHTML='&#9788;';}
-    themeBtn.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme');var t=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);themeBtn.innerHTML=t==='dark'?'&#9788;':'&#9790;';localStorage.setItem('theme',t);});
+    var themeBtn=document.getElementById('themeToggle'),moonIcon=themeBtn.querySelector('.icon-moon'),sunIcon=themeBtn.querySelector('.icon-sun');
+    var savedTheme=localStorage.getItem('theme');if(savedTheme==='dark'){document.documentElement.setAttribute('data-theme','dark');moonIcon.style.display='none';sunIcon.style.display='block';}
+    themeBtn.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme');var t=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);if(t==='dark'){moonIcon.style.display='none';sunIcon.style.display='block';}else{moonIcon.style.display='block';sunIcon.style.display='none';}localStorage.setItem('theme',t);});
 
     var fTabs=document.querySelectorAll('.filter-tab'),sCards=document.querySelectorAll('.skill-category');
     for(var f=0;f<fTabs.length;f++){fTabs[f].addEventListener('click',function(){for(var a=0;a<fTabs.length;a++)fTabs[a].classList.remove('active');this.classList.add('active');var fl=this.getAttribute('data-filter');for(var c=0;c<sCards.length;c++){var cd=sCards[c],hc=cd.getAttribute('data-has-current')==='true',hr=cd.getAttribute('data-has-roadmap')==='true',tags=cd.querySelectorAll('.tag');if(fl==='all'){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].classList.remove('hidden-tag');}else if(fl==='current'){if(hc){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].getAttribute('data-type')==='roadmap'?tags[t].classList.add('hidden-tag'):tags[t].classList.remove('hidden-tag');}else cd.classList.add('hidden-card');}else if(fl==='roadmap'){if(hr){cd.classList.remove('hidden-card');for(var t=0;t<tags.length;t++)tags[t].getAttribute('data-type')==='current'?tags[t].classList.add('hidden-tag'):tags[t].classList.remove('hidden-tag');}else cd.classList.add('hidden-card');}}});}
