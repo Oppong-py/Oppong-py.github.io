@@ -37,8 +37,8 @@
         .top-bar .back-link { color:var(--cream); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.3s; display:flex; align-items:center; gap:0.4rem; }
         .top-bar .back-link:hover { color:var(--gold); }
         .top-bar .right-controls { display:flex; align-items:center; gap:1rem; }
-        .theme-toggle { background:none; border:2px solid var(--gold); color:var(--gold); width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
-        .theme-toggle:hover { background:var(--gold); color:var(--navy); }
+        .theme-toggle { background:none; border:none; color:var(--cream); width:34px; height:34px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:color 0.3s; padding:0; opacity:0.8; }
+        .theme-toggle:hover { color:var(--gold); opacity:1; }
 
         /* ── Page header ── */
         .page-header { padding:4rem 2rem 2rem; text-align:center; }
@@ -71,7 +71,10 @@
     <a href="index.html" class="logo">KOA</a>
     <div class="right-controls">
         <a href="index.html" class="back-link">&larr; back_to_home</a>
-        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
     </div>
 </div>
 
@@ -135,13 +138,13 @@
 
 <script>
 (function(){
-    var t=document.getElementById('themeToggle');
+    var t=document.getElementById('themeToggle'),moon=t.querySelector('.icon-moon'),sun=t.querySelector('.icon-sun');
     var saved=localStorage.getItem('theme');
-    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');t.textContent='☀';}
+    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');moon.style.display='none';sun.style.display='block';}
     t.addEventListener('click',function(){
         var dark=document.documentElement.getAttribute('data-theme')==='dark';
         document.documentElement.setAttribute('data-theme',dark?'':'dark');
-        t.textContent=dark?'☽':'☀';
+        if(dark){moon.style.display='block';sun.style.display='none';}else{moon.style.display='none';sun.style.display='block';}
         localStorage.setItem('theme',dark?'light':'dark');
     });
 })();

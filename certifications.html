@@ -36,8 +36,8 @@
         .top-bar .back-link { color:var(--cream); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.3s; }
         .top-bar .back-link:hover { color:var(--gold); }
         .top-bar .right-controls { display:flex; align-items:center; gap:1rem; }
-        .theme-toggle { background:none; border:2px solid var(--gold); color:var(--gold); width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
-        .theme-toggle:hover { background:var(--gold); color:var(--navy); }
+        .theme-toggle { background:none; border:none; color:var(--cream); width:34px; height:34px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:color 0.3s; padding:0; opacity:0.8; }
+        .theme-toggle:hover { color:var(--gold); opacity:1; }
         .page-header { padding:4rem 2rem 2rem; text-align:center; }
         .page-header h1 { font-size:1.8rem; color:var(--section-title-color); font-family:var(--heading-font); margin-bottom:0.5rem; transition:color 0.4s; }
         .page-header h1 .bracket { color:var(--gold); }
@@ -56,8 +56,10 @@
         .cert-issuer { font-size:0.78rem; color:var(--light-slate); font-family:var(--code-font); margin-bottom:0.4rem; }
         .cert-card p { font-size:0.85rem; color:var(--light-slate); line-height:1.65; }
         .planned-badge { display:inline-block; background:var(--coach); color:var(--white); font-size:0.65rem; padding:0.15rem 0.5rem; border-radius:3px; font-family:var(--code-font); margin-bottom:0.3rem; letter-spacing:1px; }
+        .cert-card-link { text-decoration:none; color:inherit; display:block; }
+        .cert-card-link .cert-card { cursor:pointer; }
         .cert-link { display:inline-block; margin-top:0.5rem; font-size:0.78rem; color:var(--gold); text-decoration:none; font-family:var(--code-font); border-bottom:1px solid transparent; transition:border-color 0.3s; }
-        .cert-link:hover { border-color:var(--gold); }
+        .cert-card-link:hover .cert-link { border-color:var(--gold); }
         footer { background:var(--footer-bg); color:var(--light-slate); text-align:center; padding:1.5rem; font-size:0.8rem; font-family:var(--code-font); }
         @media(max-width:768px) { .cert-grid { grid-template-columns:1fr; } .page-header h1 { font-size:1.4rem; } }
     </style>
@@ -67,7 +69,10 @@
     <a href="index.html" class="logo">KOA</a>
     <div class="right-controls">
         <a href="index.html" class="back-link">&larr; back_to_home</a>
-        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">&#9790;</button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
     </div>
 </div>
 
@@ -79,26 +84,38 @@
 
 <div class="content-wrap">
     <div class="cert-grid">
+        <a href="assets/docs/hedera-certificate.pdf" target="_blank" class="cert-card-link">
         <div class="cert-card">
             <div class="cert-top"><h4>Hedera Developer Course Certificate</h4><span class="cert-date">2025</span></div>
             <div class="cert-issuer">// Hedera &amp; The HBAR Foundation</div>
             <p>Completed comprehensive training on building decentralized applications on the Hedera network. Covered Hedera Consensus Service, Token Service, Smart Contracts, and SDK integration for DApp development.</p>
+            <span class="cert-link">view_cert &rarr;</span>
         </div>
+        </a>
+        <a href="assets/docs/hedera-foundation-certificate.pdf" target="_blank" class="cert-card-link">
         <div class="cert-card">
             <div class="cert-top"><h4>Hedera Foundation Certificate</h4><span class="cert-date">2025</span></div>
             <div class="cert-issuer">// Hedera &amp; The HBAR Foundation</div>
             <p>Foundational certification covering distributed ledger concepts, Hedera Hashgraph consensus, tokenomics, and the Hedera ecosystem architecture.</p>
+            <span class="cert-link">view_cert &rarr;</span>
         </div>
+        </a>
+        <a href="assets/docs/ippf-certificate.pdf" target="_blank" class="cert-card-link">
         <div class="cert-card">
             <div class="cert-top"><h4>IPPF Certificate of Participation</h4><span class="cert-date">2024</span></div>
             <div class="cert-issuer">// Brewer Foundation &amp; NYU</div>
             <p>Certificate for participating in the International Public Policy Forum, a rigorous global debate competition testing research, argumentation, and policy analysis skills.</p>
+            <span class="cert-link">view_cert &rarr;</span>
         </div>
+        </a>
+        <a href="assets/docs/prempeh-certificate.pdf" target="_blank" class="cert-card-link">
         <div class="cert-card">
             <div class="cert-top"><h4>WASSCE Certificate</h4><span class="cert-date">2024</span></div>
             <div class="cert-issuer">// West African Examinations Council</div>
             <p>West African Senior School Certificate Examination. Graduated from Prempeh College with strong performance in Science, Mathematics, and Elective ICT.</p>
+            <span class="cert-link">view_cert &rarr;</span>
         </div>
+        </a>
         <div class="cert-card planned">
             <div class="cert-top"><span class="planned-badge">IN PROGRESS</span><h4>Deep Learning Specialization</h4><span class="cert-date">// planned</span></div>
             <div class="cert-issuer">// DeepLearning.AI &mdash; Coursera</div>
@@ -116,13 +133,13 @@
 
 <script>
 (function(){
-    var t=document.getElementById('themeToggle');
+    var t=document.getElementById('themeToggle'),moon=t.querySelector('.icon-moon'),sun=t.querySelector('.icon-sun');
     var saved=localStorage.getItem('theme');
-    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');t.textContent='☀';}
+    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');moon.style.display='none';sun.style.display='block';}
     t.addEventListener('click',function(){
         var dark=document.documentElement.getAttribute('data-theme')==='dark';
         document.documentElement.setAttribute('data-theme',dark?'':'dark');
-        t.textContent=dark?'☽':'☀';
+        if(dark){moon.style.display='block';sun.style.display='none';}else{moon.style.display='none';sun.style.display='block';}
         localStorage.setItem('theme',dark?'light':'dark');
     });
 })();
