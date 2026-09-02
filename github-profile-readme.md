@@ -7,7 +7,7 @@ National Robotics Champion (2025) · Regional Cybersecurity Champion (2024)
 ### What I'm working on
 
 - 🧠 Taking Andrew Ng's [ML Specialization](https://github.com/Oppong-py/ml-specialization-coursera) — documenting everything
-- 📱 Co-building [Arethos](https://github.com/Oppong-py/arethos) — a mental wellness app (React Native + Groq/Anthropic AI)
+- 📱 Co-building [Arethos](https://github.com/Oppong-py/arethos) — a mental wellness app (React Native + Groq AI)
 - 🌐 Portfolio: [oppong-py.github.io](https://oppong-py.github.io)
 
 ### Tech
