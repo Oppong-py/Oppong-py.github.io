@@ -308,7 +308,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
       root.className += ' is-leaving';
       var gone = false;
       var go = function () { if (!gone) { gone = true; location.href = a.href; } };
-      setTimeout(go, 125);                               /* matches the CSS */
+      setTimeout(go, 100);                               /* matches the CSS */
     });
   }
   /* Warm the next page on hover. By the time a visitor has moved the

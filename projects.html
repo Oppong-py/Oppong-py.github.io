@@ -64,7 +64,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   <div class="plist">
     <article class="prow has-media">
       <div class="idx"><span>index 01 &middot; DESIGN</span><b>2026</b></div>
-      <div class="pfig"><img class="media contain" src="assets/images/codefest-figma.png" alt="The ACES KNUST redesign in Figma" loading="lazy" data-lb="assets/images/codefest-figma.png"><span class="mcap">click to enlarge</span></div>
+      <div class="pfig"><img class="media contain" src="assets/images/codefest-figma.webp" alt="The ACES KNUST redesign in Figma" loading="lazy" decoding="async" width="1400" height="788" data-lb="assets/images/codefest-figma.webp"><span class="mcap">click to enlarge</span></div>
       <div class="body">
         <h3>ACES KNUST Website Redesign</h3>
         <span class="tag">2ND PLACE &middot; CODEFEST 2026</span>
@@ -100,7 +100,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
 
     <article class="prow has-media">
       <div class="idx"><span>index 03 &middot; ROBOTICS</span><b>2025</b></div>
-      <div class="pfig"><video class="media" src="assets/videos/pid-bot-video.mp4" controls muted playsinline preload="metadata" aria-label="The line-following robot running its competition course"></video></div>
+      <div class="pfig"><video class="media" src="assets/videos/pid-bot-video.mp4" poster="assets/images/pid-bot-poster.webp" controls muted playsinline preload="none" aria-label="The line-following robot running its competition course"></video></div>
       <div class="body">
         <h3>Autonomous Line-Following Robot</h3>
         <span class="tag">NATIONAL CHAMPION &middot; ROBOFEST GHANA 2025</span>
@@ -303,7 +303,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
       root.className += ' is-leaving';
       var gone = false;
       var go = function () { if (!gone) { gone = true; location.href = a.href; } };
-      setTimeout(go, 125);                               /* matches the CSS */
+      setTimeout(go, 100);                               /* matches the CSS */
     });
   }
   /* Warm the next page on hover. By the time a visitor has moved the

@@ -575,15 +575,20 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
    all of the smoothness, almost none of the wait. Internal links are
    also prefetched on hover, so the next document is usually cached.
 
-   TO RETUNE: .38s (arrival) and .12s (departure). Departure must stay
-   <= the 125ms setTimeout in the footer script.
+   The arrival starts at opacity .35, NOT 0. Starting from zero meant the
+   incoming page was unreadable for the first ~250ms, which reads as "the
+   page is taking a while to come" even though nothing is loading. Starting
+   part-visible keeps the ease without the blank beat.
+
+   TO RETUNE: .26s (arrival) and .1s (departure). Departure must stay
+   <= the 100ms setTimeout in the footer script.
    ============================================================ */
 
 :root.js-fx body {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity .38s cubic-bezier(.45, 0, .55, 1),
-              transform .44s cubic-bezier(.22, .7, .28, 1);
+  opacity: .35;
+  transform: translateY(9px);
+  transition: opacity .26s cubic-bezier(.45, 0, .55, 1),
+              transform .3s cubic-bezier(.22, .7, .28, 1);
   will-change: opacity, transform;
 }
 
@@ -597,9 +602,9 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
    one movement continuing rather than as a bounce */
 :root.js-fx.is-leaving body {
   opacity: 0;
-  transform: translateY(-5px);
-  transition: opacity .12s cubic-bezier(.4, 0, 1, 1),
-              transform .12s cubic-bezier(.4, 0, 1, 1);
+  transform: translateY(-4px);
+  transition: opacity .1s cubic-bezier(.4, 0, 1, 1),
+              transform .1s cubic-bezier(.4, 0, 1, 1);
 }
 
 /* The sticky nav does not travel with the page — it is the one thing

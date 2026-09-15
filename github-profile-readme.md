@@ -85,24 +85,12 @@ robot holding a line at speed, moved through network security, and points now at
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Oppong-py&theme=github_dark">
-    <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Oppong-py&theme=github_light" alt="Top languages by repository" width="48%">
+    <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Oppong-py&theme=github_light" alt="Top languages by repository">
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Oppong-py&theme=github_dark">
-    <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Oppong-py&theme=github_light" alt="Top languages by commit" width="48%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Oppong-py&theme=github_dark">
+    <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Oppong-py&theme=github_light" alt="GitHub stats">
   </picture>
 </p>
-
-<!--
-  Two more cards exist and are deliberately left off for now:
-
-    .../cards/stats?username=Oppong-py            -> Total Stars / Commits / PRs / Issues
-    https://streak-stats.demolab.com/?user=Oppong-py  -> current + longest streak
-
-  Right now they would publish "Total Stars: 0 · Total PRs: 0" and a zeroed streak.
-  Turn them on when the numbers argue for you — roughly, once stars are non-zero and
-  you have merged PRs on someone else's repo. The cards above are proportional and
-  scale-free, so they read well at any size.
--->
 
 <p align="center"><sub>Open to collaboration on robotics, applied ML, and anything that has to work outdoors.</sub></p>
