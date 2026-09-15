@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Credentials | Kwabena Oppong Adutwum</title>
-<meta name="description" content="Verified credentials and learning paths — Hedera, IPPF, WASSCE, and Andrew Ng's ML Specialization.">
+<title>Writing | Kwabena Oppong Adutwum</title>
+<meta name="description" content="Technical write-ups by Kwabena Oppong Adutwum — PID control to reinforcement learning, and three React Native bugs.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2310151B'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23EDAE3E'%3EKOA%3C/text%3E%3C/svg%3E">
-<meta property="og:title" content="Credentials | Kwabena Oppong Adutwum">
-<meta property="og:description" content="Verified credentials and learning paths — Hedera, IPPF, WASSCE, and Andrew Ng's ML Specialization.">
-<link rel="canonical" href="https://oppong-py.github.io/certifications.html">
-<meta property="og:url" content="https://oppong-py.github.io/certifications.html">
+<meta property="og:title" content="Writing | Kwabena Oppong Adutwum">
+<meta property="og:description" content="Technical write-ups by Kwabena Oppong Adutwum — PID control to reinforcement learning, and three React Native bugs.">
+<link rel="canonical" href="https://oppong-py.github.io/writing.html">
+<meta property="og:url" content="https://oppong-py.github.io/writing.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://oppong-py.github.io/assets/images/og-preview.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -30,9 +30,9 @@ if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)
       <a href="about.html">df.<b>profile</b></a>
       <a href="projects.html">df.<b>projects</b></a>
       <a href="achievements.html">df.<b>record</b></a>
-      <a href="certifications.html" class="on">df.<b>certs</b></a>
+      <a href="certifications.html">df.<b>certs</b></a>
       <a href="testimonials.html">df.<b>refs</b></a>
-      <a href="writing.html">nb.<b>writing</b></a>
+      <a href="writing.html" class="on">nb.<b>writing</b></a>
     </div>
     <a href="contact.html" class="tog ctc">contact.open()</a>
     <button class="tog" id="themeToggle" type="button" aria-label="Switch colour theme">theme: light</button>
@@ -40,46 +40,36 @@ if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)
 </nav>
 <div class="wrap phead" id="main">
   <a class="back" href="index.html">&larr; back to notebook</a>
-  <h1>df.<em>credentials</em></h1>
-  <p class="sub">Earned certificates with documents attached, and the learning paths currently running.</p>
+  <h1>nb.<em>writing</em></h1>
+  <p class="sub">Notes from things that broke and what fixed them. Written while the detail was still fresh, not reconstructed afterwards.</p>
 </div>
 
 <section class="wrap" style="padding-top:26px">
-  <div class="cell"><span class="in">In&nbsp;[1]:</span><h2>df.credentials.groupby("status").size()</h2><span class="rule"></span></div>
-  <div class="out">Out[1]: completed <b>5</b> &nbsp;&middot;&nbsp; in_progress <b>1</b></div>
+  <div class="cell"><span class="in">In&nbsp;[1]:</span><h2>nb.writing.list()</h2><span class="rule"></span></div>
+  <div class="out">Out[1]: <b>2</b> notebooks &nbsp;&middot;&nbsp; control theory, mobile debugging &nbsp;&middot;&nbsp; 2 more queued</div>
 
-  <div class="entries">
-    <div class="entry">
-      <div class="when">Sept 2026<span>Coursera</span></div>
-      <div><h3>Machine Learning Specialization</h3><p>Stanford &amp; DeepLearning.AI &mdash; Andrew Ng&rsquo;s three-course specialization covering supervised learning, advanced algorithms, unsupervised learning, recommenders and reinforcement learning. Notes published per week rather than kept private.</p><div class="links"><a href="https://github.com/Oppong-py/ml-specialization-coursera" target=_blank rel=noopener>notes repo &rarr;</a></div></div>
-    </div>
-    <div class="entry">
-      <div class="when">Apr 2026<span>Hedera</span></div>
-      <div><h3>Hedera Certified Foundation</h3><p>Foundational certification covering distributed ledger concepts, Hedera Hashgraph consensus, tokenomics and the Hedera ecosystem architecture.</p><div class="links"><a href="assets/docs/hedera-foundation-certificate.pdf">certificate &rarr;</a></div></div>
-    </div>
-    <div class="entry">
-      <div class="when">Jan 2026<span>Hedera</span></div>
-      <div><h3>Hashgraph Developer Course</h3><p>Comprehensive training on building decentralised applications on the Hedera network &mdash; Consensus Service, Token Service, smart contracts and SDK integration.</p><div class="links"><a href="assets/docs/hedera-certificate.pdf">certificate &rarr;</a></div></div>
-    </div>
-    <div class="entry">
-      <div class="when">2024<span>Brewer &amp; NYU</span></div>
-      <div><h3>IPPF Certificate of Participation</h3><p>Certificate for participating in the International Public Policy Forum, a global debate competition testing research, argumentation and policy analysis.</p><div class="links"><a href="assets/docs/ippf-certificate.pdf">certificate &rarr;</a></div></div>
-    </div>
-    <div class="entry">
-      <div class="when">2024<span>WAEC</span></div>
-      <div><h3>WASSCE Certificate</h3><p>West African Senior School Certificate Examination. Graduated from Prempeh College with strong performance in Science, Mathematics and Elective ICT.</p><div class="links"><a href="assets/docs/prempeh-certificate.pdf">certificate &rarr;</a></div></div>
-    </div>
+  <div class="wr">
+    <a class="wi big" href="blog-pid-to-rl.html">
+      <div class="m">JUL 2026 &middot; 4 MIN &middot; CONTROL THEORY</div>
+      <h3>From PID Control to Reinforcement Learning</h3>
+      <p>Tuning Kp, Ki and Kd on a line-following robot is the same shape of problem as tuning a learning rate &mdash; too much gain and it oscillates, too little and it never converges. What a championship robot taught me about optimisation before I knew the word for it.</p>
+      <span class="go">open_notebook() &rarr;</span>
+    </a>
+    <a class="wi big" href="blog-arethos-rn.html">
+      <div class="m">JUL 2026 &middot; 6 MIN &middot; MOBILE ENGINEERING</div>
+      <h3>Three Bugs That Taught Me More Than Any Tutorial</h3>
+      <p>Why React Native&rsquo;s zIndex is a lie, how a stale closure quietly broke my sleep slider, and what nine haptic iterations taught me about the Android vibration API &mdash; with the fix for each.</p>
+      <span class="go">open_notebook() &rarr;</span>
+    </a>
   </div>
 </section>
 
 <section class="wrap" style="padding-top:0">
-  <div class="cell"><span class="in">In&nbsp;[2]:</span><h2>df.credentials.query("status == 'in_progress'")</h2><span class="rule"></span></div>
-  <div class="out">Out[2]: <b>1 row</b> &nbsp;&middot;&nbsp; currently training</div>
-  <div class="entries">
-    <div class="entry">
-      <div class="when">next<span>DeepLearning.AI</span></div>
-      <div><span class="flag">IN PROGRESS</span><h3>Deep Learning Specialization</h3><p>Andrew Ng&rsquo;s five-course specialization covering neural networks, optimisation, convolutional networks, sequence models and how to structure machine learning projects.</p></div>
-    </div>
+  <div class="cell"><span class="in">In&nbsp;[2]:</span><h2>nb.writing.queue()</h2><span class="rule"></span></div>
+  <div class="out">Out[2]: <b>2</b> drafts &nbsp;&middot;&nbsp; not published yet</div>
+  <div class="queue">
+    <div class="qi"><div class="c">draft_01.ipynb</div><div class="t">The hackathon write-up</div><div class="d">Building-age classification from Landsat imagery &mdash; what worked, what the label budget cost, and where the baseline beat me.</div></div>
+    <div class="qi"><div class="c">draft_02.ipynb</div><div class="t">What transfer learning actually costs</div><div class="d">Domain shift between two cities, measured rather than assumed.</div></div>
   </div>
 </section>
 

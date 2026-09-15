@@ -1,152 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonials | Kwabena Oppong Adutwum</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B46'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23C9A54E'%3EKOA%3C/text%3E%3C/svg%3E">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-        :root {
-            --navy:#0F2B46;--navy-light:#1a3a5c;--gold:#C9A54E;--gold-light:#d4b76a;
-            --cream:#F0ECE3;--slate:#3B444F;--light-slate:#6B7480;--white:#FFFFFF;
-            --bg:#f8f9fa;--card-bg:#ffffff;--card-border:#e8e8e8;
-            --section-title-color:var(--navy);--footer-bg:#0a1f33;
-            --shadow-color:rgba(0,0,0,0.08);--shadow-heavy:rgba(0,0,0,0.1);
-            --glow:rgba(201,165,78,0.15);--glow-strong:rgba(201,165,78,0.35);
-            --grid-color:rgba(15,43,70,0.04);--code-font:'JetBrains Mono','Fira Code','Consolas',monospace;
-            --heading-font:'Space Grotesk','Inter',sans-serif;
-        }
-        [data-theme="dark"] {
-            --bg:#0d1b2a;--card-bg:#1b2838;--card-border:#2a3a4d;
-            --slate:#c8d0d8;--light-slate:#8a95a3;--cream:#1e3048;
-            --section-title-color:var(--gold);--footer-bg:#060e17;
-            --shadow-color:rgba(0,0,0,0.3);--shadow-heavy:rgba(0,0,0,0.4);
-            --grid-color:rgba(201,165,78,0.03);
-        }
-        html { scroll-behavior:smooth; }
-        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--slate); line-height:1.6; transition:background 0.4s,color 0.4s; background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px); background-size:60px 60px; }
-
-        /* ── Top bar ── */
-        .top-bar { background:var(--navy); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(201,165,78,0.15); position:sticky; top:0; z-index:100; }
-        .top-bar .logo { color:var(--gold); font-weight:700; font-size:1.2rem; letter-spacing:1px; font-family:var(--code-font); text-decoration:none; }
-        .top-bar .logo::before { content:'< '; opacity:0.5; } .top-bar .logo::after { content:' />'; opacity:0.5; }
-        .top-bar .back-link { color:var(--cream); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.3s; display:flex; align-items:center; gap:0.4rem; }
-        .top-bar .back-link:hover { color:var(--gold); }
-        .top-bar .right-controls { display:flex; align-items:center; gap:1rem; }
-        .theme-toggle { background:none; border:none; color:var(--cream); width:34px; height:34px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:color 0.3s; padding:0; opacity:0.8; }
-        .theme-toggle:hover { color:var(--gold); opacity:1; }
-
-        /* ── Page header ── */
-        .page-header { padding:4rem 2rem 2rem; text-align:center; }
-        .page-header h1 { font-size:1.8rem; color:var(--section-title-color); font-family:var(--heading-font); margin-bottom:0.5rem; transition:color 0.4s; }
-        .page-header h1 .bracket { color:var(--gold); }
-        .page-header p { color:var(--light-slate); font-size:0.95rem; max-width:600px; margin:0 auto 1rem; }
-        .page-header .section-line { width:60px; height:3px; background:linear-gradient(90deg,var(--gold),var(--gold-light)); margin:0 auto; border-radius:2px; }
-
-        /* ── Testimonial cards ── */
-        .testimonials-list { display:flex; flex-direction:column; gap:1.5rem; max-width:800px; margin:0 auto; padding:0 2rem 3rem; }
-        .testimonial-full {
-            background:var(--card-bg); border-radius:12px; padding:2rem 2.2rem;
-            border:1px solid var(--card-border); position:relative; overflow:hidden;
-            transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
-        }
-        .testimonial-full:hover { transform:translateY(-3px); box-shadow:0 12px 35px var(--shadow-color); border-color:rgba(201,165,78,0.3); }
-        .testimonial-full .quote-mark { position:absolute; top:0.8rem; left:1.2rem; font-family:var(--heading-font); font-size:3.5rem; line-height:1; color:var(--gold); opacity:0.15; pointer-events:none; }
-        .testimonial-full p { font-size:0.9rem; color:var(--slate); line-height:1.8; font-style:italic; margin-bottom:1.2rem; position:relative; z-index:1; }
-        .testimonial-author { display:flex; align-items:center; gap:0.8rem; }
-        .testimonial-avatar { width:40px; height:40px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:0.75rem; color:var(--gold); font-family:var(--code-font); flex-shrink:0; }
-        .testimonial-name { font-weight:600; font-size:0.9rem; color:var(--section-title-color); font-family:var(--heading-font); }
-        .testimonial-title { font-size:0.75rem; color:var(--gold); font-family:var(--code-font); }
-
-        footer { background:var(--footer-bg); color:var(--light-slate); text-align:center; padding:1.5rem; font-size:0.8rem; font-family:var(--code-font); }
-        @media(max-width:768px) { .page-header h1 { font-size:1.4rem; } .testimonials-list { padding:0 1.2rem 2rem; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>References | Kwabena Oppong Adutwum</title>
+<meta name="description" content="Four named referees — a robotics patron, two senior teachers and an NGO executive director — on Kwabena Oppong Adutwum.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2310151B'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23EDAE3E'%3EKOA%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="References | Kwabena Oppong Adutwum">
+<meta property="og:description" content="Four named referees — a robotics patron, two senior teachers and an NGO executive director — on Kwabena Oppong Adutwum.">
+<link rel="canonical" href="https://oppong-py.github.io/testimonials.html">
+<meta property="og:url" content="https://oppong-py.github.io/testimonials.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://oppong-py.github.io/assets/images/og-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<script>(function(){try{var t=localStorage.getItem('koa-theme');
+if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="top-bar">
-    <a href="index.html" class="logo">KOA</a>
-    <div class="right-controls">
-        <a href="index.html#testimonial" class="back-link">&larr; back_to_testimonials</a>
-        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
-            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        </button>
+<a href="#main" class="skip">Skip to content</a>
+<nav aria-label="Main">
+  <div class="wrap">
+    <a href="index.html" class="id">KOA//</a>
+    <div class="navlinks">
+      <a href="index.html">notebook</a>
+      <a href="about.html">df.<b>profile</b></a>
+      <a href="projects.html">df.<b>projects</b></a>
+      <a href="achievements.html">df.<b>record</b></a>
+      <a href="certifications.html">df.<b>certs</b></a>
+      <a href="testimonials.html" class="on">df.<b>refs</b></a>
+      <a href="writing.html">nb.<b>writing</b></a>
     </div>
+    <a href="contact.html" class="tog ctc">contact.open()</a>
+    <button class="tog" id="themeToggle" type="button" aria-label="Switch colour theme">theme: light</button>
+  </div>
+</nav>
+<div class="wrap phead" id="main">
+  <a class="back" href="index.html">&larr; back to notebook</a>
+  <h1>df.<em>references</em></h1>
+  <p class="sub">Four people who taught, supervised or worked alongside me, in their own words. Signed letters are available on request.</p>
 </div>
 
-<div class="page-header">
-    <h1><span class="bracket">{</span> Testimonials <span class="bracket">}</span></h1>
-    <p>What mentors, teachers, and collaborators say about working with me.</p>
-    <div class="section-line"></div>
+<section class="wrap" style="padding-top:26px">
+  <div class="cell"><span class="in">In&nbsp;[1]:</span><h2>df.references.value_counts()</h2><span class="rule"></span></div>
+  <div class="out">Out[1]: <b>4</b> named referees &nbsp;&middot;&nbsp; 1 robotics patron, 2 senior teachers, 1 executive director</div>
+
+</section>
+
+<div class="refband">
+  <div class="wrap" style="padding-block:0">
+    <div class="refs" style="border-top:1px solid var(--line)">
+      <figure class="rf">
+        <span class="q">&ldquo;</span>
+        <p>An outstanding student with a natural flair for technology and innovation. He played key roles in building a solar-powered water dispenser, a class attendance system and an air purification device &mdash; and is a skilled team leader, mentoring peers in robotics and coding.</p>
+        <figcaption class="who"><b>RICHARD OSEI ADU</b><span>Robotics Patron, Prempeh College</span></figcaption>
+      </figure>
+      <figure class="rf">
+        <span class="q">&ldquo;</span>
+        <p>By far the best of his classmates and among the top students in the entire 2025 batch. Independent, takes good initiative in decision-making, and functions well as a leader. Respectful, humble and obedient.</p>
+        <figcaption class="who"><b>KWADWO GYAN DARKWA</b><span>Senior Physics Teacher, Prempeh College</span></figcaption>
+      </figure>
+      <figure class="rf">
+        <span class="q">&ldquo;</span>
+        <p>A driven, well-organized student who is naturally born to lead. He takes on the mantle to teach his colleagues in the absence of a teacher &mdash; no surprise he was selected to lead development of the college e-voting software.</p>
+        <figcaption class="who"><b>EMMANUEL OWUSU ANSAH</b><span>Mathematics Teacher &amp; Form Master</span></figcaption>
+      </figure>
+      <figure class="rf">
+        <span class="q">&ldquo;</span>
+        <p>Bright, confident, sociable, open-minded and creative, with high professional goals and excellent interpersonal skills &mdash; determined to use cybersecurity and AI to drive positive change for the vulnerable in society.</p>
+        <figcaption class="who"><b>SALLY ANOKYE YEBOAH</b><span>Executive Director, SFLIG</span></figcaption>
+      </figure>
+    </div>
+  </div>
 </div>
 
-<div class="testimonials-list">
-    <div class="testimonial-full">
-        <div class="quote-mark">&ldquo;</div>
-        <p>Oppong is an outstanding student with a natural flair for technology and innovation. He played key roles in building a solar-powered water dispenser, a class attendance system, and an air purification device. He is a skilled team leader, winning the regional cybersecurity challenge and mentoring peers in robotics.</p>
-        <div class="testimonial-author">
-            <div class="testimonial-avatar">ROA</div>
-            <div>
-                <div class="testimonial-name">Richard Osei Adu</div>
-                <div class="testimonial-title"><a href="https://richardoseiadu.vercel.app/" target="_blank" style="color:var(--gold);text-decoration:none;background:rgba(201,165,78,0.12);padding:0.1rem 0.45rem;border-radius:4px;border:1px solid rgba(201,165,78,0.3);transition:all 0.3s;" onmouseover="this.style.background='rgba(201,165,78,0.25)'" onmouseout="this.style.background='rgba(201,165,78,0.12)'">Robotics Patron &#8599;</a>, Prempeh College</div>
-            </div>
-        </div>
+<section class="wrap">
+  <div class="cell"><span class="in">In&nbsp;[2]:</span><h2>references.context()</h2><span class="rule"></span></div>
+  <div class="out">Out[2]: how each of them knows me</div>
+  <div class="entries">
+    <div class="entry">
+      <div class="when">2023&ndash;2025<span>Robotics</span></div>
+      <div><h3>Richard Osei Adu</h3><p>Robotics patron at Prempeh College and the person who supervised the builds that led to Robofest 2025 &mdash; the solar water dispenser, the attendance system and the air purification device. He also runs his own development practice.</p>
+      <div class="links"><a href="https://richardoseiadu.vercel.app/" target="_blank" rel="noopener">his portfolio &rarr;</a></div></div>
     </div>
+    <div class="entry">
+      <div class="when">2023&ndash;2025<span>Physics</span></div>
+      <div><h3>Kwadwo Gyan Darkwa</h3><p>Senior physics teacher who mentored me through senior high to the final year. Father of Ruth Gyan-Darkwa, Ghana&rsquo;s youngest PhD student.</p>
+      <div class="links"><a href="https://en.wikipedia.org/wiki/Ruth_Ama_Gyan-Darkwa" target="_blank" rel="noopener">wikipedia &rarr;</a><a href="https://www.linkedin.com/posts/kwabena-oppong-adutwum_prempehcollege-mentorship-education-ugcPost-7495875791164051456-WFP1/" target="_blank" rel="noopener">our story &rarr;</a></div></div>
+    </div>
+    <div class="entry">
+      <div class="when">2023&ndash;2025<span>Mathematics</span></div>
+      <div><h3>Emmanuel Owusu Ansah</h3><p>Senior mathematics teacher and form master at Prempeh College, who selected me to lead development of the college e-voting software.</p></div>
+    </div>
+    <div class="entry">
+      <div class="when">2022&ndash;now<span>SFLIG</span></div>
+      <div><h3>Sally Anokye Yeboah</h3><p>Executive Director of Solutions for Life Initiative Ghana, where I volunteered from October 2022 and was promoted to Online Safety Analyst in August 2023.</p>
+      <div class="links"><a href="https://sfligvolunteers.org/" target="_blank" rel="noopener">sflig &rarr;</a></div></div>
+    </div>
+  </div>
+</section>
 
-    <div class="testimonial-full">
-        <div class="quote-mark">&ldquo;</div>
-        <p>Oppong is a driven, well-organized student who is naturally born to lead. He takes on the mantle to teach his colleagues in the absence of a teacher. This came as no surprise when he was selected to play the leading role in developing a software for e-voting in the College.</p>
-        <div class="testimonial-author">
-            <div class="testimonial-avatar">EOA</div>
-            <div>
-                <div class="testimonial-name">Emmanuel Owusu Ansah</div>
-                <div class="testimonial-title">Senior Mathematics Teacher &amp; Form Master, Prempeh College</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="testimonial-full">
-        <div class="quote-mark">&ldquo;</div>
-        <p>Kwabena is a very bright, confident, sociable, open-minded and creative young man with high professional goals. He also has excellent interpersonal skills. Given that he is a determined person who is seeking to pursue his dreams of actively engaging in cybersecurity and AI to drive positive change and safety for the vulnerable in society.</p>
-        <div class="testimonial-author">
-            <div class="testimonial-avatar">SAY</div>
-            <div>
-                <div class="testimonial-name">Sally Anokye Yeboah</div>
-                <div class="testimonial-title">Executive Director, <a href="https://sfligvolunteers.org/" target="_blank" style="color:var(--gold);text-decoration:none;background:rgba(201,165,78,0.12);padding:0.1rem 0.45rem;border-radius:4px;border:1px solid rgba(201,165,78,0.3);transition:all 0.3s;" onmouseover="this.style.background='rgba(201,165,78,0.25)'" onmouseout="this.style.background='rgba(201,165,78,0.12)'">SFLIG &#8599;</a></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="testimonial-full">
-        <div class="quote-mark">&ldquo;</div>
-        <p>Master Adutwum is by far the best of his class mates and among the top students in the entire 2025 year batch. He is independent, takes good initiatives in decision-making, and functions well as a leader. Aside academics, he has proven to be a student of good moral values &mdash; respectful, humble and obedient.</p>
-        <div class="testimonial-author">
-            <div class="testimonial-avatar">KGD</div>
-            <div>
-                <div class="testimonial-name">Kwadwo Gyan Darkwa</div>
-                <div class="testimonial-title">Senior Physics Teacher, Prempeh College<br><a href="https://en.wikipedia.org/wiki/Ruth_Ama_Gyan-Darkwa" target="_blank" style="color:var(--gold);text-decoration:none;background:rgba(201,165,78,0.12);padding:0.1rem 0.45rem;border-radius:4px;border:1px solid rgba(201,165,78,0.3);transition:all 0.3s;display:inline-block;margin-top:0.25rem;" onmouseover="this.style.background='rgba(201,165,78,0.25)'" onmouseout="this.style.background='rgba(201,165,78,0.12)'">Father of Ghana&rsquo;s Youngest PhD Student &#8599;</a> <a href="https://www.linkedin.com/posts/kwabena-oppong-adutwum_prempehcollege-mentorship-education-ugcPost-7495875791164051456-WFP1/" target="_blank" style="color:var(--gold);text-decoration:none;background:rgba(201,165,78,0.12);padding:0.1rem 0.45rem;border-radius:4px;border:1px solid rgba(201,165,78,0.3);transition:all 0.3s;display:inline-block;margin-top:0.25rem;" onmouseover="this.style.background='rgba(201,165,78,0.25)'" onmouseout="this.style.background='rgba(201,165,78,0.12)'">Our Story on LinkedIn &#8599;</a></div>
-            </div>
-        </div>
-    </div>
+<div class="strip">
+  <div class="wrap">
+    <div class="c"><div class="l">Available from</div><div class="v">Summer <small>2027</small></div></div>
+    <div class="c"><div class="l">Based in</div><div class="v">Kumasi <small>&middot; GH</small></div></div>
+    <div class="c"><div class="l">Timezone</div><div class="v">GMT <small>+0</small></div></div>
+    <div class="c"><div class="l">Remote</div><div class="v cool">Open</div></div>
+    <div class="c"><div class="l">Relocation</div><div class="v cool">Open</div></div>
+    <div class="c"><div class="l">Reply time</div><div class="v num">&lt;24 <small>hrs</small></div></div>
+  </div>
 </div>
 
-<footer><p>// &copy; 2026 Kwabena Oppong Adutwum &mdash; built_with_passion( "Kumasi, Ghana" )</p></footer>
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="k">In&nbsp;[7]: <b>contact.open()</b></div>
+        <h2>Open to machine<br>learning <em>internships</em></h2>
+        <a class="fcta" href="contact.html">send a message &rarr;</a>
+      </div>
+      <div class="links">
+        <a href="mailto:oppongkwabena1777knust@gmail.com"><i>&rarr;</i> email</a><br>
+        <a href="https://github.com/Oppong-py" target="_blank" rel="noopener"><i>&rarr;</i> github.com/Oppong-py</a><br>
+        <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum" target="_blank" rel="noopener"><i>&rarr;</i> linkedin.com/in/kwabena-oppong-adutwum</a><br>
+        <a href="https://leetcode.com/u/Oppong-py" target="_blank" rel="noopener"><i>&rarr;</i> leetcode.com/u/Oppong-py</a><br>
+        <a href="assets/docs/resume.pdf" target="_blank" rel="noopener"><i>&rarr;</i> r&eacute;sum&eacute;.pdf</a>
+        <a href="assets/docs/resume.pdf" download title="Download r&eacute;sum&eacute;">&darr;</a> &nbsp;
+        <a href="assets/docs/cv.pdf" target="_blank" rel="noopener"><i>&rarr;</i> cv.pdf</a>
+        <a href="assets/docs/cv.pdf" download title="Download CV">&darr;</a>
+      </div>
+    </div>
+    <div class="colophon">SET IN SAIRA CONDENSED &middot; JETBRAINS MONO &middot; IBM PLEX SANS &nbsp;&middot;&nbsp; BUILT IN KUMASI, GHANA &middot; 2026</div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden><button class="lbx" type="button" aria-label="Close">&times;</button><img id="lbi" src="" alt=""></div>
 
 <script>
-(function(){
-    var t=document.getElementById('themeToggle'),moon=t.querySelector('.icon-moon'),sun=t.querySelector('.icon-sun');
-    var saved=localStorage.getItem('theme');
-    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');moon.style.display='none';sun.style.display='block';}
-    t.addEventListener('click',function(){
-        var dark=document.documentElement.getAttribute('data-theme')==='dark';
-        document.documentElement.setAttribute('data-theme',dark?'':'dark');
-        if(dark){moon.style.display='block';sun.style.display='none';}else{moon.style.display='none';sun.style.display='block';}
-        localStorage.setItem('theme',dark?'light':'dark');
+(function () {
+  var root = document.documentElement, btn = document.getElementById('themeToggle');
+  function save(v) { try { localStorage.setItem('koa-theme', v); } catch (e) {} }
+  /* the theme was already applied by the inline script in <head>, so there is
+     no flash of the wrong colours here — this only wires up the toggle. */
+  function label(){ btn.textContent = 'theme: ' + (root.getAttribute('data-theme') || 'light'); }
+  label();
+  btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); save(next); label();
+  });
+
+  /* lightbox — any element with data-lb opens its image full size */
+  var lb = document.getElementById('lb'), lbi = document.getElementById('lbi');
+  function close(){ lb.hidden = true; lbi.src = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('[data-lb]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      lbi.src = el.getAttribute('data-lb');
+      lbi.alt = el.getAttribute('alt') || '';
+      lb.hidden = false; document.body.style.overflow = 'hidden';
     });
+  });
+  /* show the confirmation banner when Formspree sends the visitor back */
+  if (location.search.indexOf('sent=1') !== -1) {
+    var s = document.getElementById('sent');
+    if (s) { s.hidden = false; s.scrollIntoView({block:'center'}); }
+  }
+
+  lb.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
 })();
 </script>
 </body>
