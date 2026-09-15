@@ -551,3 +551,68 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
   body{ background:#fff; color:#000; }
   .panels{ display:grid; grid-template-columns:repeat(2,1fr); }
 }
+
+/* ============================================================
+   PAGE TRANSITIONS
+
+   NOT the View Transitions API. That was tried and abandoned: it is
+   unsupported in Firefox, it silently does nothing whenever any
+   precondition is unmet, and "silently does nothing" is visually
+   identical to the bug it was meant to fix. Three rounds of tuning
+   an effect that may or may not have been running is two too many.
+
+   This is a plain opacity/transform transition on <body>, driven by
+   two classes that a script adds. It runs in every browser, on
+   http:// and file:// alike, whether or not anything is cached.
+
+   Safety: the hidden start state lives behind .js-fx, which only the
+   bootstrap script adds. With JS disabled the site is always visible,
+   and a 1200ms failsafe reveals the page even if the script dies.
+
+   Latency budget: only the DEPARTURE delays navigation. The arrival
+   costs nothing — the page is already there, it is just fading up. So
+   departure is kept short (.18s) and arrival stays generous (.45s):
+   all of the smoothness, almost none of the wait. Internal links are
+   also prefetched on hover, so the next document is usually cached.
+
+   TO RETUNE: .38s (arrival) and .12s (departure). Departure must stay
+   <= the 125ms setTimeout in the footer script.
+   ============================================================ */
+
+:root.js-fx body {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .38s cubic-bezier(.45, 0, .55, 1),
+              transform .44s cubic-bezier(.22, .7, .28, 1);
+  will-change: opacity, transform;
+}
+
+/* arrival */
+:root.js-fx.is-ready body {
+  opacity: 1;
+  transform: none;
+}
+
+/* departure — faster than the arrival, and upward, so the two read as
+   one movement continuing rather than as a bounce */
+:root.js-fx.is-leaving body {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity .12s cubic-bezier(.4, 0, 1, 1),
+              transform .12s cubic-bezier(.4, 0, 1, 1);
+}
+
+/* The sticky nav does not travel with the page — it is the one thing
+   that should feel fixed while the content moves under it. */
+:root.js-fx body > nav {
+  transition: opacity .3s cubic-bezier(.45, 0, .55, 1);
+}
+:root.js-fx body > nav { transform: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root body, :root.js-fx body {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

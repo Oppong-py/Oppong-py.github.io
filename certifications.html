@@ -5,16 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Credentials | Kwabena Oppong Adutwum</title>
 <meta name="description" content="Verified credentials and learning paths — Hedera, IPPF, WASSCE, and Andrew Ng's ML Specialization.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2310151B'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='%23EDAE3E'%3EKOA%3C/text%3E%3C/svg%3E">
-<meta property="og:title" content="Credentials | Kwabena Oppong Adutwum">
-<meta property="og:description" content="Verified credentials and learning paths — Hedera, IPPF, WASSCE, and Andrew Ng's ML Specialization.">
+<link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="canonical" href="https://oppong-py.github.io/certifications.html">
 <meta property="og:url" content="https://oppong-py.github.io/certifications.html">
+<meta property="og:title" content="Credentials | Kwabena Oppong Adutwum">
+<meta property="og:description" content="Verified credentials and learning paths — Hedera, IPPF, WASSCE, and Andrew Ng's ML Specialization.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://oppong-py.github.io/assets/images/og-preview.png">
 <meta name="twitter:card" content="summary_large_image">
-<script>(function(){try{var t=localStorage.getItem('koa-theme');
-if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script>(function(){var r=document.documentElement;
+try{var t=localStorage.getItem('koa-theme');
+if(t==='dark'||t==='light')r.setAttribute('data-theme',t);}catch(e){}
+/* Page-transition bootstrap. The hidden start state is applied ONLY once this
+   script has run, so with JS off the site is simply always visible. */
+try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  r.className+=' js-fx';
+  var show=function(){if(r.className.indexOf('is-ready')<0)r.className+=' is-ready';};
+  if(document.readyState!=='loading')requestAnimationFrame(show);
+  else document.addEventListener('DOMContentLoaded',function(){requestAnimationFrame(show);});
+  setTimeout(show,1200);                       /* failsafe: never stay blank */
+}}catch(e){r.className+=' is-ready';}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -142,6 +155,58 @@ if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)
       lb.hidden = false; document.body.style.overflow = 'hidden';
     });
   });
+  /* ---- page departure ----------------------------------------------
+     Deliberately NOT the View Transitions API. That API is unsupported in
+     Firefox and silently does nothing when anything is off, and "nothing"
+     looks exactly like the bug. This runs in every browser, on every
+     protocol, every time. */
+  if (root.className.indexOf('js-fx') !== -1) {
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (!a || !a.href) return;
+      if (a.target && a.target !== '_self') return;      /* new-tab links */
+      if (a.hasAttribute('download')) return;
+      var href = a.getAttribute('href') || '';
+      if (href.charAt(0) === '#' || /^(mailto|tel):/i.test(href)) return;
+      var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+      if (u.origin !== location.origin) return;          /* off-site */
+      if (/\.(pdf|png|jpe?g|gif|svg|mp4|zip)$/i.test(u.pathname)) return;
+      if (u.href === location.href) return;              /* same page */
+
+      e.preventDefault();
+      root.className += ' is-leaving';
+      var gone = false;
+      var go = function () { if (!gone) { gone = true; location.href = a.href; } };
+      setTimeout(go, 125);                               /* matches the CSS */
+    });
+  }
+  /* Warm the next page on hover. By the time a visitor has moved the
+     pointer onto a link and pressed it (~200ms at minimum), the document
+     is usually already fetched — so the exit fade is the only cost. */
+  if (root.className.indexOf('js-fx') !== -1) {
+    var warmed = {};
+    var warm = function (e) {
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (!a || !a.href || (a.target && a.target !== '_self')) return;
+      var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+      if (u.origin !== location.origin || warmed[u.href]) return;
+      if (!/\.html?$/i.test(u.pathname) && u.pathname !== '/') return;
+      warmed[u.href] = 1;
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = u.href;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('mouseover', warm, { passive: true });
+    document.addEventListener('focusin', warm);
+  }
+
+  /* coming back via the back button restores a bfcached page mid-fade */
+  window.addEventListener('pageshow', function () {
+    root.className = root.className.replace(/\s*is-leaving/g, '');
+  });
+
   /* show the confirmation banner when Formspree sends the visitor back */
   if (location.search.indexOf('sent=1') !== -1) {
     var s = document.getElementById('sent');
