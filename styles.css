@@ -589,7 +589,11 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
   transform: translateY(9px);
   transition: opacity .26s cubic-bezier(.45, 0, .55, 1),
               transform .3s cubic-bezier(.22, .7, .28, 1);
-  will-change: opacity, transform;
+  /* Deliberately no compositor hint on <body>. Hinting a transform here
+     makes body a containing block for position:fixed descendants, so .lb
+     (inset:0) sized itself to the document rather than the viewport and
+     the lightbox image landed ~1,550px below the fold. The hint bought
+     nothing for a two-property transition; correctness beats it. */
 }
 
 /* arrival */
@@ -613,6 +617,17 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
   transition: opacity .3s cubic-bezier(.45, 0, .55, 1);
 }
 :root.js-fx body > nav { transform: none !important; }
+
+/* Belt and braces for the lightbox. ANY transform, filter or compositor
+   hint on <body> makes it the containing block for position:fixed
+   descendants — which sizes .lb to the document instead of the viewport
+   and pushes the image below the fold. At rest body's transform is
+   already none, but this guarantees it for as long as the overlay is
+   open, so a future tweak to the page transition cannot break it again. */
+:root body:has(.lb:not([hidden])) {
+  transform: none !important;
+  filter: none !important;
+}
 
 @media (prefers-reduced-motion: reduce) {
   :root body, :root.js-fx body {
