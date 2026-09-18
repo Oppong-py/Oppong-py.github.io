@@ -40,49 +40,60 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     <a href="index.html" class="id">KOA//</a>
     <div class="navlinks">
       <a href="index.html">notebook</a>
-      <a href="about.html">df.<b>profile</b></a>
-      <a href="projects.html">df.<b>projects</b></a>
-      <a href="achievements.html">df.<b>record</b></a>
-      <a href="certifications.html">df.<b>certs</b></a>
-      <a href="testimonials.html">df.<b>refs</b></a>
-      <a href="writing.html" class="on">nb.<b>writing</b></a>
+      <a href="about.html">about</a>
+      <a href="projects.html">projects</a>
+      <a href="achievements.html">awards</a>
+      <a href="certifications.html">certificates</a>
+      <a href="testimonials.html">references</a>
+      <a href="writing.html" class="on">writing</a>
     </div>
-    <a href="contact.html" class="tog ctc">contact.open()</a>
+    <a href="contact.html" class="tog ctc">contact</a>
     <button class="tog" id="themeToggle" type="button" aria-label="Switch colour theme">theme: light</button>
   </div>
 </nav>
 <div class="wrap phead" id="main">
   <a class="back" href="index.html">&larr; back to notebook</a>
-  <h1>nb.<em>writing</em></h1>
-  <p class="sub">Notes from things that broke and what fixed them. Written while the detail was still fresh, not reconstructed afterwards.</p>
+  <h1>Things I&rsquo;ve <em>written</em></h1>
+  <p class="sub">Notes on things that broke and what fixed them, written while the detail was still fresh rather than reconstructed later.</p>
 </div>
 
 <section class="wrap" style="padding-top:26px">
-  <div class="cell"><span class="in">In&nbsp;[1]:</span><h2>nb.writing.list()</h2><span class="rule"></span></div>
-  <div class="out">Out[1]: <b>2</b> notebooks &nbsp;&middot;&nbsp; control theory, mobile debugging &nbsp;&middot;&nbsp; 2 more queued</div>
+  <div class="cell"><span class="in">In&nbsp;[1]:</span><h2>Published</h2><span class="rule"></span></div>
+  <div class="out">Four pieces &nbsp;&middot;&nbsp; two from the Ghana Data Science hackathon, one on control theory, one on mobile debugging</div>
 
   <div class="wr">
+    <a class="wi big" href="blog-the-scoring-was-lying.html">
+      <div class="m">SEP 2026 &middot; 8 MIN &middot; MACHINE LEARNING</div>
+      <h3>The scoring was lying to us</h3>
+      <p>Four days at the Ghana Data Science Regional Hackathon. Our Madrid score looked good and was suspiciously steady &mdash; it turned out 82.4% of our test pixels were touching a pixel the model had already trained on. Fixing that cost 0.047 and was the most useful thing we did.</p>
+      <span class="go">read it &rarr;</span>
+    </a>
+    <a class="wi big" href="blog-transfer-learning-cost.html">
+      <div class="m">SEP 2026 &middot; 9 MIN &middot; MACHINE LEARNING</div>
+      <h3>What transfer learning actually costs</h3>
+      <p>Moving the same model from Madrid to Amsterdam. Picking by the best home score chose the worst travelling model; keeping the source model&rsquo;s trees made it worse; adding source data made it worse again. Three assumptions, all measured, all wrong.</p>
+      <span class="go">read it &rarr;</span>
+    </a>
     <a class="wi big" href="blog-pid-to-rl.html">
       <div class="m">JUL 2026 &middot; 4 MIN &middot; CONTROL THEORY</div>
       <h3>From PID Control to Reinforcement Learning</h3>
       <p>Tuning Kp, Ki and Kd on a line-following robot is the same shape of problem as tuning a learning rate &mdash; too much gain and it oscillates, too little and it never converges. What a championship robot taught me about optimisation before I knew the word for it.</p>
-      <span class="go">open_notebook() &rarr;</span>
+      <span class="go">read it &rarr;</span>
     </a>
     <a class="wi big" href="blog-arethos-rn.html">
       <div class="m">JUL 2026 &middot; 6 MIN &middot; MOBILE ENGINEERING</div>
       <h3>Three Bugs That Taught Me More Than Any Tutorial</h3>
       <p>Why React Native&rsquo;s zIndex is a lie, how a stale closure quietly broke my sleep slider, and what nine haptic iterations taught me about the Android vibration API &mdash; with the fix for each.</p>
-      <span class="go">open_notebook() &rarr;</span>
+      <span class="go">read it &rarr;</span>
     </a>
   </div>
 </section>
 
 <section class="wrap" style="padding-top:0">
-  <div class="cell"><span class="in">In&nbsp;[2]:</span><h2>nb.writing.queue()</h2><span class="rule"></span></div>
-  <div class="out">Out[2]: <b>2</b> drafts &nbsp;&middot;&nbsp; not published yet</div>
+  <div class="cell"><span class="in">In&nbsp;[2]:</span><h2>Still drafting</h2><span class="rule"></span></div>
+  <div class="out">One draft, not finished yet</div>
   <div class="queue">
-    <div class="qi"><div class="c">draft_01.ipynb</div><div class="t">The hackathon write-up</div><div class="d">Building-age classification from Landsat imagery &mdash; what worked, what the label budget cost, and where the baseline beat me.</div></div>
-    <div class="qi"><div class="c">draft_02.ipynb</div><div class="t">What transfer learning actually costs</div><div class="d">Domain shift between two cities, measured rather than assumed.</div></div>
+    <div class="qi"><div class="c">in progress</div><div class="t">Writing logistic regression from scratch</div><div class="d">No scikit-learn, just NumPy and the maths, so that I actually understand what the library has been doing for me.</div></div>
   </div>
 </section>
 
@@ -101,7 +112,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   <div class="wrap">
     <div class="top">
       <div>
-        <div class="k">In&nbsp;[7]: <b>contact.open()</b></div>
+        <div class="k">Get in touch</div>
         <h2>Open to machine<br>learning <em>internships</em></h2>
         <a class="fcta" href="contact.html">send a message &rarr;</a>
       </div>

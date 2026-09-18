@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/currently-GDS%20Hackathon%202026-935D0D?style=flat-square" alt="Currently: GDS Hackathon 2026">
+  <img src="https://img.shields.io/badge/latest-Ghana%20Data%20Science%20Hackathon-935D0D?style=flat-square" alt="Latest: Ghana Data Science Hackathon">
   <img src="https://img.shields.io/badge/learning-applied%20ML-0D6273?style=flat-square" alt="Learning: applied ML">
   <img src="https://img.shields.io/badge/open%20to-collaboration-4A5568?style=flat-square" alt="Open to collaboration">
   <img src="https://komarev.com/ghpvc/?username=Oppong-py&label=views&color=935D0D&style=flat-square" alt="Profile views">
@@ -63,11 +63,13 @@ robot holding a line at speed, moved through network security, and points now at
 
 | | Project | What it is |
 |:--:|---|---|
-| 🛰️ | **Ghana Data Science Regional Hackathon 2026** | Building-age classification from 40 years of Landsat imagery. Four classes, macro F1, transfer from Madrid to Amsterdam on as few as 5 labelled examples per class. |
-| 🧠 | **[ml-specialization-coursera](https://github.com/Oppong-py/ml-specialization-coursera)** | Andrew Ng's ML Specialization, worked through with notes published per week instead of kept private. |
+| 🛰️ | **[gds-hackathon-2026-building-age](https://github.com/Oppong-py/gds-hackathon-2026-building-age)** | Building-age classification from 40 years of Landsat imagery, Madrid → Amsterdam. We found the evaluation we were handed was inflated by 0.047 macro-F1. Runs without the competition data. |
+| 🧠 | **[ml-specialization-coursera](https://github.com/Oppong-py/ml-specialization-coursera)** | Andrew Ng's ML Specialization — Course 1 in progress, notes published per week instead of kept private. |
 | ⚡ | **[solar-water-dispenser](https://github.com/Oppong-py/solar-water-dispenser)** | Off-grid Arduino dispenser — dual ultrasonic sensors, solenoid valve control, debounce logic to kill false triggers. |
 | 🧮 | **[leetcode-solutions](https://github.com/Oppong-py/leetcode-solutions)** | Worked solutions with the failed attempts left in, because those are the part worth reading. |
 | 🌐 | **[Portfolio](https://oppong-py.github.io)** | Projects, write-ups, and what I'm building next. |
+
+**Recent writing** — [The scoring was lying to us](https://oppong-py.github.io/blog-the-scoring-was-lying.html) · [What transfer learning actually costs](https://oppong-py.github.io/blog-transfer-learning-cost.html)
 
 **Next up** — a student performance prediction model: logistic regression from scratch, no scikit-learn.
 

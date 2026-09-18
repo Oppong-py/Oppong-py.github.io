@@ -40,30 +40,50 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     <a href="index.html" class="id">KOA//</a>
     <div class="navlinks">
       <a href="index.html">notebook</a>
-      <a href="about.html">df.<b>profile</b></a>
-      <a href="projects.html" class="on">df.<b>projects</b></a>
-      <a href="achievements.html">df.<b>record</b></a>
-      <a href="certifications.html">df.<b>certs</b></a>
-      <a href="testimonials.html">df.<b>refs</b></a>
-      <a href="writing.html">nb.<b>writing</b></a>
+      <a href="about.html">about</a>
+      <a href="projects.html" class="on">projects</a>
+      <a href="achievements.html">awards</a>
+      <a href="certifications.html">certificates</a>
+      <a href="testimonials.html">references</a>
+      <a href="writing.html">writing</a>
     </div>
-    <a href="contact.html" class="tog ctc">contact.open()</a>
+    <a href="contact.html" class="tog ctc">contact</a>
     <button class="tog" id="themeToggle" type="button" aria-label="Switch colour theme">theme: light</button>
   </div>
 </nav>
 <div class="wrap phead" id="main">
   <a class="back" href="index.html">&larr; back to notebook</a>
-  <h1>df.<em>projects</em></h1>
-  <p class="sub">Everything built so far, most recent first, and the machine learning work queued next. Five shipped systems, four on the roadmap.</p>
+  <h1>My <em>projects</em></h1>
+  <p class="sub">Everything I&rsquo;ve built so far, newest first, and the machine learning work I have planned next. Six finished, four to come.</p>
 </div>
 
 <section class="wrap" style="padding-top:26px">
-  <div class="cell"><span class="in">In&nbsp;[1]:</span><h2>df.projects.sort_values("year", ascending=False)</h2><span class="rule"></span></div>
-  <div class="out">Out[1]: <b>(9, 6)</b> &nbsp;&middot;&nbsp; 5 shipped, 4 planned &nbsp;&middot;&nbsp; columns: title, category, year, stack, outcome, links</div>
+  <div class="cell"><span class="in">In&nbsp;[1]:</span><h2>Everything I&rsquo;ve built</h2><span class="rule"></span></div>
+  <div class="out">Ten projects &nbsp;&middot;&nbsp; six finished, four still to come &nbsp;&middot;&nbsp; newest first</div>
 
   <div class="plist">
     <article class="prow has-media">
-      <div class="idx"><span>index 01 &middot; DESIGN</span><b>2026</b></div>
+      <div class="idx"><span>01 &middot; MACHINE LEARNING</span><b>2026</b></div>
+      <div class="pfig"><img class="media contain" src="assets/images/gds-cv-inversion.png" alt="Slope chart: four feature sets rank one way on Madrid and the exact reverse on Amsterdam" loading="lazy" decoding="async" width="1836" height="986" data-lb="assets/images/gds-cv-inversion.png"><span class="mcap">click to enlarge</span></div>
+      <div class="body">
+        <h3>Building Age Classification from Satellite Imagery</h3>
+        <span class="tag">GHANA DATA SCIENCE REGIONAL HACKATHON 2026 &middot; KNUST &middot; TEAM OF FOUR</span>
+        <p>Four days at KNUST with a team of four. The task: work out roughly when a building was put up, using nothing but 40 years of satellite readings of the ground it stands on. Train on Madrid, then make it work in Amsterdam with as few as five labelled examples per era.</p>
+        <p>The chart is the finding. We tested five sets of input features; on Madrid they rank one way and on Amsterdam in exactly the opposite order. Choosing a model the way every course teaches &mdash; best home score wins &mdash; picks the wrong one. We also caught the scoring we&rsquo;d been handed inflating every result by 0.047, because a satellite pixel is smaller than a building and the standard split was putting half a roof in training and half in the test set.</p>
+        <p>We didn&rsquo;t place. Two write-ups go through it properly: <a href="blog-the-scoring-was-lying.html">the leak we found in our own evaluation</a>, and <a href="blog-transfer-learning-cost.html">what transfer learning actually costs</a>.</p>
+        <div class="spec">
+          <div class="r"><span class="k">Task</span><span class="v">4-class, macro-F1, Madrid &rarr; Amsterdam</span></div>
+          <div class="r"><span class="k">Data</span><span class="v">102,255 pixels &middot; 40 years of Landsat</span></div>
+          <div class="r"><span class="k">Madrid, honest CV</span><span class="v">0.5656 &plusmn; 0.0227</span></div>
+          <div class="r"><span class="k">Amsterdam, 25 labels/class</span><span class="v">0.6220 &plusmn; 0.0105</span></div>
+          <div class="r"><span class="k">Team</span><span class="v">4 people</span></div>
+        </div>
+        <div class="links"><a href="https://github.com/Oppong-py/gds-hackathon-2026-building-age" target=_blank rel=noopener><span>the code &rarr;</span></a><a href="blog-the-scoring-was-lying.html"><span>write-up 1 &rarr;</span></a><a href="blog-transfer-learning-cost.html"><span>write-up 2 &rarr;</span></a></div>
+      </div>
+    </article>
+
+    <article class="prow has-media">
+      <div class="idx"><span>02 &middot; DESIGN</span><b>2026</b></div>
       <div class="pfig"><img class="media contain" src="assets/images/codefest-figma.webp" alt="The ACES KNUST redesign in Figma" loading="lazy" decoding="async" width="1400" height="788" data-lb="assets/images/codefest-figma.webp"><span class="mcap">click to enlarge</span></div>
       <div class="body">
         <h3>ACES KNUST Website Redesign</h3>
@@ -76,12 +96,12 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
           <div class="r"><span class="k">Duration</span><span class="v">2 weeks</span></div>
           <div class="r"><span class="k">Result</span><span class="v">2nd place</span></div>
         </div>
-        <div class="links"><a href="assets/docs/codefest-2026-certificate.pdf"><span>certificate() &rarr;</span></a><a href="assets/images/ACES%20medal.jpg"><span>medal() &rarr;</span></a><a href="https://www.figma.com/proto/uZCkzk7lSsNmTTUwJMdSu9/Untitled?node-id=8-85&t=7QIixyMz9WWijsW7-1&starting-point-node-id=8%3A85" target=_blank rel=noopener><span>prototype() &rarr;</span></a></div>
+        <div class="links"><a href="assets/docs/codefest-2026-certificate.pdf"><span>certificate &rarr;</span></a><a href="assets/images/ACES%20medal.jpg"><span>photo of the medal &rarr;</span></a><a href="https://www.figma.com/proto/uZCkzk7lSsNmTTUwJMdSu9/Untitled?node-id=8-85&t=7QIixyMz9WWijsW7-1&starting-point-node-id=8%3A85" target=_blank rel=noopener><span>open the prototype &rarr;</span></a></div>
       </div>
     </article>
 
     <article class="prow">
-      <div class="idx"><span>index 02 &middot; MOBILE</span><b>2026</b></div>
+      <div class="idx"><span>03 &middot; MOBILE</span><b>2026</b></div>
       <div class="body">
         <h3>Arethos &mdash; Mental Wellness App</h3>
         <span class="tag">CO-FOUNDER &middot; 3-PERSON TEAM</span>
@@ -94,12 +114,12 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
           <div class="r"><span class="k">Inference</span><span class="v">Groq API</span></div>
           <div class="r"><span class="k">Stack</span><span class="v">React Native &middot; Expo SDK 54</span></div>
         </div>
-        <div class="links"><a href="blog-arethos-rn.html"><span>read notes() &rarr;</span></a></div>
+        <div class="links"><a href="blog-arethos-rn.html"><span>read the write-up &rarr;</span></a></div>
       </div>
     </article>
 
     <article class="prow has-media">
-      <div class="idx"><span>index 03 &middot; ROBOTICS</span><b>2025</b></div>
+      <div class="idx"><span>04 &middot; ROBOTICS</span><b>2025</b></div>
       <div class="pfig"><video class="media" src="assets/videos/pid-bot-video.mp4" poster="assets/images/pid-bot-poster.webp" controls muted playsinline preload="none" aria-label="The line-following robot running its competition course"></video></div>
       <div class="body">
         <h3>Autonomous Line-Following Robot</h3>
@@ -112,12 +132,12 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
           <div class="r"><span class="k">Platform</span><span class="v">LEGO MINDSTORMS EV3</span></div>
           <div class="r"><span class="k">Stack</span><span class="v">Sensors &middot; Motor control</span></div>
         </div>
-        <div class="links"><a href="blog-pid-to-rl.html"><span>read notes() &rarr;</span></a></div>
+        <div class="links"><a href="blog-pid-to-rl.html"><span>read the write-up &rarr;</span></a></div>
       </div>
     </article>
 
     <article class="prow has-media">
-      <div class="idx"><span>index 04 &middot; EMBEDDED</span><b>2025</b></div>
+      <div class="idx"><span>05 &middot; EMBEDDED</span><b>2025</b></div>
       <div class="pfig"><img class="media contain" src="assets/images/solar_dispensor.png" alt="The solar-powered water dispenser firmware and build" loading="lazy" data-lb="assets/images/solar_dispensor.png"><span class="mcap">click to enlarge</span></div>
       <div class="body">
         <h3>Solar-Powered Water Dispenser</h3>
@@ -130,12 +150,12 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
           <div class="r"><span class="k">Power</span><span class="v">Solar, off-grid</span></div>
           <div class="r"><span class="k">Stack</span><span class="v">Arduino &middot; C++ &middot; Solenoid</span></div>
         </div>
-        <div class="links"><a href="https://github.com/Oppong-py/solar-water-dispenser" target=_blank rel=noopener><span>source() &rarr;</span></a></div>
+        <div class="links"><a href="https://github.com/Oppong-py/solar-water-dispenser" target=_blank rel=noopener><span>source code &rarr;</span></a></div>
       </div>
     </article>
 
     <article class="prow">
-      <div class="idx"><span>index 05 &middot; FULL-STACK</span><b>2025</b></div>
+      <div class="idx"><span>06 &middot; FULL-STACK</span><b>2025</b></div>
       <div class="body">
         <h3>Class Attendance Monitoring System</h3>
         <span class="tag">PROTOTYPE &middot; 50 STUDENTS</span>
@@ -154,11 +174,11 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
 </section>
 
 <section class="wrap" style="padding-top:0">
-  <div class="cell"><span class="in">In&nbsp;[2]:</span><h2>df.projects.query("status == 'planned'")</h2><span class="rule"></span></div>
-  <div class="out">Out[2]: <b>4 rows</b> &nbsp;&middot;&nbsp; queued machine learning work &mdash; in progress or not yet started</div>
+  <div class="cell"><span class="in">In&nbsp;[2]:</span><h2>Machine learning work I have planned</h2><span class="rule"></span></div>
+  <div class="out">Four projects &mdash; some started, some not yet</div>
   <div class="panels two">
     <article class="pan plan">
-      <div class="idx"><span>index 06 &middot; PREDICTIVE ML</span><b>planned</b></div>
+      <div class="idx"><span>07 &middot; PREDICTIVE ML</span><b>planned</b></div>
       <div class="body">
         <h3>Student Performance Prediction</h3>
         <span class="tag plan">UP NEXT &middot; FROM SCRATCH</span>
@@ -173,7 +193,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     </article>
 
     <article class="pan plan">
-      <div class="idx"><span>index 07 &middot; COMPUTER VISION</span><b>planned</b></div>
+      <div class="idx"><span>08 &middot; COMPUTER VISION</span><b>planned</b></div>
       <div class="body">
         <h3>Crop Disease Detector</h3>
         <span class="tag plan">ROADMAP &middot; APPLIED CV</span>
@@ -188,7 +208,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     </article>
 
     <article class="pan plan">
-      <div class="idx"><span>index 08 &middot; NLP / LLM</span><b>planned</b></div>
+      <div class="idx"><span>09 &middot; NLP / LLM</span><b>planned</b></div>
       <div class="body">
         <h3>AI Study Assistant</h3>
         <span class="tag plan">ROADMAP &middot; RAG</span>
@@ -203,7 +223,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     </article>
 
     <article class="pan plan">
-      <div class="idx"><span>index 09 &middot; TIME SERIES</span><b>planned</b></div>
+      <div class="idx"><span>10 &middot; TIME SERIES</span><b>planned</b></div>
       <div class="body">
         <h3>Energy Demand Forecasting</h3>
         <span class="tag plan">ROADMAP &middot; REGRESSION</span>
@@ -235,7 +255,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   <div class="wrap">
     <div class="top">
       <div>
-        <div class="k">In&nbsp;[7]: <b>contact.open()</b></div>
+        <div class="k">Get in touch</div>
         <h2>Open to machine<br>learning <em>internships</em></h2>
         <a class="fcta" href="contact.html">send a message &rarr;</a>
       </div>

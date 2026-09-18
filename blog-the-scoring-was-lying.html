@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The scoring was lying to us | Kwabena Oppong Adutwum</title>
+<meta name="description" content="Four days at the Ghana Data Science Regional Hackathon 2026, and the first useful thing we did was find out that the number we were trying to improve wasn&rsquo;t real.">
+<link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="canonical" href="https://oppong-py.github.io/blog-the-scoring-was-lying.html">
+<meta property="og:url" content="https://oppong-py.github.io/blog-the-scoring-was-lying.html">
+<meta property="og:title" content="The scoring was lying to us | Kwabena Oppong Adutwum">
+<meta property="og:description" content="Four days at the Ghana Data Science Regional Hackathon 2026, and the first useful thing we did was find out that the number we were trying to improve wasn&rsquo;t real.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://oppong-py.github.io/assets/images/og-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<script>(function(){var r=document.documentElement;
+try{var t=localStorage.getItem('koa-theme');
+if(t==='dark'||t==='light')r.setAttribute('data-theme',t);}catch(e){}
+/* Page-transition bootstrap. The hidden start state is applied ONLY once this
+   script has run, so with JS off the site is simply always visible. */
+try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  r.className+=' js-fx';
+  var show=function(){if(r.className.indexOf('is-ready')<0)r.className+=' is-ready';};
+  if(document.readyState!=='loading')requestAnimationFrame(show);
+  else document.addEventListener('DOMContentLoaded',function(){requestAnimationFrame(show);});
+  setTimeout(show,1200);                       /* failsafe: never stay blank */
+}}catch(e){r.className+=' is-ready';}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<nav aria-label="Main">
+  <div class="wrap">
+    <a href="index.html" class="id">KOA//</a>
+    <div class="navlinks">
+      <a href="index.html">notebook</a>
+      <a href="about.html">about</a>
+      <a href="projects.html">projects</a>
+      <a href="achievements.html">awards</a>
+      <a href="certifications.html">certificates</a>
+      <a href="testimonials.html">references</a>
+      <a href="writing.html" class="on">writing</a>
+    </div>
+    <a href="contact.html" class="tog ctc">contact</a>
+    <button class="tog" id="themeToggle" type="button" aria-label="Switch colour theme">theme: light</button>
+  </div>
+</nav>
+
+<article class="article" id="main">
+  <a class="back" href="writing.html" style="font-family:var(--m);font-size:11.5px;color:var(--dim);text-decoration:none">&larr; back to writing</a>
+  <div class="meta" style="margin-top:18px">SEP 2026 &middot; 8 MIN READ &middot; MACHINE LEARNING</div>
+  <h1>The scoring was lying to us</h1>
+  <p class="standfirst">Four days at the Ghana Data Science Regional Hackathon 2026. The first useful thing we did was discover that the number we were trying to improve wasn&rsquo;t real.</p>
+
+  <p>In September I spent four days at KNUST on the Ghana Data Science Regional Hackathon 2026, run by the AstroXMat Research Laboratory in the Physics department with Hack4Dev. Teams of four, assigned by the organisers. I was a first-year, and I was the least experienced person in the room by a wide margin.</p>
+
+  <p>The problem was this. Take a patch of ground about the size of a tennis court. You have a satellite reading of it once or twice a year going back to 1984 &mdash; forty years of how bright that patch was in six different colours, including two your eye can&rsquo;t see. From that alone, work out roughly when the building sitting on it was put up. Four eras: pre-1960, 1960&ndash;1984, 1984&ndash;2004, 2004&ndash;2024.</p>
+
+  <p>Then the hard part. Train the model on Madrid, and make it work in Amsterdam, where you&rsquo;re allowed as few as five labelled examples per era to help it adjust.</p>
+
+  <h2>Why this is even possible</h2>
+
+  <p>It sounds like magic and it isn&rsquo;t. A building changes the ground under it permanently. Before it exists you&rsquo;re looking at soil or vegetation. During construction you get bare earth. Afterwards you get concrete and roofing, which reflect light very differently and, crucially, stay roughly the same year after year.</p>
+
+  <p>So a patch built in 1995 has a signature: green and variable until the early nineties, a disturbed few years, then flat and bright ever since. A patch built in 1940 is just flat and bright the whole way through, because the building was already old when the satellites went up. The shape of the forty-year sequence carries the age, even though no single year tells you anything.</p>
+
+  <p>That&rsquo;s what the feature engineering does. You take the 40-year sequence for each colour band and collapse it into a handful of summary numbers &mdash; the average, how much it wobbled, the average over the early years, the average over the late years, and the wobble in each of those. Six bands times six statistics is 36 numbers per patch. That&rsquo;s the whole input.</p>
+
+  <h2>Day one: a number that looked good</h2>
+
+  <p>We trained a Random Forest on Madrid and cross-validated it the standard way &mdash; shuffle the data, hold out a fifth, train on the rest, repeat five times. Macro-F1 came back at <b>0.6128</b>, and it was suspiciously steady: a standard deviation of 0.0040 across twenty-five folds.</p>
+
+  <p>That steadiness is what bothered me. Real cross-validation folds disagree with each other. Ours barely moved. When a model gives you almost the same score no matter which fifth of the data you hide, it usually means the fifth you hid wasn&rsquo;t really hidden.</p>
+
+  <h2>The thing nobody tells you about satellite pixels</h2>
+
+  <p>Here is the problem, and it took us an embarrassing while to see it.</p>
+
+  <p>A Landsat pixel is 30 metres on a side. A building is often bigger than that, so one building covers several pixels. Those pixels are not independent observations &mdash; they&rsquo;re the same roof, the same construction year, the same materials, photographed in several squares.</p>
+
+  <p>Shuffle randomly and you put half a roof in the training set and the other half in the test set. The model doesn&rsquo;t have to learn anything about how buildings age. It just has to recognise <i>this particular roof</i>, which it has already seen.</p>
+
+  <p>So we measured it, rather than arguing about it. For every held-out pixel we found the distance to the nearest pixel the model had trained on.</p>
+
+  <pre><b># how close is each test pixel to something the model already saw?</b>
+tree = cKDTree(train_coordinates)
+distance, _ = tree.query(test_coordinates)
+
+print((distance &lt;= 1).mean())   # fraction within one pixel</pre>
+
+  <p><b>82.4%</b> of our test pixels were within a single pixel of a training pixel. The median distance was 1.00 &mdash; literally touching. We hadn&rsquo;t built a test set. We&rsquo;d built a slightly blurry photocopy of the training set.</p>
+
+  <h2>Two attempts at a fix</h2>
+
+  <p>The first fix was obvious: stop splitting by pixel and start splitting by geography. Carve Madrid into blocks 30 pixels across and assign whole blocks to train or test. Whole neighbourhoods go one way or the other.</p>
+
+  <p>Better, and not enough. Adjacency dropped from 82.4% to <b>14.8%</b>. The pixels along the seam between two blocks are still neighbours, and there are a lot of seams.</p>
+
+  <p>The second fix was to add a buffer. Keep the blocks, but throw away every training pixel within five pixels of a test block &mdash; a strip of no-man&rsquo;s-land around each held-out region. That cost us 7,000 training pixels out of roughly 60,000, which felt expensive at the time.</p>
+
+  <p>Adjacency went to <b>0.0%</b>. Not within one pixel, not within three, not within five. Median distance from a test pixel to the nearest training pixel: 10.77.</p>
+
+  <p>Then we re-scored. Madrid came back at <b>0.5656</b>, with a standard deviation of 0.0227 &mdash; five times the spread we&rsquo;d had before, which is what honest folds look like.</p>
+
+  <p>We had not made the model worse. We had stopped flattering it. Every score anyone had quoted that week, ours included, was about <b>0.047 too high</b>.</p>
+
+  <h2>What that bought us</h2>
+
+  <p>Losing 0.047 off your headline number on day two of a four-day competition does not feel like progress. It was the most valuable thing we did.</p>
+
+  <p>Every decision after that point &mdash; which features to keep, which model to use, whether an idea was working &mdash; was made against a number that meant something. Teams working from the inflated score were comparing options using a measurement that mostly reflected how well each option memorised roofs. You cannot tune your way out of that. You&rsquo;ll pick whichever option memorises best.</p>
+
+  <p>One detail worth noting, because it shows this wasn&rsquo;t leakage everywhere: the Amsterdam side was never affected. Because the labelled Amsterdam examples are drawn as a scattered handful across the whole city, the median distance from a test pixel to a labelled one was 17.46 pixels, and only 0.5% were touching. The leak was specific to how Madrid was being split, which is exactly why you have to measure it rather than assume it.</p>
+
+  <h2>The part I&rsquo;m least proud of</h2>
+
+  <p>After the deadline, going back through the notebook to write this, I found something.</p>
+
+  <p>The experiment where we compared seven different transfer methods had been run on the full 61-column feature matrix. The model we actually packaged and submitted uses 36 columns. Same notebook, same afternoon, two different feature spaces &mdash; and I hadn&rsquo;t noticed.</p>
+
+  <p>It doesn&rsquo;t change which method we picked; the winner wins in both. But it means the specific numbers from that comparison can&rsquo;t be reproduced by anyone who downloads our submitted model and runs it. For a competition where the whole point was measuring things honestly, that&rsquo;s a bad way to finish.</p>
+
+  <p>The public repository reports the 36-feature results instead, keeps the 61-feature ones under a heading that says exactly what they are, and has a file mapping every quoted figure to the notebook cell that printed it. If a number isn&rsquo;t in that file, it isn&rsquo;t in the write-up.</p>
+
+  <p>We didn&rsquo;t place. I&rsquo;d do it again.</p>
+
+  <h2>What I actually took away</h2>
+
+  <p>Before you try to improve a number, find out whether the number is real. I&rsquo;d read that sentence in a dozen places and it meant nothing to me until I watched 0.6128 turn into 0.5656 and understood why.</p>
+
+  <p>The second thing is smaller and I keep coming back to it. The fix wasn&rsquo;t clever. It was one spatial index and a distance check &mdash; maybe fifteen lines. What was hard was being suspicious of a good result in the first place, on day two, with the clock running and a score that everyone would have accepted.</p>
+
+  <p><a href="https://github.com/Oppong-py/gds-hackathon-2026-building-age" target="_blank" rel="noopener">The code, the numbers, and what went wrong &rarr;</a> &nbsp;&middot;&nbsp; Built with a team of four. The competition data isn&rsquo;t mine to publish, so the repository ships a generated stand-in that reproduces the same structure and runs in about 80 seconds.</p>
+
+  <p style="font-size:14px;color:var(--dim)">AI assistance was used to design and debug these experiments. The decisions about what to measure and what to throw away were ours, and every figure here is what the code printed.</p>
+
+  <div class="tags"><span>machine-learning</span><span>data-leakage</span><span>cross-validation</span><span>remote-sensing</span><span>ghana-data-science-hackathon-2026</span></div>
+</article>
+
+
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="k">Get in touch</div>
+        <h2>Open to machine<br>learning <em>internships</em></h2>
+        <a class="fcta" href="contact.html">send a message &rarr;</a>
+      </div>
+      <div class="links">
+        <a href="mailto:oppongkwabena1777knust@gmail.com"><i>&rarr;</i> email</a><br>
+        <a href="https://github.com/Oppong-py" target="_blank" rel="noopener"><i>&rarr;</i> github.com/Oppong-py</a><br>
+        <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum" target="_blank" rel="noopener"><i>&rarr;</i> linkedin.com/in/kwabena-oppong-adutwum</a><br>
+        <a href="https://leetcode.com/u/Oppong-py" target="_blank" rel="noopener"><i>&rarr;</i> leetcode.com/u/Oppong-py</a><br>
+        <a href="assets/docs/resume.pdf" target="_blank" rel="noopener"><i>&rarr;</i> r&eacute;sum&eacute;.pdf</a>
+        <a href="assets/docs/resume.pdf" download title="Download r&eacute;sum&eacute;">&darr;</a> &nbsp;
+        <a href="assets/docs/cv.pdf" target="_blank" rel="noopener"><i>&rarr;</i> cv.pdf</a>
+        <a href="assets/docs/cv.pdf" download title="Download CV">&darr;</a>
+      </div>
+    </div>
+    <div class="colophon">SET IN SAIRA CONDENSED &middot; JETBRAINS MONO &middot; IBM PLEX SANS &nbsp;&middot;&nbsp; BUILT IN KUMASI, GHANA &middot; 2026</div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden><button class="lbx" type="button" aria-label="Close">&times;</button><img id="lbi" src="" alt=""></div>
+
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById('themeToggle');
+  function save(v) { try { localStorage.setItem('koa-theme', v); } catch (e) {} }
+  /* the theme was already applied by the inline script in <head>, so there is
+     no flash of the wrong colours here — this only wires up the toggle. */
+  function label(){ btn.textContent = 'theme: ' + (root.getAttribute('data-theme') || 'light'); }
+  label();
+  btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); save(next); label();
+  });
+
+  /* lightbox — any element with data-lb opens its image full size */
+  var lb = document.getElementById('lb'), lbi = document.getElementById('lbi');
+  function close(){ lb.hidden = true; lbi.src = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('[data-lb]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      lbi.src = el.getAttribute('data-lb');
+      lbi.alt = el.getAttribute('alt') || '';
+      lb.hidden = false; document.body.style.overflow = 'hidden';
+    });
+  });
+  /* ---- page departure ----------------------------------------------
+     Deliberately NOT the View Transitions API. That API is unsupported in
+     Firefox and silently does nothing when anything is off, and "nothing"
+     looks exactly like the bug. This runs in every browser, on every
+     protocol, every time. */
+  if (root.className.indexOf('js-fx') !== -1) {
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (!a || !a.href) return;
+      if (a.target && a.target !== '_self') return;      /* new-tab links */
+      if (a.hasAttribute('download')) return;
+      var href = a.getAttribute('href') || '';
+      if (href.charAt(0) === '#' || /^(mailto|tel):/i.test(href)) return;
+      var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+      if (u.origin !== location.origin) return;          /* off-site */
+      if (/\.(pdf|png|jpe?g|gif|svg|mp4|zip)$/i.test(u.pathname)) return;
+      if (u.href === location.href) return;              /* same page */
+
+      e.preventDefault();
+      root.className += ' is-leaving';
+      var gone = false;
+      var go = function () { if (!gone) { gone = true; location.href = a.href; } };
+      setTimeout(go, 100);                               /* matches the CSS */
+    });
+  }
+  /* Warm the next page on hover. By the time a visitor has moved the
+     pointer onto a link and pressed it (~200ms at minimum), the document
+     is usually already fetched — so the exit fade is the only cost. */
+  if (root.className.indexOf('js-fx') !== -1) {
+    var warmed = {};
+    var warm = function (e) {
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (!a || !a.href || (a.target && a.target !== '_self')) return;
+      var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+      if (u.origin !== location.origin || warmed[u.href]) return;
+      if (!/\.html?$/i.test(u.pathname) && u.pathname !== '/') return;
+      warmed[u.href] = 1;
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = u.href;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('mouseover', warm, { passive: true });
+    document.addEventListener('focusin', warm);
+  }
+
+  /* coming back via the back button restores a bfcached page mid-fade */
+  window.addEventListener('pageshow', function () {
+    root.className = root.className.replace(/\s*is-leaving/g, '');
+  });
+
+  /* show the confirmation banner when Formspree sends the visitor back */
+  if (location.search.indexOf('sent=1') !== -1) {
+    var s = document.getElementById('sent');
+    if (s) { s.hidden = false; s.scrollIntoView({block:'center'}); }
+  }
+
+  lb.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What transfer learning actually costs | Kwabena Oppong Adutwum</title>
+<meta name="description" content="Moving a building-age model from Madrid to Amsterdam. Three things I assumed were true, and what happened when we measured them instead.">
+<link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="canonical" href="https://oppong-py.github.io/blog-transfer-learning-cost.html">
+<meta property="og:url" content="https://oppong-py.github.io/blog-transfer-learning-cost.html">
+<meta property="og:title" content="What transfer learning actually costs | Kwabena Oppong Adutwum">
+<meta property="og:description" content="Moving a building-age model from Madrid to Amsterdam. Three things I assumed were true, and what happened when we measured them instead.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://oppong-py.github.io/assets/images/og-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<script>(function(){var r=document.documentElement;
+try{var t=localStorage.getItem('koa-theme');
+if(t==='dark'||t==='light')r.setAttribute('data-theme',t);}catch(e){}
+/* Page-transition bootstrap. The hidden start state is applied ONLY once this
+   script has run, so with JS off the site is simply always visible. */
+try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  r.className+=' js-fx';
+  var show=function(){if(r.className.indexOf('is-ready')<0)r.className+=' is-ready';};
+  if(document.readyState!=='loading')requestAnimationFrame(show);
+  else document.addEventListener('DOMContentLoaded',function(){requestAnimationFrame(show);});
+  setTimeout(show,1200);                       /* failsafe: never stay blank */
+}}catch(e){r.className+=' is-ready';}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<nav aria-label="Main">
+  <div class="wrap">
+    <a href="index.html" class="id">KOA//</a>
+    <div class="navlinks">
+      <a href="index.html">notebook</a>
+      <a href="about.html">about</a>
+      <a href="projects.html">projects</a>
+      <a href="achievements.html">awards</a>
+      <a href="certifications.html">certificates</a>
+      <a href="testimonials.html">references</a>
+      <a href="writing.html" class="on">writing</a>
+    </div>
+    <a href="contact.html" class="tog ctc">contact</a>
+    <button class="tog" id="themeToggle" type="button" aria-label="Switch colour theme">theme: light</button>
+  </div>
+</nav>
+
+<article class="article" id="main">
+  <a class="back" href="writing.html" style="font-family:var(--m);font-size:11.5px;color:var(--dim);text-decoration:none">&larr; back to writing</a>
+  <div class="meta" style="margin-top:18px">SEP 2026 &middot; 9 MIN READ &middot; MACHINE LEARNING</div>
+  <h1>What transfer learning actually costs</h1>
+  <p class="standfirst">A model trained on Madrid, moved to Amsterdam. Three things I assumed were true, and what happened when we measured them instead.</p>
+
+  <p>This is the second piece about the Ghana Data Science Regional Hackathon 2026 at KNUST. The <a href="blog-the-scoring-was-lying.html">first one</a> is about discovering that our evaluation was inflated by 0.047. This one is about what we found once we could trust the number.</p>
+
+  <p>The setup: a model that guesses a building&rsquo;s age from forty years of satellite readings, trained on Madrid, then asked to work in Amsterdam. You get a handful of labelled Amsterdam examples to help it adjust &mdash; anywhere from 5 to 200 per era.</p>
+
+  <p>&ldquo;Transfer learning&rdquo; sounds like something you switch on. In practice it&rsquo;s a series of choices, and I had an intuition about each of them. All three intuitions were wrong.</p>
+
+  <h2>Assumption one: pick the model that does best on Madrid</h2>
+
+  <p>This is what every course teaches. Try your options, cross-validate them on your training data, ship whichever scores highest. It is so standard that it doesn&rsquo;t feel like a choice.</p>
+
+  <p>We had five candidate feature sets, from 10 numbers per patch up to 60. We scored each on Madrid using the honest spatially-blocked split, and separately on Amsterdam averaged across six label budgets.</p>
+
+  <table>
+    <tr><th>feature set</th><th>Madrid</th><th>Amsterdam</th></tr>
+    <tr><td>raw bands (36)</td><td>0.5656</td><td><b>0.6031</b></td></tr>
+    <tr><td>bands + indices (46)</td><td>0.5683</td><td>0.5996</td></tr>
+    <tr><td>bands + year-on-year (48)</td><td>0.5776</td><td>0.5926</td></tr>
+    <tr><td>all features (60)</td><td><b>0.5790</b></td><td>0.5903</td></tr>
+    <tr><td>indices only (10)</td><td>0.4987</td><td>0.4169</td></tr>
+  </table>
+
+  <p>Read the top four rows in both directions. Madrid ranks them 60, then 48, then 46, then 36. Amsterdam ranks them 36, then 46, then 48, then 60. Not roughly reversed. <b>Exactly reversed</b>, across all four.</p>
+
+  <p>Following the standard advice picks the 60-feature set and costs <b>0.0128</b> macro-F1 on the city we were actually being graded on. That is not a huge number, but the sign is the point: on this problem, doing better at home predicted doing <i>worse</i> away.</p>
+
+  <p>The explanation turned out to be simple once we looked at what we were dropping. The extra features were mostly spectral indices &mdash; ratios like NDVI and NDBI that describe how bright and how green a patch is. Brightness is a property of the sensor, the atmosphere and the local building materials. It is a genuinely useful clue about a Madrid building when you have other Madrid buildings to compare it against, and it is actively misleading in Amsterdam, where the whole baseline has shifted. The model was learning &ldquo;this is what a 1970s roof looks like <i>in Madrid</i>&rdquo;, and Amsterdam roofs don&rsquo;t look like that.</p>
+
+  <p>The 36 features we kept describe the <i>shape</i> of a patch&rsquo;s forty-year history &mdash; how much it changed, whether the change was early or late. That survives the move. Absolute brightness doesn&rsquo;t.</p>
+
+  <h2>The control that stopped us fooling ourselves</h2>
+
+  <p>Look at the bottom row of that table. Indices-only, 10 features: 0.4987 on Madrid, 0.4169 on Amsterdam. Worst on both.</p>
+
+  <p>That row is there on purpose, and it is the row that makes the other four mean something. Without it, you could tell yourself a tidy story: fewer features transfer better, so strip the model down. The indices-only set is stripped down and it is terrible everywhere, which tells you it isn&rsquo;t about the count. It is about <i>which</i> features you keep. Take away the wrong ones and you don&rsquo;t get a robust model, you get a model that can&rsquo;t see.</p>
+
+  <p>If I take one habit away from those four days it&rsquo;s that one: when a result supports the story you want, go and build the experiment that would have broken it.</p>
+
+  <h2>Assumption two: keep what the source model learned</h2>
+
+  <p>The whole appeal of transfer learning is not starting from nothing. So when it came time to adapt to Amsterdam, my instinct was to keep the Madrid model and extend it &mdash; keep its 500 decision trees and add another 100 trained on the Amsterdam examples.</p>
+
+  <p>Random Forests let you do exactly that. It&rsquo;s a one-line change.</p>
+
+  <pre><b># keep the Madrid forest, grow 100 more trees on Amsterdam</b>
+model.set_params(warm_start=True, n_estimators=600)
+model.fit(X_amsterdam_support, y_amsterdam_support)</pre>
+
+  <p>It scored <b>0.5487</b> at 25 labels per era. Refitting from scratch on the same Amsterdam examples, inside the same feature space, scored <b>0.6220</b> across five random seeds. Keeping Madrid&rsquo;s trees cost <b>0.073</b>.</p>
+
+  <p>The failure is almost funny once you see it. A Random Forest predicts by majority vote. 500 Madrid trees and 100 Amsterdam trees is a vote with a 5-to-1 majority for Madrid. The Amsterdam trees are outvoted on every disagreement, so the &ldquo;adapted&rdquo; model behaves almost exactly like the un-adapted one.</p>
+
+  <p>You can see it in a single number. In the un-adapted model, the third era &mdash; buildings from 1984 to 2004 &mdash; had a recall of 0.27, meaning it found barely a quarter of them. In the warm-started model, that recall was 0.2729. The same collapse, unchanged. We had added a hundred trees and changed nothing.</p>
+
+  <h2>Assumption three: more Madrid data must help</h2>
+
+  <p>The last version I was confident about: train the Amsterdam model on the Amsterdam examples <i>plus</i> a chunk of Madrid. More rows, more signal.</p>
+
+  <p>Across six label budgets that averaged 0.5612, against 0.6328 for training on the Amsterdam examples alone. It lost at every single budget.</p>
+
+  <p>Which makes sense once you stop thinking about &ldquo;more data&rdquo; and start thinking about where the boundary is. The two cities cut the first era boundary at different years &mdash; Madrid at 1960, Amsterdam at 1945 &mdash; because their building histories are different. Madrid rows don&rsquo;t just fail to help place Amsterdam&rsquo;s boundary. They actively pull it toward the wrong year.</p>
+
+  <p>So the division of labour that worked is narrower than &ldquo;transfer learning&rdquo; suggests. <b>Madrid tells you what to measure. Amsterdam tells you where to draw the line.</b> The 76,000 Madrid patches earn their place by defining a feature space where building age is visible at all. The decision boundary inside that space has to be re-estimated locally, from local labels, with the source data kept out of it.</p>
+
+  <h2>What the label budget actually buys</h2>
+
+  <p>The last question was the practical one. If you were doing this for real in a new city, how many buildings would you need to go and survey?</p>
+
+  <table>
+    <tr><th>labels per era</th><th>macro-F1</th></tr>
+    <tr><td>5</td><td>0.5758 &plusmn; 0.0297</td></tr>
+    <tr><td>10</td><td>0.5818 &plusmn; 0.0351</td></tr>
+    <tr><td>25</td><td>0.6125 &plusmn; 0.0195</td></tr>
+    <tr><td>50</td><td>0.6139 &plusmn; 0.0086</td></tr>
+    <tr><td>100</td><td>0.6179 &plusmn; 0.0088</td></tr>
+    <tr><td>200</td><td>0.6169 &plusmn; 0.0045</td></tr>
+  </table>
+
+  <p>The curve rises steeply and then stops. Going from 5 to 25 labels buys you 0.037. Going from 25 all the way to 200 &mdash; eight times the surveying effort &mdash; buys you 0.004, which is inside the noise.</p>
+
+  <p>The error bars are the more interesting column. At 5 labels the spread across random draws is 0.0297; at 200 it is 0.0045. So the extra labels aren&rsquo;t really buying accuracy past 25. They&rsquo;re buying <i>reliability</i> &mdash; the guarantee that you didn&rsquo;t happen to pick five unrepresentative buildings. For a team planning fieldwork, that is a concrete answer: survey about 25 per era, and spend the rest of the budget on a second city instead.</p>
+
+  <h2>The honest footnote</h2>
+
+  <p>The 0.5612-versus-0.6328 comparison in the third section was run on a 61-column feature matrix, while the model we submitted uses 36. I found that after the deadline. The conclusion holds in both spaces &mdash; target-only wins either way &mdash; but those particular numbers can&rsquo;t be reproduced from our submitted model, and the repository says so plainly rather than quietly reporting them as if they could.</p>
+
+  <p>We didn&rsquo;t place, and the model isn&rsquo;t good in absolute terms. Macro-F1 around 0.62 on four classes is a long way from useful. But every one of the three things above is a thing I believed on Monday and could disprove by Thursday, with a measurement, which is more than I expected to get out of four days.</p>
+
+  <p><a href="https://github.com/Oppong-py/gds-hackathon-2026-building-age" target="_blank" rel="noopener">Code, figures and a file mapping every number to the cell that printed it &rarr;</a></p>
+
+  <p style="font-size:14px;color:var(--dim)">AI assistance was used to design and debug these experiments. The decisions about what to measure and what to throw away were ours, and every figure here is what the code printed.</p>
+
+  <div class="tags"><span>machine-learning</span><span>transfer-learning</span><span>domain-adaptation</span><span>few-shot</span><span>ghana-data-science-hackathon-2026</span></div>
+</article>
+
+
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="k">Get in touch</div>
+        <h2>Open to machine<br>learning <em>internships</em></h2>
+        <a class="fcta" href="contact.html">send a message &rarr;</a>
+      </div>
+      <div class="links">
+        <a href="mailto:oppongkwabena1777knust@gmail.com"><i>&rarr;</i> email</a><br>
+        <a href="https://github.com/Oppong-py" target="_blank" rel="noopener"><i>&rarr;</i> github.com/Oppong-py</a><br>
+        <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum" target="_blank" rel="noopener"><i>&rarr;</i> linkedin.com/in/kwabena-oppong-adutwum</a><br>
+        <a href="https://leetcode.com/u/Oppong-py" target="_blank" rel="noopener"><i>&rarr;</i> leetcode.com/u/Oppong-py</a><br>
+        <a href="assets/docs/resume.pdf" target="_blank" rel="noopener"><i>&rarr;</i> r&eacute;sum&eacute;.pdf</a>
+        <a href="assets/docs/resume.pdf" download title="Download r&eacute;sum&eacute;">&darr;</a> &nbsp;
+        <a href="assets/docs/cv.pdf" target="_blank" rel="noopener"><i>&rarr;</i> cv.pdf</a>
+        <a href="assets/docs/cv.pdf" download title="Download CV">&darr;</a>
+      </div>
+    </div>
+    <div class="colophon">SET IN SAIRA CONDENSED &middot; JETBRAINS MONO &middot; IBM PLEX SANS &nbsp;&middot;&nbsp; BUILT IN KUMASI, GHANA &middot; 2026</div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden><button class="lbx" type="button" aria-label="Close">&times;</button><img id="lbi" src="" alt=""></div>
+
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById('themeToggle');
+  function save(v) { try { localStorage.setItem('koa-theme', v); } catch (e) {} }
+  /* the theme was already applied by the inline script in <head>, so there is
+     no flash of the wrong colours here — this only wires up the toggle. */
+  function label(){ btn.textContent = 'theme: ' + (root.getAttribute('data-theme') || 'light'); }
+  label();
+  btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); save(next); label();
+  });
+
+  /* lightbox — any element with data-lb opens its image full size */
+  var lb = document.getElementById('lb'), lbi = document.getElementById('lbi');
+  function close(){ lb.hidden = true; lbi.src = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('[data-lb]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      lbi.src = el.getAttribute('data-lb');
+      lbi.alt = el.getAttribute('alt') || '';
+      lb.hidden = false; document.body.style.overflow = 'hidden';
+    });
+  });
+  /* ---- page departure ----------------------------------------------
+     Deliberately NOT the View Transitions API. That API is unsupported in
+     Firefox and silently does nothing when anything is off, and "nothing"
+     looks exactly like the bug. This runs in every browser, on every
+     protocol, every time. */
+  if (root.className.indexOf('js-fx') !== -1) {
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (!a || !a.href) return;
+      if (a.target && a.target !== '_self') return;      /* new-tab links */
+      if (a.hasAttribute('download')) return;
+      var href = a.getAttribute('href') || '';
+      if (href.charAt(0) === '#' || /^(mailto|tel):/i.test(href)) return;
+      var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+      if (u.origin !== location.origin) return;          /* off-site */
+      if (/\.(pdf|png|jpe?g|gif|svg|mp4|zip)$/i.test(u.pathname)) return;
+      if (u.href === location.href) return;              /* same page */
+
+      e.preventDefault();
+      root.className += ' is-leaving';
+      var gone = false;
+      var go = function () { if (!gone) { gone = true; location.href = a.href; } };
+      setTimeout(go, 100);                               /* matches the CSS */
+    });
+  }
+  /* Warm the next page on hover. By the time a visitor has moved the
+     pointer onto a link and pressed it (~200ms at minimum), the document
+     is usually already fetched — so the exit fade is the only cost. */
+  if (root.className.indexOf('js-fx') !== -1) {
+    var warmed = {};
+    var warm = function (e) {
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (!a || !a.href || (a.target && a.target !== '_self')) return;
+      var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+      if (u.origin !== location.origin || warmed[u.href]) return;
+      if (!/\.html?$/i.test(u.pathname) && u.pathname !== '/') return;
+      warmed[u.href] = 1;
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = u.href;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('mouseover', warm, { passive: true });
+    document.addEventListener('focusin', warm);
+  }
+
+  /* coming back via the back button restores a bfcached page mid-fade */
+  window.addEventListener('pageshow', function () {
+    root.className = root.className.replace(/\s*is-leaving/g, '');
+  });
+
+  /* show the confirmation banner when Formspree sends the visitor back */
+  if (location.search.indexOf('sent=1') !== -1) {
+    var s = document.getElementById('sent');
+    if (s) { s.hidden = false; s.scrollIntoView({block:'center'}); }
+  }
+
+  lb.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
+})();
+</script>
+</body>
+</html>
