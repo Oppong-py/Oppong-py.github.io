@@ -434,8 +434,11 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
   border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow); }
 .ch{ display:flex; align-items:stretch; border-right:1px solid var(--line);
   border-bottom:1px solid var(--line); }
-.ch:nth-child(2n){ border-right:none; }
-.ch:nth-last-child(-n+2){ border-bottom:none; }
+/* 5 channels, laid out: email | linkedin  ·  github (full width)  ·  resume | cv */
+.chan .ch:nth-child(2){ border-right:none; }
+.chan .ch:nth-child(3){ grid-column:1 / -1; border-right:none; }
+.chan .ch:nth-child(5){ border-right:none; }
+.chan .ch:nth-child(4), .chan .ch:nth-child(5){ border-bottom:none; }
 .ch .main{ display:flex; align-items:baseline; gap:14px; padding:15px 18px;
   text-decoration:none; flex:1; min-width:0; }
 .ch:hover{ background:var(--accent-wash); }
@@ -523,8 +526,9 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
   .edug{ grid-template-columns:1fr; }
   .chan{ grid-template-columns:1fr; }
   .ch{ border-right:none; }
-  .ch:nth-last-child(-n+2){ border-bottom:1px solid var(--line); }
-  .ch:last-child{ border-bottom:none; }
+  .chan .ch:nth-child(3){ grid-column:auto; }
+  .chan .ch:nth-child(4){ border-bottom:1px solid var(--line); }
+  .chan .ch:last-child{ border-bottom:none; }
   .fact{ order:-1; }
   .wi.big h3{ font-size:24px; }
 }
