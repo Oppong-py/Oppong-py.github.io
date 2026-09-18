@@ -16,7 +16,7 @@
   <a href="https://oppong-py.github.io"><img src="https://img.shields.io/badge/Portfolio-935D0D?style=for-the-badge&logo=githubpages&logoColor=white" alt="Portfolio"></a>
   <a href="https://linkedin.com/in/kwabena-oppong-adutwum"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
   <a href="https://leetcode.com/u/Oppong-py"><img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black" alt="LeetCode"></a>
-  <a href="mailto:kaoppong5@st.knust.edu.gh"><img src="https://img.shields.io/badge/Email-0D6273?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
+  <a href="mailto:oppongkwabena1777dev@gmail.com"><img src="https://img.shields.io/badge/Email-0D6273?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
 </p>
 
 ---

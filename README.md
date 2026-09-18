@@ -1,6 +1,6 @@
 # oppong-py.github.io
 
-My portfolio. Ten pages of projects, write-ups and references, laid out like a Jupyter notebook.
+My portfolio. Twelve pages of projects, write-ups and references.
 
 **Live at [oppong-py.github.io](https://oppong-py.github.io)**
 
@@ -13,10 +13,14 @@ My portfolio. Ten pages of projects, write-ups and references, laid out like a J
 I'm a Computer Science undergraduate at KNUST working toward machine learning engineering, and
 this is where the work lives — robotics, embedded systems, and the ML I'm learning now.
 
-The interface borrows its vocabulary from pandas and Jupyter: `df.projects`, `nb.contents()`,
-`log.tail(n=5)`, `In [1]:` / `Out[1]:` prompts. That isn't decoration. A portfolio is a dataframe
-you query — you arrive with a question and want the rows that answer it — and saying so in the
-language of the tools I actually work in is more honest than a generic developer template.
+The layout borrows the shape of a Jupyter notebook — numbered `In [n]:` prompts above each
+section, one idea per cell, each section on its own short page rather than one long scroll.
+
+An earlier version pushed that much further: the navigation itself read `df.projects`,
+`nb.contents()`, `log.tail(n=5)`. A friend reviewing it told me the terms were getting in the
+way of the content, and he was right. Now the code vocabulary is a garnish and every heading and
+link is plain English. If a reader has to decode your navigation, the cleverness is costing you
+more than it earns.
 
 ## Stack
 
@@ -34,15 +38,15 @@ Fonts: Saira Condensed (display), JetBrains Mono (data and CLI), IBM Plex Sans (
 
 | File | Nav label | What's on it |
 |---|---|---|
-| `index.html` | notebook | Hero, stats, contents, recent log, three featured projects |
-| `about.html` | df.profile | Background, skills matrix, roles, education |
-| `projects.html` | df.projects | Everything built, current to past, plus what's queued |
-| `achievements.html` | df.record | Competitions, awards, memberships |
-| `certifications.html` | df.certs | Certificates, with the files attached |
-| `testimonials.html` | df.refs | Four named referees and how each of them knows me |
-| `writing.html` | nb.writing | Technical write-ups |
-| `contact.html` | contact.open() | Six channels and a form |
-| `blog-pid-to-rl.html` · `blog-arethos-rn.html` | — | The two long-form posts |
+| `index.html` | notebook | Hero, stats, contents, recent activity, three featured projects |
+| `about.html` | about | Background, skills matrix, roles, education |
+| `projects.html` | projects | Ten projects, newest first, six finished and four planned |
+| `achievements.html` | awards | Competitions won, competitions entered, memberships |
+| `certifications.html` | certificates | Four earned with the files attached, two in progress |
+| `testimonials.html` | references | Four named referees and how each of them knows me |
+| `writing.html` | writing | Four technical write-ups |
+| `contact.html` | contact | Six channels and a form |
+| `blog-*.html` | — | The four long-form posts |
 
 ## Details worth pointing at
 
@@ -69,7 +73,7 @@ visible.
 **Responsive without a framework either.** Card rows become scroll-snap rails below 768px, the
 nav drops to its own scrolling row below 700px, and long project rows collapse to one column.
 
-Every build is checked across 10 pages × 3 widths × 2 themes for horizontal overflow, console
+Every build is checked across 12 pages × 3 widths × 2 themes for horizontal overflow, console
 errors and failed requests.
 
 ## Running it locally
@@ -97,4 +101,4 @@ Then open `http://localhost:8000`. Opening `index.html` directly works too.
 
 [oppong-py.github.io/contact.html](https://oppong-py.github.io/contact.html) ·
 [LinkedIn](https://www.linkedin.com/in/kwabena-oppong-adutwum) ·
-kaoppong5@st.knust.edu.gh
+oppongkwabena1777dev@gmail.com
