@@ -147,6 +147,8 @@ h1 em{ font-style:normal; color:var(--accent); }
   color:var(--accent-2); background:var(--accent-wash); border:1px solid var(--accent);
   padding:2px 7px; margin:8px 0 10px; letter-spacing:.03em; }
 .pan .tag.plan{ color:var(--cool); background:var(--cool-wash); border-color:var(--cool-line); }
+.pan .tag.wip{ color:var(--cool); background:var(--cool-wash); border-color:var(--cool-line);
+  border-style:dashed; }
 .pan p{ font-size:15px; line-height:1.75; color:var(--ink2); }
 .pan p + p{ margin-top:10px; }
 .pan.plan{ border-style:dashed; }
@@ -490,6 +492,8 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
 .prow .tag{ display:inline-block; align-self:flex-start; font-family:var(--m); font-size:9.5px;
   letter-spacing:.1em; color:var(--accent-ink); background:var(--accent-wash);
   border:1px solid var(--accent-wash); padding:4px 9px; margin:9px 0 12px; }
+.prow .tag.wip{ color:var(--cool); background:var(--cool-wash);
+  border:1px dashed var(--cool-line); }
 .prow p{ font-size:14px; line-height:1.75; color:var(--ink2); }
 .prow p + p{ margin-top:10px; }
 .prow .spec{ margin-top:16px; border-top:1px solid var(--line);

@@ -104,10 +104,11 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
       <div class="idx"><span>03 &middot; MOBILE</span><b>2026</b></div>
       <div class="body">
         <h3>Arethos &mdash; Mental Wellness App</h3>
-        <span class="tag">CO-FOUNDER &middot; 3-PERSON TEAM</span>
-        <p>Co-built a cross-platform wellness app for KNUST students: an AI-assisted journal, a mood tracker with sleep and energy logging, and a reflections tab that surfaces behavioural patterns in plain language.</p>
+        <span class="tag wip">IN DEVELOPMENT &middot; CO-FOUNDER &middot; 3-PERSON TEAM</span>
+        <p>Building a cross-platform wellness app for KNUST students with two teammates: an AI-assisted journal, a mood tracker with sleep and energy logging, and a reflections tab that surfaces behavioural patterns in plain language.</p>
         <p>Engineered the reflection engine on Groq for fast inference, and a custom haptic layer calibrated across nine iterations on Android hardware &mdash; expo-haptics only fires single-pulse vibrations there, so the fix was dropping to React Native&rsquo;s native <code>Vibration.vibrate()</code>. The sleep slider uses a PanResponder with ref-pinned state to eliminate stale-closure bugs.</p>
         <p>Fully offline-first: SQLite local storage, no user data ever leaves the device. Documented across 16 chapters covering every architectural decision.</p>
+        <p>Still in development &mdash; not released, and the repository stays private until it is. The write-up below is what the build has taught us so far, not a post-launch retrospective.</p>
         <div class="spec">
           <div class="r"><span class="k">Haptic iterations</span><span class="v">9</span></div>
           <div class="r"><span class="k">Storage</span><span class="v">Offline-first SQLite</span></div>
