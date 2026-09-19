@@ -188,6 +188,7 @@ h1 em{ font-style:normal; color:var(--accent); }
 .entry .when span{ display:block; color:var(--dim); }
 .entry h3{ font-family:var(--d); font-size:24px; font-weight:600; line-height:1.15; }
 .entry p{ font-size:15.5px; line-height:1.8; color:var(--ink2); margin-top:9px; max-width:66ch; }
+.entry .flag.plan{ color:var(--dim); border-color:var(--line2); background:none; }
 .entry .flag{ display:inline-block; font-family:var(--m); font-size:9.5px; letter-spacing:.09em;
   color:var(--accent-ink);
   color:var(--cool); border:1px solid var(--cool-line); background:var(--cool-wash);
@@ -240,6 +241,7 @@ h1 em{ font-style:normal; color:var(--accent); }
 .log .r b{ color:var(--ink); font-weight:600; }
 .log .st{ font-family:var(--m); font-size:9px; color:var(--cool); border:1px solid var(--cool-line);
   padding:1px 5px; margin-left:6px; white-space:nowrap; }
+.log .st.off{ color:var(--dim); border-color:var(--line2); }
 
 /* ── Writing + roadmap ───────────────────────────────────── */
 .wr{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }

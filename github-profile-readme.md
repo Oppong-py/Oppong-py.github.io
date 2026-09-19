@@ -30,7 +30,7 @@ The repository is pinned below. Both findings are written up properly on my site
 
 ### Now
 
-- **Andrew Ng's ML Specialization** — Course 1, with [the notes published weekly](https://github.com/Oppong-py/ml-specialization-coursera) rather than kept private
+- **Andrew Ng's ML Specialization** — Course 1 of 3, with [the notes published](https://github.com/Oppong-py/ml-specialization-coursera) rather than kept private. Paused since August; the repo shows exactly where
 - **Logistic regression from scratch** in NumPy, no scikit-learn, to understand what the library has been doing for me
 - **Arethos** — an offline-first mental wellness app for KNUST students, built with two others. Private while we finish it; [the engineering write-up is public](https://oppong-py.github.io/blog-arethos-rn.html)
 

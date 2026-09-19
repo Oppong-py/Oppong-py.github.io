@@ -160,11 +160,11 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
       <div class="body">
         <h3>Class Attendance Monitoring System</h3>
         <span class="tag">PROTOTYPE &middot; 50 STUDENTS</span>
-        <p>Architected a full-stack biometric attendance platform serving 50 students in prototype testing, cutting manual roll-call time by roughly 80%. Built to handle concurrent Bluetooth fingerprint scans &mdash; the same shape of problem as a data ingestion pipeline.</p>
+        <p>Built a full-stack biometric attendance platform and tested it with one class of 50 students. The engineering problem was concurrency &mdash; several phones checking in at the same moment, and the duplicate and interleaved writes that come with that.</p>
         <p>Django REST API with PostgreSQL for persistence, React Native front end for cross-platform deployment, and Bluetooth Low Energy for proximity check-in.</p>
         <div class="spec">
           <div class="r"><span class="k">Users in test</span><span class="v">50 students</span></div>
-          <div class="r"><span class="k">Roll-call time</span><span class="v">~80% reduction</span></div>
+          <div class="r"><span class="k">Scope</span><span class="v">One class, one session</span></div>
           <div class="r"><span class="k">Backend</span><span class="v">Django &middot; PostgreSQL</span></div>
           <div class="r"><span class="k">Client</span><span class="v">React Native &middot; BLE</span></div>
         </div>
