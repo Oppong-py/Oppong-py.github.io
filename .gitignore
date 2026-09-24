@@ -1,0 +1,21 @@
+# ── OS and editor noise ──────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# ── Working files that should never reach the live site ──────
+# High-resolution originals kept only to regenerate the published
+# WebP versions. Suffix any such file with -src.
+assets/**/*-src.*
+*.orig
+*.bak
+_scratch/
+
+# ── Lives in the Oppong-py/Oppong-py profile repository ──────
+# Kept on disk for reference; it is not part of this site.
+github-profile-readme.md

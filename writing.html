@@ -3,18 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-2ElPHIPE8Q+Jko6kBx0FxSscNRR/ViGcCvGbqpuE5KE=' 'sha256-2zb+mQBzGT9uicoOkUEa5SNSH8Clbm29IaGXX9ww3PA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Writing | Kwabena Oppong Adutwum</title>
-<meta name="description" content="Technical write-ups by Kwabena Oppong Adutwum — PID control to reinforcement learning, and three React Native bugs.">
+<meta name="description" content="Technical write-ups by Kwabena Oppong Adutwum: PID control to reinforcement learning, and three React Native bugs.">
 <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#935D0D">
 <link rel="canonical" href="https://oppong-py.github.io/writing.html">
 <meta property="og:url" content="https://oppong-py.github.io/writing.html">
 <meta property="og:title" content="Writing | Kwabena Oppong Adutwum">
-<meta property="og:description" content="Technical write-ups by Kwabena Oppong Adutwum — PID control to reinforcement learning, and three React Native bugs.">
+<meta property="og:description" content="Technical write-ups by Kwabena Oppong Adutwum: PID control to reinforcement learning, and three React Native bugs.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://oppong-py.github.io/assets/images/og-preview.png">
+<meta property="og:image" content="https://oppong-py.github.io/assets/images/og/default.png">
 <meta name="twitter:card" content="summary_large_image">
 <script>(function(){var r=document.documentElement;
 try{var t=localStorage.getItem('koa-theme');
@@ -31,6 +36,9 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oppong-py.github.io/#person","name":"Kwabena Oppong Adutwum","alternateName":"Oppong","url":"https://oppong-py.github.io/","jobTitle":"Computer Science Student","description":"Computer Science undergraduate at KNUST, Kumasi, working in applied machine learning after a route through robotics and cybersecurity.","image":"https://oppong-py.github.io/assets/images/portrait-v2.webp","email":"oppongkwabena1777dev@gmail.com","nationality":{"@type":"Country","name":"Ghana"},"address":{"@type":"PostalAddress","addressLocality":"Kumasi","addressCountry":"GH"},"sameAs":["https://github.com/Oppong-py","https://www.linkedin.com/in/kwabena-oppong-adutwum"],"alumniOf":{"@type":"HighSchool","name":"Prempeh College","address":{"@type":"PostalAddress","addressLocality":"Kumasi","addressCountry":"GH"}},"affiliation":{"@type":"CollegeOrUniversity","name":"Kwame Nkrumah University of Science and Technology","url":"https://www.knust.edu.gh"},"knowsLanguage":["en","fr"],"knowsAbout":["Machine Learning","Python","NumPy","pandas","scikit-learn","Matplotlib","Remote Sensing","Cross-Validation","Domain Adaptation","Robotics","PID Control","Cybersecurity","React Native"],"award":["National Champion, Robofest Ghana 2025","Regional Champion, National Cybersecurity Challenge 2024","2nd Place, ACES CodeFest 2026 UI/UX Challenge"]},{"@type":"WebSite","@id":"https://oppong-py.github.io/#website","url":"https://oppong-py.github.io/","name":"Kwabena Oppong Adutwum","inLanguage":"en","publisher":{"@id":"https://oppong-py.github.io/#person"}},{"@type":"BreadcrumbList","@id":"https://oppong-py.github.io/writing.html#crumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"Notebook","item":"https://oppong-py.github.io/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://oppong-py.github.io/writing.html"}]},{"@type":"CollectionPage","@id":"https://oppong-py.github.io/writing.html#page","name":"Writing","description":"Technical write-ups by Kwabena Oppong Adutwum: PID control to reinforcement learning, and three React Native bugs.","url":"https://oppong-py.github.io/writing.html","inLanguage":"en","isPartOf":{"@id":"https://oppong-py.github.io/#website"},"primaryImageOfPage":"https://oppong-py.github.io/assets/images/og/default.png","breadcrumb":{"@id":"https://oppong-py.github.io/writing.html#crumbs"},"about":{"@id":"https://oppong-py.github.io/#person"}}]}
+</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -51,7 +59,8 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     <button class="tog" id="themeToggle" type="button" aria-label="Switch colour theme">theme: light</button>
   </div>
 </nav>
-<div class="wrap phead" id="main">
+<main id="main">
+<div class="wrap phead">
   <a class="back" href="index.html">&larr; back to notebook</a>
   <h1>Things I&rsquo;ve <em>written</em></h1>
   <p class="sub">Notes on things that broke and what fixed them, written while the detail was still fresh rather than reconstructed later.</p>
@@ -65,25 +74,25 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     <a class="wi big" href="blog-the-scoring-was-lying.html">
       <div class="m">SEP 2026 &middot; 8 MIN &middot; MACHINE LEARNING</div>
       <h3>The scoring was lying to us</h3>
-      <p>Four days at the Ghana Data Science Regional Hackathon. Our Madrid score looked good and was suspiciously steady &mdash; it turned out 82.4% of our test pixels were touching a pixel the model had already trained on. Fixing that cost 0.047 and was the most useful thing we did.</p>
+      <p>Four days at the Ghana Data Science Regional Hackathon. Our Madrid score looked good and was suspiciously steady. It turned out that 82.4% of our test pixels were touching a pixel the model had already trained on. Fixing that cost 0.047 and was the most useful thing we did.</p>
       <span class="go">read it &rarr;</span>
     </a>
     <a class="wi big" href="blog-transfer-learning-cost.html">
       <div class="m">SEP 2026 &middot; 9 MIN &middot; MACHINE LEARNING</div>
       <h3>What transfer learning actually costs</h3>
-      <p>Moving the same model from Madrid to Amsterdam. Picking by the best home score chose the worst travelling model; keeping the source model&rsquo;s trees made it worse; adding source data made it worse again. Three assumptions, all measured, all wrong.</p>
+      <p>Moving the same model from Madrid to Amsterdam. Picking by the best home score chose the worst travelling model. Keeping the source model&rsquo;s trees made it worse. Adding source data made it worse again. Three assumptions, all measured, all wrong.</p>
       <span class="go">read it &rarr;</span>
     </a>
     <a class="wi big" href="blog-pid-to-rl.html">
       <div class="m">JUL 2026 &middot; 4 MIN &middot; CONTROL THEORY</div>
       <h3>From PID Control to Reinforcement Learning</h3>
-      <p>Tuning Kp, Ki and Kd on a line-following robot is the same shape of problem as tuning a learning rate &mdash; too much gain and it oscillates, too little and it never converges. What a championship robot taught me about optimisation before I knew the word for it.</p>
+      <p>Tuning Kp, Ki and Kd on a line-following robot is the same shape of problem as tuning a learning rate. Too much gain and it oscillates. Too little and it never converges. What a championship robot taught me about optimisation before I knew the word for it.</p>
       <span class="go">read it &rarr;</span>
     </a>
     <a class="wi big" href="blog-arethos-rn.html">
       <div class="m">JUL 2026 &middot; 6 MIN &middot; MOBILE ENGINEERING</div>
       <h3>Three Bugs That Taught Me More Than Any Tutorial</h3>
-      <p>Why React Native&rsquo;s zIndex is a lie, how a stale closure quietly broke my sleep slider, and what nine haptic iterations taught me about the Android vibration API &mdash; with the fix for each.</p>
+      <p>Why React Native&rsquo;s zIndex is a lie. How a stale closure quietly broke my sleep slider. What nine haptic iterations taught me about the Android vibration API, with the fix for each.</p>
       <span class="go">read it &rarr;</span>
     </a>
   </div>
@@ -108,6 +117,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   </div>
 </div>
 
+</main>
 <footer>
   <div class="wrap">
     <div class="top">

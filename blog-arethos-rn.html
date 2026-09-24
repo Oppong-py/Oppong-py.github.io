@@ -3,18 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-2ElPHIPE8Q+Jko6kBx0FxSscNRR/ViGcCvGbqpuE5KE=' 'sha256-2zb+mQBzGT9uicoOkUEa5SNSH8Clbm29IaGXX9ww3PA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Three Bugs That Taught Me More Than Any Tutorial | Kwabena Oppong Adutwum</title>
-<meta name="description" content="Three React Native bugs — zIndex hit-testing, a stale closure in PanResponder, and nine haptic iterations on Android.">
+<meta name="description" content="Three React Native bugs: zIndex hit-testing, a stale closure in PanResponder, and nine haptic iterations on Android.">
 <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#935D0D">
 <link rel="canonical" href="https://oppong-py.github.io/blog-arethos-rn.html">
 <meta property="og:url" content="https://oppong-py.github.io/blog-arethos-rn.html">
 <meta property="og:title" content="Three Bugs That Taught Me More Than Any Tutorial | Kwabena Oppong Adutwum">
-<meta property="og:description" content="Three React Native bugs — zIndex hit-testing, a stale closure in PanResponder, and nine haptic iterations on Android.">
+<meta property="og:description" content="Three React Native bugs: zIndex hit-testing, a stale closure in PanResponder, and nine haptic iterations on Android.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://oppong-py.github.io/assets/images/og-preview.png">
+<meta property="og:image" content="https://oppong-py.github.io/assets/images/og/default.png">
 <meta name="twitter:card" content="summary_large_image">
 <script>(function(){var r=document.documentElement;
 try{var t=localStorage.getItem('koa-theme');
@@ -31,6 +36,9 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oppong-py.github.io/#person","name":"Kwabena Oppong Adutwum","alternateName":"Oppong","url":"https://oppong-py.github.io/","jobTitle":"Computer Science Student","description":"Computer Science undergraduate at KNUST, Kumasi, working in applied machine learning after a route through robotics and cybersecurity.","image":"https://oppong-py.github.io/assets/images/portrait-v2.webp","email":"oppongkwabena1777dev@gmail.com","nationality":{"@type":"Country","name":"Ghana"},"address":{"@type":"PostalAddress","addressLocality":"Kumasi","addressCountry":"GH"},"sameAs":["https://github.com/Oppong-py","https://www.linkedin.com/in/kwabena-oppong-adutwum"],"alumniOf":{"@type":"HighSchool","name":"Prempeh College","address":{"@type":"PostalAddress","addressLocality":"Kumasi","addressCountry":"GH"}},"affiliation":{"@type":"CollegeOrUniversity","name":"Kwame Nkrumah University of Science and Technology","url":"https://www.knust.edu.gh"},"knowsLanguage":["en","fr"],"knowsAbout":["Machine Learning","Python","NumPy","pandas","scikit-learn","Matplotlib","Remote Sensing","Cross-Validation","Domain Adaptation","Robotics","PID Control","Cybersecurity","React Native"],"award":["National Champion, Robofest Ghana 2025","Regional Champion, National Cybersecurity Challenge 2024","2nd Place, ACES CodeFest 2026 UI/UX Challenge"]},{"@type":"WebSite","@id":"https://oppong-py.github.io/#website","url":"https://oppong-py.github.io/","name":"Kwabena Oppong Adutwum","inLanguage":"en","publisher":{"@id":"https://oppong-py.github.io/#person"}},{"@type":"BreadcrumbList","@id":"https://oppong-py.github.io/blog-arethos-rn.html#crumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"Notebook","item":"https://oppong-py.github.io/"},{"@type":"ListItem","position":2,"name":"Three React Native bugs","item":"https://oppong-py.github.io/blog-arethos-rn.html"}]},{"@type":"BlogPosting","@id":"https://oppong-py.github.io/blog-arethos-rn.html#post","headline":"Three Bugs That Taught Me More Than Any Tutorial","description":"Three React Native bugs: zIndex hit-testing, a stale closure in PanResponder, and nine haptic iterations on Android.","image":"https://oppong-py.github.io/assets/images/og/default.png","url":"https://oppong-py.github.io/blog-arethos-rn.html","datePublished":"2026-07","dateModified":"2026-07","inLanguage":"en","wordCount":980,"author":{"@id":"https://oppong-py.github.io/#person"},"publisher":{"@id":"https://oppong-py.github.io/#person"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://oppong-py.github.io/blog-arethos-rn.html"},"isPartOf":{"@id":"https://oppong-py.github.io/#website"}}]}
+</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -52,25 +60,26 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   </div>
 </nav>
 
-<article class="article" id="main">
+<main id="main">
+<article class="article">
   <a class="back" href="writing.html" style="font-family:var(--m);font-size:11.5px;color:var(--dim);text-decoration:none">&larr; back to writing</a>
   <div class="meta" style="margin-top:18px">JUL 2026 &middot; 6 MIN READ &middot; MOBILE</div>
   <h1>Three Bugs That Taught Me More Than Any Tutorial</h1>
-  <p class="standfirst">Lessons from building Arethos &mdash; a mental wellness app where React Native&rsquo;s abstractions broke down and the real engineering started.</p>
+  <p class="standfirst">Lessons from building Arethos, a mental wellness app where React Native&rsquo;s abstractions broke down and the real engineering started.</p>
 
   <p>Arethos is a mental wellness app I am building with two teammates for KNUST students. It is not released yet. It has an AI-powered journal, a mood tracker with sleep logging, and a reflections tab that surfaces behavioural patterns. We built it on React Native and Expo SDK 54, backed by SQLite for fully offline-first storage and Groq for fast inference.</p>
   <p>The interesting parts aren&rsquo;t in the feature list. They&rsquo;re in the three bugs that forced me to understand what React Native actually does underneath, instead of just using it.</p>
 
   <h2>Bug 1 &mdash; the delete button that didn&rsquo;t exist</h2>
   <p>The journal screen shows recent entries as cards. Each card has a three-dot menu. You tap it, a dropdown appears with a &ldquo;Delete&rdquo; option. Simple. Except tapping &ldquo;Delete&rdquo; did absolutely nothing.</p>
-  <p>The dropdown was positioned with <code>zIndex: 10</code>. Visually it rendered on top of everything. But React Native&rsquo;s <code>zIndex</code> only works between direct siblings in the same parent view. Our dropdown and the card&rsquo;s <code>TouchableOpacity</code> wrapper were not siblings &mdash; the dropdown was a child of the card, and the wrapper was intercepting every tap before it could reach the dropdown&rsquo;s buttons.</p>
+  <p>The dropdown was positioned with <code>zIndex: 10</code>. Visually it rendered on top of everything. But React Native&rsquo;s <code>zIndex</code> only works between direct siblings in the same parent view. Our dropdown and the card&rsquo;s <code>TouchableOpacity</code> wrapper were not siblings. The dropdown was a child of the card, and the wrapper was intercepting every tap before it could reach the dropdown&rsquo;s buttons.</p>
   <p>This is a fundamental difference from CSS. On the web, <code>z-index</code> creates stacking contexts that govern hit-testing globally. In React Native, touch responders are resolved by the view tree&rsquo;s parent&ndash;child hierarchy, not by visual layering. <b>A child can never escape its parent&rsquo;s touch boundary through zIndex alone.</b></p>
-  <p>The fix: replace the inline dropdown with a <code>Modal</code> bottom-sheet. A Modal renders at the OS level, outside the entire view tree, so nothing can intercept its touches. That isn&rsquo;t a workaround &mdash; it&rsquo;s the correct pattern for any overlay that needs to receive taps.</p>
+  <p>The fix: replace the inline dropdown with a <code>Modal</code> bottom-sheet. A Modal renders at the OS level, outside the entire view tree, so nothing can intercept its touches. That isn&rsquo;t a workaround. It&rsquo;s the correct pattern for any overlay that needs to receive taps.</p>
 
   <h2>Bug 2 &mdash; the slider that teleported</h2>
-  <p>The mood screen has a sleep slider &mdash; drag a knob across a track to log hours slept. Except sometimes, mid-drag, the knob would snap back to zero. Other times it wouldn&rsquo;t move at all.</p>
+  <p>The mood screen has a sleep slider: drag a knob across a track to log hours slept. Except sometimes, mid-drag, the knob would snap back to zero. Other times it wouldn&rsquo;t move at all.</p>
   <p>The root cause took a while to find: a stale closure.</p>
-  <p><code>PanResponder.create()</code> runs once, inside a <code>useRef</code>, at mount. Every callback it defines captures the variables in scope at that single moment. Those variables are frozen forever. My <code>onPanResponderMove</code> was reading a state variable called <code>value</code>, converting it to a pixel position, and using that as the drag origin &mdash; but <code>value</code> inside the closure was always its initial <code>0</code>.</p>
+  <p><code>PanResponder.create()</code> runs once, inside a <code>useRef</code>, at mount. Every callback it defines captures the variables in scope at that single moment. Those variables are frozen forever. My <code>onPanResponderMove</code> was reading a state variable called <code>value</code>, converting it to a pixel position, and using that as the drag origin. But <code>value</code> inside the closure was always its initial <code>0</code>.</p>
 
   <pre><b># THE BUG: value is always 0 inside the frozen closure</b>
 onPanResponderMove: (_, gs) =&gt; {
@@ -89,11 +98,11 @@ onPanResponderMove: (_, gs) =&gt; {
   knobX.setValue(Math.max(0, Math.min(newPos, maxWidth)));
 }</pre>
 
-  <p>The lesson is broader than React Native. Any system that creates callbacks at initialisation and reuses them later &mdash; event listeners in embedded systems, registered callbacks in game engines, hooks in ML training loops &mdash; is vulnerable to stale closures. <b>If a callback needs current state, pass it through a mutable reference, not a captured variable.</b></p>
+  <p>The lesson is broader than React Native. Any system that creates callbacks at initialisation and reuses them later (event listeners in embedded systems, registered callbacks in game engines, hooks in ML training loops) is vulnerable to stale closures. <b>If a callback needs current state, pass it through a mutable reference, not a captured variable.</b></p>
 
   <h2>Bug 3 &mdash; the vibration that took nine iterations</h2>
   <p>This one wasn&rsquo;t a bug. It was a design problem that revealed how Android haptics actually work.</p>
-  <p>We wanted the theme toggle to produce a specific sensation &mdash; a subtle shake in the palm. Not a harsh buzz, not a single tap. A gentle multi-pulse tremor.</p>
+  <p>We wanted the theme toggle to produce a specific sensation: a subtle shake in the palm. Not a harsh buzz, not a single tap. A gentle multi-pulse tremor.</p>
   <p>My first instinct was expo-haptics. On Android none of its presets worked; every one felt like the same single electronic buzz at slightly different intensities. The reason: expo-haptics calls <code>VibrationEffect.createOneShot(duration, amplitude)</code> underneath. One shot, one pulse. You can adjust how hard and how long, but it is always a single impulse.</p>
   <p>To get a multi-pulse waveform you need <code>VibrationEffect.createWaveform()</code>, which React Native&rsquo;s built-in <code>Vibration.vibrate([pattern])</code> calls. The array alternates wait and vibrate durations in milliseconds.</p>
 
@@ -106,11 +115,11 @@ onPanResponderMove: (_, gs) =&gt; {
       <tr><td>4</td><td>notificationAsync(Error)</td><td>The wrong-password one</td></tr>
       <tr><td>5</td><td>Vibration.vibrate([0,40,30,40,30,40])</td><td>Getting there, too strong</td></tr>
       <tr><td>6</td><td>Vibration.vibrate([0,20,30,20,30,20])</td><td>Better, still heavy</td></tr>
-      <tr><td>7</td><td>Vibration.vibrate([0,12,32,12,32,12])</td><td>Confirmed &mdash; subtle palm shake</td></tr>
+      <tr><td>7</td><td>Vibration.vibrate([0,12,32,12,32,12])</td><td>Confirmed: subtle palm shake</td></tr>
     </tbody>
   </table></div>
 
-  <p>The key insight: <b>pulse duration controls perceived intensity, not amplitude.</b> A 40&nbsp;ms pulse feels harsh regardless of what amplitude the OS chooses. A 12&nbsp;ms pulse barely registers consciously &mdash; you feel it in your palm without it interrupting your attention. Three 12&nbsp;ms pulses with 32&nbsp;ms of breathing room produce exactly the sensation we wanted.</p>
+  <p>The key insight: <b>pulse duration controls perceived intensity, not amplitude.</b> A 40&nbsp;ms pulse feels harsh regardless of what amplitude the OS chooses. A 12&nbsp;ms pulse barely registers consciously. You feel it in your palm without it interrupting your attention. Three 12&nbsp;ms pulses with 32&nbsp;ms of breathing room produce exactly the sensation we wanted.</p>
 
   <pre><b># src/lib/haptics.js — the entire haptics layer</b>
 export function subtleShake() {
@@ -122,12 +131,13 @@ export function subtleShake() {
 }</pre>
 
   <h2>What these three bugs have in common</h2>
-  <p>Each one forced me past the abstraction layer. React Native presents a clean API &mdash; zIndex for layering, state for data, expo-haptics for vibration &mdash; but the abstraction leaks in predictable ways when you push on it.</p>
+  <p>Each one forced me past the abstraction layer. React Native presents a clean API (zIndex for layering, state for data, expo-haptics for vibration) but the abstraction leaks in predictable ways when you push on it.</p>
   <p>That is the same lesson I keep meeting elsewhere. A library is a compression of someone else&rsquo;s decisions. It works beautifully until your problem sits outside the compression, and then the only way through is to understand what it was hiding.</p>
 
   <div class="tags"><span>react-native</span><span>expo</span><span>android</span><span>debugging</span><span>arethos</span></div>
 </article>
 
+</main>
 <footer>
   <div class="wrap">
     <div class="top">
