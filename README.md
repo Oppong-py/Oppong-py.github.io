@@ -27,9 +27,9 @@ more than it earns.
 **None.** Hand-written HTML, CSS and JavaScript. No framework, no bundler, no build step, no
 `package.json`, no dependencies to install. Clone it and open `index.html`.
 
-- 12 pages · 237 KB of HTML total
-- One stylesheet, 649 lines, 37 KB
-- 90 lines of JavaScript, inline, no libraries
+- 12 pages · 302 KB of HTML total
+- One stylesheet, 701 lines, 40 KB
+- 183 lines of JavaScript, inline, no libraries
 - The only external requests are Google Fonts and the Formspree endpoint on the contact form
 
 Fonts: Saira Condensed (display), JetBrains Mono (data and CLI), IBM Plex Sans (prose).
@@ -41,7 +41,7 @@ Fonts: Saira Condensed (display), JetBrains Mono (data and CLI), IBM Plex Sans (
 | `index.html` | notebook | Hero, stats, contents, recent activity, three featured projects |
 | `about.html` | about | Background, skills matrix, roles, education |
 | `projects.html` | projects | Ten projects, newest first: five finished, one in development, four planned |
-| `achievements.html` | awards | Three awards, one invitational, five communities, two targets ahead |
+| `achievements.html` | awards | Three awards, one invitational, six communities and roles, two targets ahead |
 | `certifications.html` | certificates | Five earned with the files attached, one in progress, one queued |
 | `testimonials.html` | references | Four named referees and how each of them knows me |
 | `writing.html` | writing | Four technical write-ups |
