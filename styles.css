@@ -365,14 +365,65 @@ footer .colophon{ font-family:var(--m); font-size:10px; color:var(--dim);
 .mcap{ font-family:var(--m); font-size:10.5px; letter-spacing:.07em; color:var(--dim);
   text-transform:uppercase; padding:6px 18px 0; }
 .media[data-lb]{ cursor:zoom-in; }
-.lb{ position:fixed; inset:0; z-index:200; background:rgba(8,12,16,.92);
-  display:flex; align-items:center; justify-content:center; padding:24px; }
-.lb[hidden]{ display:none !important; }
-.lb img{ max-width:100%; max-height:92vh; object-fit:contain;
-  border:1px solid rgba(255,255,255,.14); }
-.lbx{ position:absolute; top:14px; right:18px; background:none; border:none;
-  color:#fff; font-size:34px; line-height:1; cursor:pointer; opacity:.75; }
-.lbx:hover{ opacity:1; }
+/* ── Viewer: in-page window for certificates, photos and PDFs ──
+   Replaces the old full-bleed lightbox. A recruiter clicking a
+   certificate stays on the page they were reading; Escape, the X, or a
+   click on the backdrop puts them straight back. Download and
+   open-in-new-tab both live inside the window, so nothing the old plain
+   links offered is lost. */
+.vw{ position:fixed; inset:0; z-index:300; display:flex; align-items:center;
+  justify-content:center; padding:30px; background:rgba(12,16,21,.66);
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); }
+.vw[hidden]{ display:none !important; }
+.vwd{ display:flex; flex-direction:column; width:min(1100px,100%); height:min(88vh,100%);
+  background:var(--surface); border:1px solid var(--line2);
+  box-shadow:0 24px 70px rgba(12,16,21,.34); overflow:hidden; }
+.vwh{ display:flex; align-items:center; gap:14px; flex:none;
+  padding:11px 14px; border-bottom:1px solid var(--line); background:var(--sunken); }
+.vwm{ min-width:0; }
+.vwt{ font-family:var(--d); font-size:17px; font-weight:600; color:var(--ink);
+  line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.vwf{ font-family:var(--m); font-size:10px; letter-spacing:.06em; color:var(--dim);
+  margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.vwa{ margin-left:auto; display:flex; align-items:center; gap:7px; flex:none; }
+.vwa a, .vwx{ font-family:var(--m); font-size:10.5px; letter-spacing:.05em;
+  color:var(--ink2); background:var(--surface); border:1px solid var(--line2);
+  padding:6px 10px; text-decoration:none; cursor:pointer; line-height:1.1;
+  transition:color .15s ease, border-color .15s ease; }
+.vwa a:hover, .vwx:hover{ color:var(--accent); border-color:var(--accent); }
+.vwa a[hidden]{ display:none; }
+.vwx{ font-size:15px; padding:3px 9px 5px; }
+.vwb{ flex:1; min-height:0; display:flex; align-items:center; justify-content:center;
+  background:var(--ground); overflow:auto; padding:0; }
+.vwb img{ display:block; max-width:100%; max-height:100%; object-fit:contain; margin:auto; }
+.vwb iframe{ width:100%; height:100%; border:0; background:#fff; }
+.vwn{ font-family:var(--m); font-size:12px; color:var(--dim); text-align:center;
+  padding:38px 26px; line-height:1.9; max-width:420px; }
+.vwn b{ display:block; font-family:var(--d); font-size:19px; color:var(--ink);
+  margin-bottom:8px; letter-spacing:0; }
+
+/* A tapped image toggles between fitting the window and twice the window
+   width, so a certificate can actually be read on a phone without leaving
+   the page. The container scrolls underneath it. */
+.vwb.zoom{ align-items:flex-start; justify-content:flex-start; cursor:zoom-out; }
+.vwb.zoom img{ max-width:none; max-height:none; width:200%; margin:0; }
+.vwb.can-zoom img{ cursor:zoom-in; }
+
+@media (max-width:880px){
+  .vw{ padding:0; }
+  .vwd{ width:100%; height:100%; border:none; }
+  .vwt{ font-size:15px; }
+  /* an image window hugs its picture instead of stranding it in a tall
+     empty frame; a PDF frame still needs the full height */
+  .vw.is-img .vwd{ height:auto; max-height:100%; }
+  .vw.is-img .vwb{ flex:0 1 auto; }
+}
+@media (prefers-reduced-motion:no-preference){
+  .vw{ animation:vwin .16s ease-out; }
+  .vwd{ animation:vwup .2s cubic-bezier(.2,.7,.3,1); }
+}
+@keyframes vwin{ from{ opacity:0 } to{ opacity:1 } }
+@keyframes vwup{ from{ opacity:0; transform:translateY(10px) scale(.99) } to{ opacity:1; transform:none } }
 
 /* ── Profile: fact sheet ─────────────────────────────────── */
 .fact{ background:var(--sunken); border:1px solid var(--line); font-family:var(--m); }

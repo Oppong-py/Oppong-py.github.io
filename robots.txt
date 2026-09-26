@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
+
+# The CV, the résumé and the certificates stay reachable from the site, but
+# they are not indexed: a PDF in search results is how a phone number or an
+# address ends up on a scraped list.
+Disallow: /assets/docs/
+
 Sitemap: https://oppong-py.github.io/sitemap.xml

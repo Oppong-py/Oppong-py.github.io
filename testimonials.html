@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-2ElPHIPE8Q+Jko6kBx0FxSscNRR/ViGcCvGbqpuE5KE=' 'sha256-2zb+mQBzGT9uicoOkUEa5SNSH8Clbm29IaGXX9ww3PA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-2ElPHIPE8Q+Jko6kBx0FxSscNRR/ViGcCvGbqpuE5KE=' 'sha256-1/iwNmf+Tl4HtbsisiDGjjqU19Ra7FGwI+3F8dh04ck='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>References | Kwabena Oppong Adutwum</title>
 <meta name="description" content="Four named referees on Kwabena Oppong Adutwum: a robotics patron, two senior teachers and an NGO executive director.">
@@ -149,17 +149,28 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
         <a href="mailto:oppongkwabena1777dev@gmail.com"><i>&rarr;</i> email</a><br>
         <a href="https://github.com/Oppong-py" target="_blank" rel="noopener"><i>&rarr;</i> github.com/Oppong-py</a><br>
         <a href="https://www.linkedin.com/in/kwabena-oppong-adutwum" target="_blank" rel="noopener"><i>&rarr;</i> linkedin.com/in/kwabena-oppong-adutwum</a><br>
-        <a href="assets/docs/resume.pdf" target="_blank" rel="noopener"><i>&rarr;</i> r&eacute;sum&eacute;.pdf</a>
-        <a href="assets/docs/resume.pdf" download title="Download r&eacute;sum&eacute;">&darr;</a> &nbsp;
-        <a href="assets/docs/cv.pdf" target="_blank" rel="noopener"><i>&rarr;</i> cv.pdf</a>
-        <a href="assets/docs/cv.pdf" download title="Download CV">&darr;</a>
+        <a href="assets/docs/resume.pdf" data-doc data-preview="assets/docs/previews/resume.webp" target="_blank" rel="noopener" data-title="R&eacute;sum&eacute;"><i>&rarr;</i> r&eacute;sum&eacute;.pdf</a>
+        <a href="assets/docs/resume.pdf" data-doc data-preview="assets/docs/previews/resume.webp" download title="Download r&eacute;sum&eacute;" data-title="R&eacute;sum&eacute;">&darr;</a> &nbsp;
+        <a href="assets/docs/cv.pdf" data-doc data-preview="assets/docs/previews/cv.webp" target="_blank" rel="noopener" data-title="Curriculum Vitae"><i>&rarr;</i> cv.pdf</a>
+        <a href="assets/docs/cv.pdf" data-doc data-preview="assets/docs/previews/cv.webp" download title="Download CV" data-title="Curriculum Vitae">&darr;</a>
       </div>
     </div>
     <div class="colophon">SET IN SAIRA CONDENSED &middot; JETBRAINS MONO &middot; IBM PLEX SANS &nbsp;&middot;&nbsp; BUILT IN KUMASI, GHANA &middot; 2026</div>
   </div>
 </footer>
 
-<div class="lb" id="lb" hidden><button class="lbx" type="button" aria-label="Close">&times;</button><img id="lbi" src="" alt=""></div>
+<div class="vw" id="vw" hidden role="dialog" aria-modal="true" aria-labelledby="vwt">
+  <div class="vwd">
+    <div class="vwh">
+      <div class="vwm"><div class="vwt" id="vwt"></div><div class="vwf" id="vwf"></div></div>
+      <div class="vwa">
+        <a id="vwdl" href="" download>download</a>
+        <button class="vwx" id="vwx" type="button" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="vwb" id="vwb"></div>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -174,16 +185,123 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     root.setAttribute('data-theme', next); save(next); label();
   });
 
-  /* lightbox — any element with data-lb opens its image full size */
-  var lb = document.getElementById('lb'), lbi = document.getElementById('lbi');
-  function close(){ lb.hidden = true; lbi.src = ''; document.body.style.overflow = ''; }
-  document.querySelectorAll('[data-lb]').forEach(function (el) {
-    el.addEventListener('click', function () {
-      lbi.src = el.getAttribute('data-lb');
-      lbi.alt = el.getAttribute('alt') || '';
-      lb.hidden = false; document.body.style.overflow = 'hidden';
-    });
+  /* ---- viewer -------------------------------------------------------
+     Certificates, photos and PDFs open in a window on top of the page
+     instead of navigating away or spawning a tab. With JavaScript off
+     every one of these is still a plain link and still works. */
+  var vw   = document.getElementById('vw'),
+      vwb  = document.getElementById('vwb'),
+      vwt  = document.getElementById('vwt'),
+      vwf  = document.getElementById('vwf'),
+      vwdl = document.getElementById('vwdl'),
+      lastFocus = null;
+
+  var IMG = /\.(png|jpe?g|gif|webp|svg|avif)$/i, PDF = /\.pdf$/i;
+  /* A PDF inside a frame is not rendered by iOS Safari and by most
+     Android browsers: they show an empty box or silently offer a
+     download. Below this width the link is left alone rather than
+     opening a window that cannot draw its contents. */
+  var FRAME_PDF = function(){ return window.innerWidth >= 760; };
+
+  function vwClose(){
+    if (vw.hidden) return;
+    vw.hidden = true; vwb.textContent = ''; vwb.className = 'vwb'; vw.classList.remove('is-img');
+    document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    lastFocus = null;
+  }
+
+  function vwOpen(url, title, trigger, preview, isDoc){
+    var file = url.split('/').pop();
+    try { file = decodeURIComponent(file); } catch (e) {}
+    lastFocus = trigger || null;
+    vwt.textContent = title || file;
+    vwf.textContent = file;
+    vwdl.href = url;
+    vwb.textContent = '';
+
+    /* Text documents get the browser's real PDF viewer where it works, so
+       the text stays selectable, searchable and printable. Certificates are
+       pictures and are always shown as pictures. Below 760px nothing is
+       framed, because mobile browsers do not render a PDF in a frame. */
+    var isFrame = PDF.test(url) && FRAME_PDF() && (isDoc || !preview);
+    if (isFrame) {
+      var f = document.createElement('iframe');
+      f.src = url + '#view=FitH';
+      f.title = title || file;
+      vwb.appendChild(f);
+    } else {
+      var i = document.createElement('img');
+      i.src = preview || url; i.alt = title || file; i.decoding = 'async';
+      vwb.appendChild(i);
+    }
+    /* Nothing in this window sends the reader anywhere else. A picture is
+       already fully on screen and needs no control at all beyond close.
+       A document keeps its download, which is also the way out if a
+       browser refuses to draw the PDF. */
+    vwdl.hidden = !isDoc;
+    vw.classList.toggle('is-img', !isFrame);
+    vwb.className = 'vwb' + (isFrame ? '' : ' can-zoom');
+    vw.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('vwx').focus();
+  }
+
+  /* One delegated handler covers every asset link on the page, including
+     any added later, so no link can be forgotten. */
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   /* let them open a tab on purpose */
+    if (!vw.hidden && vw.contains(e.target)) return;   /* the window's own controls */
+    var el = e.target.closest ? e.target.closest('[data-lb], a[href]') : null;
+    if (!el) return;
+
+    var url = el.getAttribute('data-lb') || el.getAttribute('href') || '';
+    if (!url) return;
+    if (el.hasAttribute('download')) return;
+    var u; try { u = new URL(url, location.href); } catch (err) { return; }
+    if (u.origin !== location.origin) return;
+    var isImg = IMG.test(u.pathname), isPdf = PDF.test(u.pathname);
+    if (!isImg && !isPdf) return;
+    var preview = el.getAttribute('data-preview') || '';
+    var isDoc   = el.hasAttribute('data-doc');
+    /* A certificate is a picture, so it ships as one: it draws in every
+       browser and on every phone, needs no plugin, and is a quarter of the
+       weight. Text documents keep their PDF. */
+    if (isPdf && !preview && !FRAME_PDF()) return;    /* phones: open it normally */
+
+    e.preventDefault();
+    vwOpen(u.pathname + u.search,
+           el.getAttribute('data-title') || (el.getAttribute('alt') || '').trim() ||
+           (el.textContent || '').replace(/[→↓←·]/g, '').trim(),
+           el, preview, isDoc);
   });
+
+  /* tap or click the picture to switch between fitting the window and
+     twice its width; the container scrolls */
+  vwb.addEventListener('click', function (e) {
+    if (e.target.tagName !== 'IMG') return;
+    vwb.classList.toggle('zoom');
+  });
+
+  document.getElementById('vwx').addEventListener('click', vwClose);
+  vw.addEventListener('click', function (e) { if (e.target === vw) vwClose(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (vw.hidden) return;
+    if (e.key === 'Escape') { vwClose(); return; }
+    if (e.key !== 'Tab') return;
+    /* keep the keyboard inside the window while it is open */
+    var f = vw.querySelectorAll('a[href]:not([hidden]), button:not([hidden])');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* the back button should dismiss the window, not leave the page */
+  window.addEventListener('pageshow', vwClose);
+
   /* ---- page departure ----------------------------------------------
      Deliberately NOT the View Transitions API. That API is unsupported in
      Firefox and silently does nothing when anything is off, and "nothing"
@@ -201,7 +319,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
       if (href.charAt(0) === '#' || /^(mailto|tel):/i.test(href)) return;
       var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
       if (u.origin !== location.origin) return;          /* off-site */
-      if (/\.(pdf|png|jpe?g|gif|svg|mp4|zip)$/i.test(u.pathname)) return;
+      if (/\.(pdf|png|jpe?g|gif|webp|avif|svg|mp4|zip)$/i.test(u.pathname)) return;
       if (u.href === location.href) return;              /* same page */
 
       e.preventDefault();
@@ -242,8 +360,6 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     if (s) { s.hidden = false; s.scrollIntoView({block:'center'}); }
   }
 
-  lb.addEventListener('click', close);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
 })();
 </script>
 </body>
